@@ -18,7 +18,6 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hi");
     // send data to server
     axios.post(`${SERVER_URL}/auth/login`, this.state)
     .then(response=> {
