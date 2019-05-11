@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
     }
 
     // the user exists -- now let's check their pw
-    if (!user.authenticed(req.body)) {
+    if (!user.authenticated(req.body.password)) {
       // invalid user credentials (bad password)
       return res.status(406).send({message: 'Unacceptable'});
     }
