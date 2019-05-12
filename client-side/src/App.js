@@ -9,6 +9,8 @@ import Login from './auth/Login';
 import Nav from './layout/Nav';
 import Profile from './Profile';
 import Signup from './auth/Signup';
+import Board from './pages/Board';
+import { connect } from 'react-redux';
 
 class App extends Component {
   constructor(props){
@@ -69,11 +71,20 @@ class App extends Component {
             <Route path="/profile" component={
               () => (<Profile user={this.state.user} />)
             } />
+          <Route path="/board" component={
+              () => (<Board  user={this.state.user}/>)
+            } />
           </div>
         </Router>
         <Footer />
       </div>
     );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return{
+
   }
 }
 
