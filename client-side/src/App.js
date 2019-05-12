@@ -7,7 +7,7 @@ import Footer from './layout/Footer';
 import Home from './Home';
 import Login from './auth/Login';
 import Nav from './layout/Nav';
-import Profile from './Profile';
+import Profile from './pages/Profile';
 import Signup from './auth/Signup';
 import Board from './pages/Board';
 import { connect } from 'react-redux';
@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   getUser = () => {
-    // TODO: SEE IF THERE'S A TOKEN
+    // TO do: SEE IF THERE'S A TOKEN
     console.log(localStorage.getItem('serverToken'));
     let token = localStorage.getItem('serverToken');
     if (token) {
