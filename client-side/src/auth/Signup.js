@@ -43,22 +43,22 @@ class Signup extends Component {
       return (<Redirect to="/profile" />);
     }
     return(
-        <div>
-          <h2>Signup as a new user</h2>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <input name="Name" placeholder="What is your name?" value={this.state.name} onChange={this.handleNameChange} />
-            </div>
-            <div>
-              <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
-            </div>
-            <div>
-              <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-            </div>
-            <input type="submit" value="Sign Me Up!" className="button" />
-          </form>
-        </div>
-      );
+      <div>
+        <h2>Signup as a new user</h2>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            <input name="Name" placeholder="What is your name?" value={this.state.name} onChange={this.handleNameChange} />
+          </div>
+          <div>
+            <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
+          </div>
+          <div>
+            <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+          </div>
+          <input type="submit" value="Sign Me Up!" className="button" />
+        </form>
+      </div>
+    );
   }
 }
 
