@@ -6,11 +6,22 @@ class Board extends Component {
   render() {
 
 
-    return (
-      <div id="content">
-        <h1>Board </h1>
-      </div>
-    );
+
+      if(this.props.user){
+        return (
+            <div>
+              <h2>Board!</h2>
+
+            </div>
+          );
+      }
+      return(
+        <div>
+          <p>This is board page. You must be logged in to see it.</p>
+          <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
+        </div>
+        );
+
   }
 };
 
@@ -20,4 +31,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {})(Board);
+export default Board;

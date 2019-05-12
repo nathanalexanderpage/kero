@@ -72,7 +72,7 @@ class App extends Component {
               () => (<Profile user={this.state.user} />)
             } />
           <Route path="/board" component={
-              () => (<Board  />)
+              () => (<Board  user={this.state.user}/>)
             } />
           </div>
         </Router>
@@ -82,4 +82,10 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapStateToProps = (state) => {
+  return{
+
+  }
+}
+
+export default App;
