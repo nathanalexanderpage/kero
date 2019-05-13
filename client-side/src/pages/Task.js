@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 class Task extends Component {
+
   render() {
+
     if(!this.props.user){
       return (
         <div>
@@ -48,7 +49,5 @@ class Task extends Component {
     );
   }
 };
-
-
 
 export default Task;
