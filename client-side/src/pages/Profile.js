@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import '../App.css';
 
 class Profile extends Component {
   render() {
     if(this.props.user){
       return (
-          <div>
-            <h2>Hello again, {this.props.user.name}!</h2>
-            <h4>Your email is {this.props.user.email}</h4>
-          </div>
+
+             <Container >
+               <Row>
+                 <Col>
+                   <img  id="userprofile" src={this.props.user.image}  />
+                 </Col>
+                 <Col>
+                   <h2>Hello again, {this.props.user.name}!</h2>
+                   <h4>Your email is : {this.props.user.email}</h4>
+                   <h4>Your role is : {this.props.user.role}</h4>
+                   <h4>Your are working in :  {this.props.user.project}</h4>
+                 </Col>
+               </Row>
+             </Container>
         );
     }
     return(
