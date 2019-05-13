@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logo.svg';
+
 
 class Nav extends Component {
   handleLogout = (e) => {
@@ -12,7 +12,7 @@ class Nav extends Component {
 
   render() {
     let links = '';
-    if(this.props.user){
+    if(this.props.user && this.props.user.role === 'user'){
       links = (
           <span>
             <a onClick={this.handleLogout}>Logout</a>
@@ -20,6 +20,15 @@ class Nav extends Component {
             <Link to="/board">Board</Link>
           </span>
         );
+    }else if (this.props.user && this.props.user.role === 'admin') {
+      links = (
+          <span>
+            <a onClick={this.handleLogout}>Logout</a>
+            <Link to="/adminprofile">Profile</Link>
+            <Link to="/board">Board</Link>
+          </span>
+        );
+
     }
     else {
       links = (
@@ -35,10 +44,6 @@ class Nav extends Component {
             <Link to="/">Home</Link>
             {links}
           </nav>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
         </div>
       );
   }
