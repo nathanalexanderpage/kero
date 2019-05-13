@@ -12,7 +12,6 @@ class AdminProfile extends Component {
     };
 
     this.toggle = this.toggle.bind(this);
-    this.changeUnmountOnClose = this.changeUnmountOnClose.bind(this);
   }
 
   toggle() {
@@ -21,10 +20,6 @@ class AdminProfile extends Component {
       }));
   }
 
-  changeUnmountOnClose(e) {
-      let value = e.target.value;
-      this.setState({ unmountOnClose: JSON.parse(value) });
-  }
 
   render() {
     if(this.props.user){
@@ -48,7 +43,7 @@ class AdminProfile extends Component {
 	                       <Button color="danger" onClick={this.toggle}>New Project</Button>
 	                   </Form>
 	                   <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
-	                       <ModalHeader toggle={this.toggle}>Create a New Project</ModalHeader>
+	                       <ModalHeader toggleProjectCard={this.toggle.projectCard}>Create a New Project</ModalHeader>
 	                       <ModalBody>
 	                         <Label>Title</Label>
 	                           <Input
@@ -99,10 +94,5 @@ class AdminProfile extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-	  return {
-	    modal: state.modal
-	  }
-	}
 
 export default AdminProfile;

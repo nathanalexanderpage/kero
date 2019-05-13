@@ -49,10 +49,6 @@ class Task extends Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    board: state.board
-  }
-};
+
 
 export default Task;
