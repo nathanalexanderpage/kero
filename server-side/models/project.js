@@ -3,14 +3,10 @@ const mongoose = require('mongoose');
 
 //  Create Project Schema
 let projectSchema = new mongoose.Schema({
-  title: String,
+  name: String,
   startdate: Date,
   finishdate: Date,
-  purpose: String,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  purpose: String
 })
 
 // Use schema to create model
