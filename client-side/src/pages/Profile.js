@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import '../App.css';
 
 class Profile extends Component {
   render() {
@@ -9,7 +10,7 @@ class Profile extends Component {
              <Container >
                <Row>
                  <Col>
-                   <img src={this.props.user.image} alt="Profile Picture" />
+                   <img  id="userprofile" src={this.props.user.image}  />
                  </Col>
                  <Col>
                    <h2>Hello again, {this.props.user.name}!</h2>

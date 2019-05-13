@@ -28,13 +28,11 @@ let userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    required: true,
-    default: 'user'
+    required: false
   },
   image: {
     type: String,
-    required: false,
-    default: 'https://making-the-web.com/sites/default/files/clipart/151721/cute-frog-pictures-151721-1721189.png'
+    required: false
   },
   level: {
     type: Number,

@@ -55,7 +55,8 @@ nav a:hover {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#userprofile{
+  height: 300px;
+  width: 300px;
+  border: 5px solid blue;
 }

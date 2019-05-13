@@ -9,15 +9,21 @@ class Signup extends Component {
     this.state = {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      image:'',
+      role:''
     };
   }
 
   handleNameChange = (e) => { this.setState({ name: e.target.value }); }
 
+  handleImageChange = (e) => { this.setState({ image: e.target.value }); }
+
   handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
 
   handlePasswordChange = (e) => { this.setState({ password: e.target.value }); }
+
+  handleRoleChange = (e) => { this.setState({ role: e.target.value }); }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -50,11 +56,23 @@ class Signup extends Component {
             <input name="Name" placeholder="What is your name?" value={this.state.name} onChange={this.handleNameChange} />
           </div>
           <div>
+            <input  placeholder="Put an image" value={this.state.image} onChange={this.handleImageChange} />
+          </div>
+          <div>
+            <label>Role</label>
+              <select value={this.state.role} onChange={this.handleRoleChange}>
+                <option defaultValue="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="stakeholder">Stake Holder</option>
+              </select>
+          </div>
+          <div>
             <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
           </div>
           <div>
             <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
           </div>
+
           <input type="submit" value="Sign Me Up!" className="button" />
         </form>
       </div>
