@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
 import '../App.css';
-import * as AdminProfileActions from '../actions/AdminProfileActions'
+
 
 class AdminProfile extends Component {
 
