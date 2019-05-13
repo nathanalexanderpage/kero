@@ -34,7 +34,7 @@ class Login extends Component {
   }
 
   render() {
-    if(this.props.user && this.props.user.role === 'user'){
+    if(this.props.user && this.props.user.role !== 'admin'){
       return (<Redirect to="/profile" />);
     } else if(this.props.user && this.props.user.role === 'admin'){
       return (<Redirect to="/adminprofile" />);
