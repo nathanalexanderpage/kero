@@ -42,27 +42,33 @@ class Login extends Component {
     }
     return(
       <div>
-        <Form>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label for="Company" className="mr-sm-2">Company:</Label>
-              <Input type="text" name="company" id="company" placeholder="company" />
+        <h2>Log In</h2>
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup row>
+            <Label for="Email">Email</Label>
+            <Input type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="example@email.com" 
+                    value={this.state.email} 
+                    onChange={this.handleEmailChange} />
           </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label for="Email" className="mr-sm-2">Email:</Label>
-              <Input type="email" name="email" id="email" placeholder="email" />
+          <FormGroup row>
+                <Label for="Password">Password</Label>
+                <Input type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="shhhh" 
+                        onChange={this.handlePasswordChange} />
           </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label for="Password" className="mr-sm-2">Password:</Label>
-            <Input type="password" name="password" id="examplePassword" placeholder="shhh!" />
-          </FormGroup>
-          <div>
-            <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
-            <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
-          </div>
-        </Form>
-      </div>
-    );
-  }
-};
+            <div>
+              <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
+              <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
+            </div>
+          </Form>
+        </div>
+      );
+    }
+  };
 
 export default Login;

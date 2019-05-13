@@ -26,6 +26,8 @@ class Signup extends Component {
 
   handleRoleChange = (e) => { this.setState({ role: e.target.value }); }
 
+  handleCompanyChange = (e) => { this.setState({ role: e.target.value }); }
+
   handleSubmit = (e) => {
     e.preventDefault();
     // TODO: SEND DATA TO SERVER
@@ -64,7 +66,7 @@ class Signup extends Component {
                 <Input type="text" 
                         name="name"
                         id="first-name" 
-                        placeholder="first name" 
+                        placeholder="My first name is..." 
                         value={this.state.name} 
                         onChange={this.handleNameChange} />
               </FormGroup>
@@ -73,16 +75,25 @@ class Signup extends Component {
                 <Input type="text" 
                         name="name" 
                         id="last-name" 
-                        placeholder="last name" 
+                        placeholder="My last name is..." 
                         value={this.state.name} 
                         onChange={this.handleNameChange} />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="Company">Company</Label>
+                <Input type="text" 
+                        name="company" 
+                        id="company" 
+                        placeholder="I work at..." 
+                        value={this.state.company} 
+                        onChange={this.handleCompanyChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Email">Email</Label>
                 <Input type="email" 
                         name="email" 
                         id="email" 
-                        placeholder="email" 
+                        placeholder="example@email.com" 
                         value={this.state.email} 
                         onChange={this.handleEmailChange} />
               </FormGroup>
@@ -91,7 +102,7 @@ class Signup extends Component {
                 <Input type="password" 
                         name="password" 
                         id="password" 
-                        placeholder="password" 
+                        placeholder="shhhh" 
                         onChange={this.handlePasswordChange} />
               </FormGroup>
               <FormGroup row>
@@ -99,7 +110,7 @@ class Signup extends Component {
                 <Input type="password" 
                         name="verify-password" 
                         id="verify-password"  
-                        placeholder="verify-password" 
+                        placeholder="confirm shhhh" 
                         onChange={this.handlePasswordChange} />
               </FormGroup>
               <FormGroup row>
@@ -115,9 +126,11 @@ class Signup extends Component {
                 </Input>
               </FormGroup>
               <FormGroup row>
-                <Input type="file"
-                        name="file" 
-                        id="file" 
+                <Label for="Image">Image</Label>
+                <Input type="text"
+                        name="image" 
+                        id="image" 
+                        placeholder="put image url here..." 
                         value={this.state.image} 
                         onChange={this.handleImageChange}/>
               </FormGroup>
