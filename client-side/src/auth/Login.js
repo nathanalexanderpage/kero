@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 
 class Login extends Component {
   constructor(props){
@@ -40,20 +41,34 @@ class Login extends Component {
       return (<Redirect to="/adminprofile" />);
     }
     return(
-        <div>
-          <h2>Login as an existing user</h2>
-          <form onSubmit={this.handleSubmit}>
+      <div>
+        <h2>Log In</h2>
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup row>
+            <Label for="Email">Email</Label>
+            <Input type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="example@email.com" 
+                    value={this.state.email} 
+                    onChange={this.handleEmailChange} />
+          </FormGroup>
+          <FormGroup row>
+                <Label for="Password">Password</Label>
+                <Input type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="shhhh" 
+                        onChange={this.handlePasswordChange} />
+          </FormGroup>
             <div>
-              <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
+              <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
+              <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
-            <div>
-              <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-            </div>
-            <input type="submit" value="Log Me In!" className="button" />
-          </form>
+          </Form>
         </div>
       );
-  }
-}
+    }
+  };
 
 export default Login;
