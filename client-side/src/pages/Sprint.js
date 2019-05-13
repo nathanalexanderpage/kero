@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 class Sprint extends Component {
   render() {
-    
+
     if(!this.props.user){
       return (
         <div>
@@ -31,10 +31,5 @@ class Sprint extends Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    board: state.board
-  }
-};
 
 export default Sprint;
