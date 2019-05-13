@@ -6,7 +6,11 @@ import * as AdminProfileActions from '../actions/AdminProfileActions'
 class AdminProfile extends Component {
 
   constructor(props) {
-        super(props);      
+        super(props);
+        this.state = {
+            modal: false
+        };
+
         this.toggle = this.toggle.bind(this);
         this.changeUnmountOnClose = this.changeUnmountOnClose.bind(this);
     }
