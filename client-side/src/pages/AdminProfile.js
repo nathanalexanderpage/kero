@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import '../App.css';
 
 class AdminProfile extends Component {
   render() {
-    if(this.props.user.role === 'admin'){
+    if(this.props.user){
       return (
 
              <Container >
                <Row>
                  <Col>
-                   <img src={this.props.user.image} alt="Profile Picture" />
+                   <img  id="userprofile" src={this.props.user.image}  />
                  </Col>
                  <Col>
-                   <h2>Hello again, {this.props.user.name}!</h2>
+                   <h2>Hello again, {this.props.user.name} You are an admin!</h2>
                    <h4>Your email is : {this.props.user.email}</h4>
                    <h4>Your role is : {this.props.user.role}</h4>
                    <h4>Your are working in :  {this.props.user.project}</h4>

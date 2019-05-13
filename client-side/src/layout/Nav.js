@@ -12,7 +12,7 @@ class Nav extends Component {
 
   render() {
     let links = '';
-    if(this.props.user){
+    if(this.props.user && this.props.user.role === 'user'){
       links = (
           <span>
             <a onClick={this.handleLogout}>Logout</a>
@@ -20,6 +20,15 @@ class Nav extends Component {
             <Link to="/board">Board</Link>
           </span>
         );
+    }else if (this.props.user && this.props.user.role === 'admin') {
+      links = (
+          <span>
+            <a onClick={this.handleLogout}>Logout</a>
+            <Link to="/adminprofile">Profile</Link>
+            <Link to="/board">Board</Link>
+          </span>
+        );
+
     }
     else {
       links = (
