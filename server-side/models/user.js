@@ -1,7 +1,12 @@
 let bcrypt = require('bcryptjs');
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var userSchema = new mongoose.Schema({
+
+let strengthsSchema = new mongoose.Schema({
+
+})
+
+let userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -20,7 +25,27 @@ var userSchema = new mongoose.Schema({
     required: true,
     minlength: 6,
     maxlength: 99
-  }
+  },
+  role: {
+    type: String,
+    required: true,
+    default: 'user'
+  },
+  image: {
+    type: String,
+    required: false,
+    default: 'https://making-the-web.com/sites/default/files/clipart/151721/cute-frog-pictures-151721-1721189.png'
+  },
+  level: {
+    type: Number,
+    required: false,
+    default: 1
+  },
+  project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project'
+  },
+  strengths: strengthsSchema
 });
 
 // TODO: Override 'toJSON' to prevent the password from being returned with the user
@@ -31,7 +56,9 @@ userSchema.set('toJSON', {
     return {
       id: user._id,
       name: user.name,
-      email: user.email
+      email: user.email,
+      image: user.image,
+      role: user.role
     }
   }
 });
