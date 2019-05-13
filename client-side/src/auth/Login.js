@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 
 class Login extends Component {
   constructor(props){
@@ -40,20 +41,28 @@ class Login extends Component {
       return (<Redirect to="/adminprofile" />);
     }
     return(
-        <div>
-          <h2>Login as an existing user</h2>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
-            </div>
-            <div>
-              <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-            </div>
-            <input type="submit" value="Log Me In!" className="button" />
-          </form>
-        </div>
-      );
+      <div>
+        <Form>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label for="Company" className="mr-sm-2">Company:</Label>
+              <Input type="text" name="company" id="company" placeholder="company" />
+          </FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label for="Email" className="mr-sm-2">Email:</Label>
+              <Input type="email" name="email" id="email" placeholder="email" />
+          </FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label for="Password" className="mr-sm-2">Password:</Label>
+            <Input type="password" name="password" id="examplePassword" placeholder="shhh!" />
+          </FormGroup>
+          <div>
+            <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
+            <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
+          </div>
+        </Form>
+      </div>
+    );
   }
-}
+};
 
 export default Login;

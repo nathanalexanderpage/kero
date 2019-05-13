@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+import { Button, Form, FormGroup, Label, Input, FormText, Fade, Row, Col } from 'reactstrap';
 
 class Signup extends Component {
   constructor(props){
@@ -54,32 +55,78 @@ class Signup extends Component {
 
     return(
       <div>
-        <h2>Signup as a new user</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input name="Name" placeholder="What is your name?" value={this.state.name} onChange={this.handleNameChange} />
-          </div>
-          <div>
-            <input  placeholder="Put an image" value={this.state.image} onChange={this.handleImageChange} />
-          </div>
-          <div>
-            <label>Role</label>
-              <select value={this.state.role} onChange={this.handleRoleChange}>
-                <option defaultValue="user">User</option>
-                <option value="admin">Admin</option>
-                <option value="stakeholder">Stake Holder</option>
-              </select>
-          </div>
-          <div>
-            <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
-          </div>
-          <div>
-            <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-          </div>
-
-          <input type="submit" value="Sign Me Up!" className="button" />
-        </form>
-      </div>
+        <h2>Sign up as a new user!</h2>
+        <h6> If you already have an account, go log in!</h6>
+        <Form onSubmit={this.handleSubmit}>
+            <Col xs="9"></Col>
+              <FormGroup row>
+                <Label for="Name">First Name</Label>
+                <Input type="text" 
+                        name="name"
+                        id="first-name" 
+                        placeholder="first name" 
+                        value={this.state.name} 
+                        onChange={this.handleNameChange} />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="Name">Last Name</Label>
+                <Input type="text" 
+                        name="name" 
+                        id="last-name" 
+                        placeholder="last name" 
+                        value={this.state.name} 
+                        onChange={this.handleNameChange} />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="Email">Email</Label>
+                <Input type="email" 
+                        name="email" 
+                        id="email" 
+                        placeholder="email" 
+                        value={this.state.email} 
+                        onChange={this.handleEmailChange} />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="Password">Password</Label>
+                <Input type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="password" 
+                        onChange={this.handlePasswordChange} />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="Password">Verify Password</Label>
+                <Input type="password" 
+                        name="verify-password" 
+                        id="verify-password"  
+                        placeholder="verify-password" 
+                        onChange={this.handlePasswordChange} />
+              </FormGroup>
+              <FormGroup row>
+                <Label for="Select Role">Select Role</Label>
+                <Input type="select" 
+                        name="select-role" 
+                        id="select-role" 
+                        value={this.state.role}  
+                        onChange={this.handleRoleChange}>
+                          <option defaultValue="user">User</option>
+                          <option value="admin">Admin</option>
+                          <option value="stakeholder">Stake Holder</option>
+                </Input>
+              </FormGroup>
+              <FormGroup row>
+                <Input type="file"
+                        name="file" 
+                        id="file" 
+                        value={this.state.image} 
+                        onChange={this.handleImageChange}/>
+              </FormGroup>
+            <div>
+              <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
+              <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
+            </div>
+        </Form>
+      </div>     
     );
   }
 }
