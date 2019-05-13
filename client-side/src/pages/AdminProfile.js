@@ -82,12 +82,12 @@ class AdminProfile extends Component {
 	                       </ModalBody>
 	                       <ModalFooter>
 	                           <Button color="primary" onClick={this.toggle}>Create</Button>{' '}
-	                           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-	                       </ModalFooter>
-	                   </Modal>
-                 </Col>
-               </Row>
-             </Container>
+	                          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+	                      </ModalFooter>
+	                	</Modal>
+                </Col>
+              </Row>
+            </Container>
         );
     }
     return(
