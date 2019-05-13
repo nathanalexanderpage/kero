@@ -18,6 +18,8 @@ class Nav extends Component {
             <a onClick={this.handleLogout}>Logout</a>
             <Link to="/profile">Profile</Link>
             <Link to="/board">Board</Link>
+            <Link to="/examplesprint">Sprint</Link>
+            <Link to="/exampletask">Task</Link>
           </span>
         );
     }else if (this.props.user && this.props.user.role === 'admin') {
@@ -26,6 +28,8 @@ class Nav extends Component {
             <a onClick={this.handleLogout}>Logout</a>
             <Link to="/adminprofile">Profile</Link>
             <Link to="/board">Board</Link>
+            <Link to="/examplesprint">Sprint</Link>
+            <Link to="/exampletask">Task</Link>
           </span>
         );
 

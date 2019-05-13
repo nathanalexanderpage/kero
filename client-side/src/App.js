@@ -11,6 +11,8 @@ import Profile from './pages/Profile';
 import AdminProfile from './pages/AdminProfile';
 import Signup from './auth/Signup';
 import Board from './pages/Board';
+import Task from './pages/Task';
+import Sprint from './pages/Sprint';
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -72,12 +74,18 @@ class App extends Component {
             <Route path="/profile" component={
               () => (<Profile user={this.state.user} />)
             } />
-          <Route path="/adminprofile" component={
-              () => (<AdminProfile user={this.state.user} />)
-            } />
-          <Route path="/board" component={
-              () => (<Board  user={this.state.user}/>)
-            } />
+            <Route path="/adminprofile" component={
+                () => (<AdminProfile user={this.state.user} />)
+              } />
+            <Route path="/board" component={
+                () => (<Board user={this.state.user} />)
+              } />
+            <Route path="/examplesprint" component={
+                () => (<Sprint user={this.state.user} />)
+              } />
+            <Route path="/exampletask" component={
+                () => (<Task user={this.state.user} />)
+              } />
           </div>
         </Router>
         <Footer />
