@@ -39,10 +39,6 @@ let userSchema = new mongoose.Schema({
     required: false,
     default: 1
   },
-  project: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
-  },
   strengths: strengthsSchema
 });
 

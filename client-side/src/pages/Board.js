@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { Container, Row, Col } from 'reactstrap';
+import '../App.css';
 
 class Board extends Component {
   render() {
@@ -9,10 +10,19 @@ class Board extends Component {
 
       if(this.props.user){
         return (
-            <div>
-              <h2>Board!</h2>
-
-            </div>
+          <Container >
+            <Row id="mainboard">
+              <Col>
+               <h1>To Do</h1>
+              </Col>
+              <Col>
+                <h1>Doing</h1>
+              </Col>
+              <Col>
+                <h1>Done</h1>
+              </Col>
+            </Row>
+          </Container>
           );
       }
       return(
