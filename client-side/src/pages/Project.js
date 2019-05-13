@@ -28,7 +28,6 @@ class Project extends Component {
   render() {
     if(this.props.user){
       return (
-
             <Container >
               <Row>
                 <Col>
@@ -45,7 +44,8 @@ class Project extends Component {
                 <Col>
                   <Form inline onSubmit={(e) => e.preventDefault()}>
                     <Button color="danger" onClick={this.toggle}>New Sprint</Button>
-                  </Form><Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
+                  </Form>
+                  <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
                   <ModalHeader toggle={this.toggle}>Create a New Sprint</ModalHeader>
                   <ModalBody>
                     <Label>Title</Label>
@@ -94,12 +94,6 @@ class Project extends Component {
       </div>
       );
   }
-}
-
-const mapStateToProps = (state) => {
-	return {
-    modal: state.modal
-	}
 }
 
 export default Project;
