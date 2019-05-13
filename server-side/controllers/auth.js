@@ -47,13 +47,13 @@ router.post('/signup', (req, res) => {
     if (user) {
       res.status(409).send({message: 'User already registered with that e-mail.'})
     }
-     if(req.body.image === ''){
-       req.body.image = 'https://st4.depositphotos.com/1742172/24828/v/950/depositphotos_248288358-stock-illustration-cartoon-kawaii-excited-cute-frog.jpg'
-     }
+    if(req.body.image === ''){
+      req.body.image = 'https://st4.depositphotos.com/1742172/24828/v/950/depositphotos_248288358-stock-illustration-cartoon-kawaii-excited-cute-frog.jpg'
+    }
 
-     if(req.body.role === ''){
-       req.body.role = 'user'
-     }
+    if(req.body.role === ''){
+        req.body.role = 'user'
+    }
     // user does not exist yet
     db.User.create(req.body)
     .then(createdUser => {

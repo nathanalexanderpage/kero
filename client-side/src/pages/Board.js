@@ -13,7 +13,7 @@ class Board extends Component {
           <Container >
             <Row id="mainboard">
               <Col>
-               <h1>To Do</h1>
+                <h1>To Do</h1>
               </Col>
               <Col>
                 <h1>Doing</h1>
