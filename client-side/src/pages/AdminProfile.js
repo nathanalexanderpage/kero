@@ -23,7 +23,6 @@ class AdminProfile extends Component {
   render() {
     if(this.props.user){
       return (
-
             <Container >
               <Row>
                 <Col>
