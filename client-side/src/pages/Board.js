@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Card, Button, CardTitle, CardText  } from 'reactstrap';
 import '../App.css';
-import { Card, Button, CardTitle, CardText } from 'reactstrap';
 
 class Board extends Component {
   render() {
@@ -37,7 +36,6 @@ class Board extends Component {
               </Col>
             </Row>
           </Container>
-          
         );
       }
       return(
@@ -46,9 +44,8 @@ class Board extends Component {
           <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
         </div>
         );
-
-  }
-};
+      }
+    };
 
 
 export default Board;
