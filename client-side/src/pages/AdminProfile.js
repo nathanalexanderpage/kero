@@ -25,7 +25,24 @@ class AdminProfile extends Component {
   handleFinishDateChange = (e) => { this.setState({ finishdate: e.target.value }); }
   handlePurposeChange = (e) => { this.setState({ purpose: e.target.value }); }
 
-
+  componentDidMount = () => {
+    // GET USER INFO
+    console.log(`POST ${SERVER_URL}/projects`);
+    let token = localStorage.getItem('serverToken');
+    axios.post(`${SERVER_URL}/projects/get`, {}, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundProjects=> {
+      console.log('Success');
+      console.log(foundProjects);
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    })
+  }
 
   toggle() {
       this.setState(prevState => ({

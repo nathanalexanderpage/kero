@@ -10,8 +10,9 @@ let router = express.Router()
 let db = require('../models')
 
 //get tasks
-router.get('/', (req, res) => {
+router.post('/get', (req, res) => {
   console.log("PROJECTS HIT");
+  console.log(req);
   db.Project.find()
   .then(foundProject => {
     console.log(foundProject);
@@ -24,7 +25,7 @@ router.get('/', (req, res) => {
 })
 
 //post tasks
-router.post('/', (req, res) => {
+router.post('/post', (req, res) => {
   console.log('In the POST /project/ route');
   console.log('ESTE ES EL USUARIO', req.user);
   console.log(req.body);
