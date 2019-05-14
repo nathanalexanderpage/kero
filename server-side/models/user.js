@@ -55,8 +55,8 @@ userSchema.set('toJSON', {
     // return user;
     return {
       id: user._id,
-      firstname: user.firstname,
-      lastname: user.lastname,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       image: user.image,
       role: user.role
