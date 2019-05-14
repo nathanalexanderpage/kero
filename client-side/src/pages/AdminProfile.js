@@ -66,6 +66,12 @@ class AdminProfile extends Component {
     .then(response=> {
       console.log('Success');
       console.log(response);
+      this.setState({
+          title: '',
+          startdate: '',
+          finishdate: '',
+          purpose:''
+      })
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -85,7 +91,7 @@ class AdminProfile extends Component {
                    <img  id="userprofile" src={this.props.user.image}  />
                  </Col>
                  <Col>
-                   <h2>Hello again, {this.props.user.name} You are an admin!</h2>
+                   <h2>Hello again, {this.props.user.firstName+ ' ' + this.props.user.lastName} You are an admin!</h2>
                    <h4>Your email is : {this.props.user.email}</h4>
                    <h4>Your role is : {this.props.user.role}</h4>
                    <h4>Your are working in :  {this.props.user.project}</h4>
@@ -136,7 +142,7 @@ class AdminProfile extends Component {
     	                             />
   	                           <Label > Author </Label>
   	                          <Input
-  	                            name="author" plaintext value={this.props.user.name}
+  	                            name="author" plaintext value={this.props.user.firstName+ ' ' + this.props.user.lastName}
   	                            />
 	                       </ModalBody>
 	                       <ModalFooter>
@@ -145,7 +151,6 @@ class AdminProfile extends Component {
 	                      </ModalFooter>
                         </Form>
 	                	</Modal>
-
                 </Col>
               </Row>
             </Container>
