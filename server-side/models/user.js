@@ -7,13 +7,13 @@ let strengthsSchema = new mongoose.Schema({
 })
 
 let userSchema = new mongoose.Schema({
-  firstname: {
+  firstName: {
     type: String,
     required: true,
     minlength: 1,
     maxlength: 99
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true,
     minlength: 1,
