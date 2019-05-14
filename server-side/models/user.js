@@ -7,7 +7,13 @@ let strengthsSchema = new mongoose.Schema({
 })
 
 let userSchema = new mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 99
+  },
+  lastName: {
     type: String,
     required: true,
     minlength: 1,
@@ -49,7 +55,8 @@ userSchema.set('toJSON', {
     // return user;
     return {
       id: user._id,
-      name: user.name,
+      firstname: user.firstname,
+      lastname: user.lastname,
       email: user.email,
       image: user.image,
       role: user.role

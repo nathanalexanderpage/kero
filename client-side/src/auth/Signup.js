@@ -8,7 +8,8 @@ class Signup extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
       image:'',
@@ -16,7 +17,9 @@ class Signup extends Component {
     };
   }
 
-  handleNameChange = (e) => { this.setState({ name: e.target.value }); }
+  handleFirstNameChange = (e) => { this.setState({ firstName: e.target.value }); }
+
+  handleLastNameChange = (e) => { this.setState({ lastName: e.target.value }); }
 
   handleImageChange = (e) => { this.setState({ image: e.target.value }); }
 
@@ -63,25 +66,25 @@ class Signup extends Component {
         <Form onSubmit={this.handleSubmit}>
             <Col xs="9"></Col>
               <FormGroup row>
-                <Label for="Name">First Name</Label>
+                <Label for="firstName">First Name</Label>
                 <Input type="text"
-                        name="name"
+                        name="firstName"
                         id="first-name"
                         placeholder="My first name is..."
-                        value={this.state.name}
-                        onChange={this.handleNameChange} />
+                        value={this.state.firstName}
+                        onChange={this.handleFirstNameChange} />
               </FormGroup>
               <FormGroup row>
-                <Label for="Name">Last Name</Label>
+                <Label for="lastName">Last Name</Label>
                 <Input type="text"
-                        name="name"
+                        name="lastName"
                         id="last-name"
                         placeholder="My last name is..."
-                        value={this.state.name}
-                        onChange={this.handleNameChange} />
+                        value={this.state.lastName}
+                        onChange={this.handleLastNameChange} />
               </FormGroup>
               <FormGroup row>
-                <Label for="Company">Company</Label>
+                <Label for="company">Company</Label>
                 <Input type="text"
                         name="company"
                         id="company"
@@ -90,7 +93,7 @@ class Signup extends Component {
                         onChange={this.handleCompanyChange} />
               </FormGroup>
               <FormGroup row>
-                <Label for="Email">Email</Label>
+                <Label for="email">Email</Label>
                 <Input type="email"
                         name="email"
                         id="email"
@@ -99,7 +102,7 @@ class Signup extends Component {
                         onChange={this.handleEmailChange} />
               </FormGroup>
               <FormGroup row>
-                <Label for="Password">Password</Label>
+                <Label for="password">Password</Label>
                 <Input type="password"
                         name="password"
                         id="password"
@@ -107,9 +110,9 @@ class Signup extends Component {
                         onChange={this.handlePasswordChange} />
               </FormGroup>
               <FormGroup row>
-                <Label for="Password">Verify Password</Label>
+                <Label for="passwordVerify">Verify Password</Label>
                 <Input type="password"
-                        name="verify-password"
+                        name="passwordVerify"
                         id="verify-password"
                         placeholder="confirm shhhh"
                         onChange={this.handlePasswordChange} />
@@ -136,7 +139,7 @@ class Signup extends Component {
                         onChange={this.handleImageChange}/>
               </FormGroup>
             <div>
-              <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
+              <Button outline color="secondary" size="lg" onClick={this.handleSubmit}>Sign Up</Button>
               <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
         </Form>

@@ -134,6 +134,7 @@ class AdminProfile extends Component {
 	                      </ModalFooter>
                         </Form>
 	                	</Modal>
+
                 </Col>
               </Row>
             </Container>
