@@ -3,15 +3,21 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 
 
 class Sprint extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-        modal: false
+        modal: false,
+        sprintTasks: []
     };
 
     this.toggle = this.toggle.bind(this);
     this.changeUnmountOnClose = this.changeUnmountOnClose.bind(this);
   }
+
+
+  render() {
+
 
   toggle() {
       this.setState(prevState => ({
@@ -56,7 +62,7 @@ class Sprint extends Component {
                     <Input
                       type="text"
                       name="title"
-                      placeholder="date placeholder" 
+                      placeholder="date placeholder"
                         />
                         <Label>Start Date</Label>
                         <Input

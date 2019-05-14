@@ -46,19 +46,19 @@ class Login extends Component {
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row>
             <Label for="Email">Email</Label>
-            <Input type="email" 
-                    name="email" 
-                    id="email" 
-                    placeholder="example@email.com" 
-                    value={this.state.email} 
+            <Input type="email"
+                    name="email"
+                    id="email"
+                    placeholder="example@email.com"
+                    value={this.state.email}
                     onChange={this.handleEmailChange} />
           </FormGroup>
           <FormGroup row>
                 <Label for="Password">Password</Label>
-                <Input type="password" 
-                        name="password" 
-                        id="password" 
-                        placeholder="shhhh" 
+                <Input type="password"
+                        name="password"
+                        id="password"
+                        placeholder="shhhh"
                         onChange={this.handlePasswordChange} />
           </FormGroup>
             <div>
