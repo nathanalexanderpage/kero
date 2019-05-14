@@ -36,7 +36,7 @@ class App extends Component {
     console.log(localStorage.getItem('serverToken'));
     let token = localStorage.getItem('serverToken');
     if (token) {
-      axios.post(`${SERVER_URL}/auth/current/user`, {
+      axios.post(`${SERVER_URL}/auth/current/user`,{}, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }

@@ -28,6 +28,7 @@ class Signup extends Component {
 
   handleCompanyChange = (e) => { this.setState({ role: e.target.value }); }
 
+
   handleSubmit = (e) => {
     e.preventDefault();
     // TODO: SEND DATA TO SERVER
@@ -63,62 +64,62 @@ class Signup extends Component {
             <Col xs="9"></Col>
               <FormGroup row>
                 <Label for="Name">First Name</Label>
-                <Input type="text" 
+                <Input type="text"
                         name="name"
-                        id="first-name" 
-                        placeholder="My first name is..." 
-                        value={this.state.name} 
+                        id="first-name"
+                        placeholder="My first name is..."
+                        value={this.state.name}
                         onChange={this.handleNameChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Name">Last Name</Label>
-                <Input type="text" 
-                        name="name" 
-                        id="last-name" 
-                        placeholder="My last name is..." 
-                        value={this.state.name} 
+                <Input type="text"
+                        name="name"
+                        id="last-name"
+                        placeholder="My last name is..."
+                        value={this.state.name}
                         onChange={this.handleNameChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Company">Company</Label>
-                <Input type="text" 
-                        name="company" 
-                        id="company" 
-                        placeholder="I work at..." 
-                        value={this.state.company} 
+                <Input type="text"
+                        name="company"
+                        id="company"
+                        placeholder="I work at..."
+                        value={this.state.company}
                         onChange={this.handleCompanyChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Email">Email</Label>
-                <Input type="email" 
-                        name="email" 
-                        id="email" 
-                        placeholder="example@email.com" 
-                        value={this.state.email} 
+                <Input type="email"
+                        name="email"
+                        id="email"
+                        placeholder="example@email.com"
+                        value={this.state.email}
                         onChange={this.handleEmailChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Password">Password</Label>
-                <Input type="password" 
-                        name="password" 
-                        id="password" 
-                        placeholder="shhhh" 
+                <Input type="password"
+                        name="password"
+                        id="password"
+                        placeholder="shhhh"
                         onChange={this.handlePasswordChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Password">Verify Password</Label>
-                <Input type="password" 
-                        name="verify-password" 
-                        id="verify-password"  
-                        placeholder="confirm shhhh" 
+                <Input type="password"
+                        name="verify-password"
+                        id="verify-password"
+                        placeholder="confirm shhhh"
                         onChange={this.handlePasswordChange} />
               </FormGroup>
               <FormGroup row>
                 <Label for="Select Role">Select Role</Label>
-                <Input type="select" 
-                        name="select-role" 
-                        id="select-role" 
-                        value={this.state.role}  
+                <Input type="select"
+                        name="select-role"
+                        id="select-role"
+                        value={this.state.role}
                         onChange={this.handleRoleChange}>
                           <option defaultValue="user">User</option>
                           <option value="admin">Admin</option>
@@ -128,10 +129,10 @@ class Signup extends Component {
               <FormGroup row>
                 <Label for="Image">Image</Label>
                 <Input type="text"
-                        name="image" 
-                        id="image" 
-                        placeholder="put image url here..." 
-                        value={this.state.image} 
+                        name="image"
+                        id="image"
+                        placeholder="put image url here..."
+                        value={this.state.image}
                         onChange={this.handleImageChange}/>
               </FormGroup>
             <div>
@@ -139,7 +140,7 @@ class Signup extends Component {
               <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
         </Form>
-      </div>     
+      </div>
     );
   }
 }
