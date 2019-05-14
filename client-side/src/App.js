@@ -13,6 +13,7 @@ import Signup from './auth/Signup';
 import Board from './pages/Board';
 import Task from './pages/Task';
 import Sprint from './pages/Sprint';
+import Project from './pages/Project';
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -99,6 +100,9 @@ class App extends Component {
               } />
             <Route path="/exampletask" component={
                 () => (<Task user={this.state.user} />)
+              } />
+            <Route path="/exampleproject" component={
+                () => (<Project user={this.state.user} />)
               } />
           </div>
         </Router>
