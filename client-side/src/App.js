@@ -13,31 +13,52 @@ import Signup from './auth/Signup';
 import Board from './pages/Board';
 import Task from './pages/Task';
 import Sprint from './pages/Sprint';
+import Project from './pages/Project';
+
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      user: null
+      user: null,
+      projects: [],
+      sprints: [],
+      tasks: []
     }
   }
 
   componentDidMount = () => {
     // GET USER INFO
-    console.log(`GET ${SERVER_URL}/projects`);
-    axios.get(`${SERVER_URL}/projects`, this.state)
-    .then(response=> {
-      console.log('Success');
-      console.log(response);
-      // set response.data.token to local storage
-      localStorage.setItem('serverToken', response.data.token)
-      // TODO: update user in parent component
-      this.props.getUser()
-    })
-    .catch(err => {
-      console.log('error axios to server:');
-      console.log(err);
-    })
+
+    console.log("INSIDE componentDidMount");
+
+    let promise1 = 1;
+    let promise2 = 42;
+    let promise3 = new Promise(function(resolve, reject) {
+      console.log(`POST ${SERVER_URL}/projects/get`);
+      let token = localStorage.getItem('serverToken');
+      axios.post(`${SERVER_URL}/projects/get`, {}, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      .then(foundProjects=> {
+        console.log(token);
+        console.log('Success');
+        console.log(foundProjects.data);
+        resolve(foundProjects.data);
+      })
+      .catch(err => {
+        console.log('error axios to server:');
+        console.log(err);
+      })
+    });
+
+    Promise.all([promise1, promise2, promise3])
+    .then(() => {
+      console.log(`ready to setState`);
+      console.log(promise3);
+    });
   }
 
   resetUser = () => {
@@ -99,17 +120,14 @@ class App extends Component {
             <Route path="/exampletask" component={
                 () => (<Task user={this.state.user} />)
               } />
+            <Route path="/exampleproject" component={
+                () => (<Project user={this.state.user} />)
+              } />
           </div>
         </Router>
         <Footer />
       </div>
     );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return{
-
   }
 }
 

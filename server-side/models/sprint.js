@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var sprintSchema = new mongoose.Schema({
+  number: Number,
   startDate: {
     type: String,
     required: true,

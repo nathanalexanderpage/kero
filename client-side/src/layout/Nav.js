@@ -30,6 +30,7 @@ class Nav extends Component {
             <Link to="/board">Board</Link>
             <Link to="/examplesprint">Sprint</Link>
             <Link to="/exampletask">Task</Link>
+            <Link to="/exampleproject">Project</Link>
           </span>
         );
 
