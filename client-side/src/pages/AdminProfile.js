@@ -27,21 +27,7 @@ class AdminProfile extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
-    console.log(`POST ${SERVER_URL}/projects/get`);
-    let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/projects/get`, {}, {
-      headers: {
-        'Authorization' : `Bearer ${token}`
-      }
-    })
-    .then(foundProjects=> {
-      console.log('Success');
-      console.log(foundProjects);
-    })
-    .catch(err => {
-      console.log('error axios to server:');
-      console.log(err);
-    })
+
   }
 
   toggle() {

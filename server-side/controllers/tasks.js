@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
     req.body ,
     {new: true, useFindAndModify:false }) //this will return what was updated
   .then(editedTask => {
-     res.send(editedTask)
+    res.send(editedTask)
   })
   .catch( err => {
     console.log('error in put /task/:id', err);
