@@ -25,6 +25,20 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
+    console.log(`GET ${SERVER_URL}/projects`);
+    axios.get(`${SERVER_URL}/projects`, this.state)
+    .then(response=> {
+      console.log('Success');
+      console.log(response);
+      // set response.data.token to local storage
+      localStorage.setItem('serverToken', response.data.token)
+      // TODO: update user in parent component
+      this.props.getUser()
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    })
   }
 
   resetUser = () => {

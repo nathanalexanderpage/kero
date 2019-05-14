@@ -22,6 +22,7 @@ class Task extends Component {
       let value = e.target.value;
       this.setState({ unmountOnClose: JSON.parse(value) });
   }
+  
   render() {
 
     if(!this.props.user){

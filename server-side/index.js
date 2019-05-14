@@ -35,7 +35,7 @@ app.use('/auth', expressJWT({
 ]
 }), require('./controllers/auth'));
 
-app.use('/project', expressJWT({
+app.use('/projects', expressJWT({
   secret: process.env.JWT_SECRET
 }), require('./controllers/projects'))
 

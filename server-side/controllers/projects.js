@@ -1,5 +1,7 @@
 //Required models
-let express = require('express')
+require('dotenv').config();
+const express = require('express');
+const jwt = require('jsonwebtoken');
 
 //router instances
 let router = express.Router()
@@ -9,8 +11,10 @@ let db = require('../models')
 
 //get tasks
 router.get('/', (req, res) => {
+  console.log("PROJECTS HIT");
   db.Project.find()
   .then(foundProject => {
+    console.log(foundProject);
     res.send(foundProject)
   })
   .catch( err => {
