@@ -27,7 +27,7 @@ class AdminProfile extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
-    console.log(`POST ${SERVER_URL}/projects`);
+    console.log(`POST ${SERVER_URL}/projects/get`);
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/projects/get`, {}, {
       headers: {
@@ -57,7 +57,7 @@ class AdminProfile extends Component {
     delete newState.modal
     console.log(this.state,newState);
     let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/project/`, newState,
+    axios.post(`${SERVER_URL}/projects/post`, newState,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
