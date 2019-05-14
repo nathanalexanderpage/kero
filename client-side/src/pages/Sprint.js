@@ -3,6 +3,13 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 
 
 class Sprint extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      sprintTasks: []
+    }
+  }
+
   render() {
 
     if(!this.props.user){
@@ -37,7 +44,7 @@ class Sprint extends Component {
                     <Input
                       type="text"
                       name="title"
-                      placeholder="date placeholder" 
+                      placeholder="date placeholder"
                         />
                         <Label>Start Date</Label>
                         <Input
