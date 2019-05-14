@@ -61,7 +61,7 @@ router.put('/:id', (req, res) => {
     req.body ,
     {new: true, useFindAndModify:false }) //this will return what was updated
   .then(editedProject => {
-     res.send(editedProject)
+    res.send(editedProject)
   })
   .catch( err => {
     console.log('error in put /Project/:id', err);

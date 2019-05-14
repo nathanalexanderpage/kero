@@ -9,30 +9,34 @@ class Board extends Component {
           <Container >
             <Row id="mainboard">
               <Col>
-                  <div>
-                  <h1>To Do</h1>
-                  <Card body>
-                    <CardTitle>Special Title Treatment</CardTitle>
-                    <CardText>With supporting text below as a natural lead-in to additional             content.</CardText>
-                    <Button>Go somewhere</Button>
-                  </Card>
-                  <Card body className="text-center">
-                    <CardTitle>Special Title Treatment</CardTitle>
-                    <CardText>With supporting text below as a natural lead-in to additional             content.</CardText>
-                    <Button>Go somewhere</Button>
-                  </Card>
-                  <Card body className="text-right">
-                    <CardTitle>Special Title Treatment</CardTitle>
-                    <CardText>With supporting text below as a natural lead-in to additional             content.</CardText>
-                    <Button>Go somewhere</Button>
-                  </Card>
-                  </ div>
-                </Col>
-              <Col>
-                <h1>Doing</h1>
+                <div>
+                <h1>To Do</h1>
+                <Card body className="text-center">
+                  <CardTitle></CardTitle>
+                  <CardText></CardText>
+                <Button>Go to task <a href="/task"></a></Button>
+                </Card>
+                </ div>
               </Col>
               <Col>
+              <div>
+                <h1>Doing</h1>
+                <Card body className="text-center">
+                  <CardTitle></CardTitle>
+                  <CardText></CardText>
+                  <Button>Go to task <a href="/task"></a></Button>
+                </Card>
+              </div>
+              </Col>
+              <Col>
+              <div>
                 <h1>Done</h1>
+                <Card body className="text-center">
+                  <CardTitle></CardTitle>
+                  <CardText></CardText>
+                  <Button>Go to task <a href="/task"></a></Button>
+                </Card>
+              </div>
               </Col>
             </Row>
           </Container>

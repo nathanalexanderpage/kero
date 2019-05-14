@@ -13,7 +13,6 @@ import Signup from './auth/Signup';
 import Board from './pages/Board';
 import Task from './pages/Task';
 import Sprint from './pages/Sprint';
-import { connect } from 'react-redux';
 
 class App extends Component {
   constructor(props){
