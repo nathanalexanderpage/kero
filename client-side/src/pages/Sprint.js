@@ -3,15 +3,33 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 
 
 class Sprint extends Component {
-  constructor(props){
+
+  constructor(props) {
     super(props);
     this.state = {
-      sprintTasks: []
-    }
+        modal: false,
+        sprintTasks: []
+    };
+
+    this.toggle = this.toggle.bind(this);
+    this.changeUnmountOnClose = this.changeUnmountOnClose.bind(this);
   }
+
 
   render() {
 
+
+  toggle() {
+      this.setState(prevState => ({
+          modal: !prevState.modal
+      }));
+  }
+
+  changeUnmountOnClose(e) {
+      let value = e.target.value;
+      this.setState({ unmountOnClose: JSON.parse(value) });
+  }
+  render() {
     if(!this.props.user){
       return (
         <div>

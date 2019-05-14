@@ -2,7 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Task extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        modal: false
+    };
 
+    this.toggle = this.toggle.bind(this);
+    this.changeUnmountOnClose = this.changeUnmountOnClose.bind(this);
+  }
+
+  toggle() {
+      this.setState(prevState => ({
+          modal: !prevState.modal
+      }));
+  }
+
+  changeUnmountOnClose(e) {
+      let value = e.target.value;
+      this.setState({ unmountOnClose: JSON.parse(value) });
+  }
   render() {
 
     if(!this.props.user){
