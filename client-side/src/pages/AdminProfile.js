@@ -49,6 +49,12 @@ class AdminProfile extends Component {
     .then(response=> {
       console.log('Success');
       console.log(response);
+      this.setState({
+          title: '',
+          startdate: '',
+          finishdate: '',
+          purpose:''
+      })
     })
     .catch(err => {
       console.log('error axios to server:');
