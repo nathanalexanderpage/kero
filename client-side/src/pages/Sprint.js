@@ -13,7 +13,6 @@ class Sprint extends Component {
     };
 
     this.toggle = this.toggle.bind(this);
-    this.changeUnmountOnClose = this.changeUnmountOnClose.bind(this);
   }
 
   toggle() {
@@ -22,10 +21,6 @@ class Sprint extends Component {
       }));
   }
 
-  changeUnmountOnClose(e) {
-      let value = e.target.value;
-      this.setState({ unmountOnClose: JSON.parse(value) });
-  }
   render() {
     if(!this.props.user){
       return (
@@ -36,17 +31,6 @@ class Sprint extends Component {
     }
     return(
       <Container >
-        <Row>
-          <Col>
-            <img  id="userprofile" src={this.props.user.image}  />
-          </Col>
-          <Col>
-            <h2>Hello again, {this.props.user.name} You are an admin!</h2>
-            <h4>Your email is : {this.props.user.email}</h4>
-            <h4>Your role is : {this.props.user.role}</h4>
-            <h4>Your are working in :  {this.props.user.sprint}</h4>
-          </Col>
-        </Row>
         <Row>
           <Col>
             <Form inline onSubmit={(e) => e.preventDefault()}>
@@ -61,33 +45,33 @@ class Sprint extends Component {
                 name="title"
                 placeholder="date placeholder"
                   />
-                  <Label>Start Date</Label>
-                  <Input
-                    type="date"
-                    name="startdate"
-                    placeholder="date placeholder"
-                      />
-                  <Label>End Date</Label>
-                    <Input
-                    type="date"
-                    name="finishdate"
-                    placeholder="date placeholder"
-                      />
-                    <Label>Purpose</Label>
-                    <Input
-                      type="textarea"
-                      name="purpose"
-                      placeholder="Write something"
-                      rows={5}
-                        />
-                      <Label > Author </Label>
-                      <Input
-                        plaintext value={this.props.user.name}/>
-                    </ModalBody>
-                  <ModalFooter>
-                    <Button color="primary" onClick={this.toggle}>Create</Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-              </ModalFooter>
+              <Label>Start Date</Label>
+              <Input
+                type="date"
+                name="startdate"
+                placeholder="date placeholder"
+                  />
+              <Label>End Date</Label>
+              <Input
+                type="date"
+                name="finishdate"
+                placeholder="date placeholder"
+                  />
+              <Label>Purpose</Label>
+              <Input
+                type="textarea"
+                name="purpose"
+                placeholder="Write something"
+                rows={5}
+                  />
+              <Label > Author </Label>
+              <Input
+                plaintext value={this.props.user.name}/>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={this.toggle}>Create</Button>{' '}
+              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            </ModalFooter>
             </Modal>
           </Col>
         </Row>
