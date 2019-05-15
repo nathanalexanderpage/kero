@@ -49,9 +49,9 @@ class Sprint extends Component {
     axios.post(`${SERVER_URL}/tasks/post`, newState,
       {
         headers: {
-         'Authorization' : `Bearer ${token}`
-       }
-     })
+        'Authorization' : `Bearer ${token}`
+      }
+    })
     .then(response=> {
       console.log('Success');
       console.log(response);
