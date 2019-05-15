@@ -34,7 +34,7 @@ class Project extends Component {
     let newState = {...this.state}
     delete newState.modal
     let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/projects/post`, newState,
+    axios.post(`${SERVER_URL}/sprints/post`, newState,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
