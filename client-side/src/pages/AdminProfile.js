@@ -17,7 +17,7 @@ class AdminProfile extends Component {
         modal: false
     };
 
-    this.togdgle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   handleTitleChange = (e) => { this.setState({ title: e.target.value }); }
@@ -68,7 +68,7 @@ class AdminProfile extends Component {
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
-          <div key="{i}">
+          <div key={`project-${i}`}>
             <div>
               Title: {proj.title}
             </div>

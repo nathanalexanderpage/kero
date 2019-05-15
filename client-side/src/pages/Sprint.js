@@ -83,7 +83,7 @@ class Sprint extends Component {
 
     let tasksList = this.props.tasks.map((task, i) => {
       return(
-        <div key="{i}">
+        <div key={`task-${i}`}>
           <div>
             No: {i}
           </div>
