@@ -8,7 +8,7 @@ let router = express.Router()
 let db = require('../models')
 
 //get tasks
-router.get('/', (req, res) => {
+router.post('/get', (req, res) => {
   db.Task.find()
   .then(foundTasks => {
     res.send(foundTasks)
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 })
 
 //post tasks
-router.post('/', (req, res) => {
+router.post('/post', (req, res) => {
   db.Task.create(req.body)
   .then(createdTask => {
     res.send(createdTask)

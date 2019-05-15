@@ -1,6 +1,7 @@
+require('dotenv').config();
 //Required models
 let express = require('express')
-
+const jwt = require('jsonwebtoken');
 //router instances
 let router = express.Router()
 
@@ -8,9 +9,11 @@ let router = express.Router()
 let db = require('../models')
 
 //GET sprints
-router.get('/', (req, res) => {
+router.post('/get', (req, res) => {
+  console.log('SPRINTS HIT');
   db.Sprint.find()
   .then(foundSprint => {
+    console.log(foundSprint);
     res.send(foundSprint)
   })
   .catch( err => {
@@ -20,7 +23,7 @@ router.get('/', (req, res) => {
 })
 
 //post tasks
-router.post('/', (req, res) => {
+router.post('/post', (req, res) => {
   db.Sprint.create(req.body)
   .then(createdSprint => {
     res.send(createdSprint)
