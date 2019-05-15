@@ -41,7 +41,7 @@ class AdminProfile extends Component {
     e.preventDefault();
     let newState = {...this.state}
     delete newState.modal
-    console.log(this.state,newState);
+    console.log(newState);
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/projects/post`, newState,
       {

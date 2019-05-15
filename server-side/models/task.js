@@ -7,9 +7,7 @@ var taskSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true,
-    minlength: 20,
-    maxlength: 70
+    required: true
   },
   desc: {
     type: String,
@@ -27,9 +25,12 @@ var taskSchema = new mongoose.Schema({
   dateCompleted: {
     type: String
   },
-  prerequisiteTasks: {
-    type: String
-  },
+  prerequisiteTasks:
+    {
+      required: false,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Task'    
+    },
   basePriority: {
     type: Number
   }
