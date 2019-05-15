@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, FormText, Fade, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Fade, Col } from 'reactstrap';
 
 class Signup extends Component {
   constructor(props){

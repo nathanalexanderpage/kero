@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Col } from 'reactstrap';
+import { Container, ListGroupItem, Col, Card, CardTitle, CardText, Button, Row } from 'reactstrap';
 import '../App.css';
 
 class Profile extends Component {
@@ -7,33 +7,54 @@ class Profile extends Component {
     if(this.props.user){
       return (
       <Container>
-        <Col>
-          <img  id="userprofile" src={this.props.user.image}  />
-          <ListGroup>
-            <ListGroupItem color="success" className="profile-info">
-              <h2>Hello again, {this.props.user.firstname}!</h2>
-            </ListGroupItem>
-            <ListGroupItem color="info" className="profile-info">
-              <h4>Your email is : {this.props.user.email}</h4>
-            </ListGroupItem>
-            <ListGroupItem color="warning" className="profile-info">
-              <h4>Your role is : {this.props.user.role}</h4>
-            </ListGroupItem>
-          </ListGroup>
-        </Col>
-        <Col>
-          <ListGroup>
-            <ListGroupItem color="success" className="profile-info">
-              <h4>Your are working in Project: {this.props.user.project}</h4>
-            </ListGroupItem>
-            <ListGroupItem color="info" className="profile-info">
-              <h4>Your are working in Sprint: {this.props.user.sprint}</h4>
-            </ListGroupItem>
-            <ListGroupItem color="warning" className="profile-info">
-              <h4>Your are working in Task: {this.props.user.task}</h4>
-            </ListGroupItem>
-          </ListGroup>
-        </Col>
+        <Row>
+          <Col md="6">
+            <img  id="userprofile" src={this.props.user.image}  />
+              <ListGroupItem className="profile-info">
+                <h3>Hello again, {this.props.user.firstName}!</h3>
+              </ListGroupItem>
+              <ListGroupItem className="profile-info">
+                <h5>Email : {this.props.user.email}</h5>
+              </ListGroupItem>
+              <ListGroupItem className="profile-info">
+                <h5>Your role is : {this.props.user.role}</h5>
+              </ListGroupItem>
+              <ListGroupItem className="profile-info">
+                <h5>Your are working in Project: {this.props.user.project}</h5>
+              </ListGroupItem>
+          </Col>
+          <Col md="6">
+            <h1>To Do</h1>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+            <Card body className="text-center" id="card-body">
+              <CardTitle></CardTitle>
+              <CardText></CardText>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     );
   };
