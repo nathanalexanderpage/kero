@@ -65,6 +65,7 @@ class Sprint extends Component {
         prerequisiteTasks:'',
         description:''
       })
+      
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -157,7 +158,7 @@ class Sprint extends Component {
                     <Label for="Select Role">Status</Label>
                   <Input type="select"
                           name="status"
-                          value={this.state.role}
+                          value={this.state.status}
                           onChange={this.handleStatusChange}>
                             <option defaultValue="todo">To Do</option>
                             <option value="inprogress">In progress</option>
@@ -205,6 +206,7 @@ class Sprint extends Component {
               </Form>
             </Modal>
             {tasksList}
+
           </Col>
         </Row>
       </Container>
