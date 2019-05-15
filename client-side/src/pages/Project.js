@@ -59,6 +59,25 @@ class Project extends Component {
 
   render() {
     if(this.props.user){
+
+      let sprintsList = this.props.sprints.map((sprint, i) => {
+        return (
+          <div key="{i}">
+            <div>
+              Number: {sprint.number}
+            </div>
+            <div>
+              Start date: {sprint.startDate}
+            </div>
+            <div>
+              End date: {sprint.finishDate}
+            </div>
+            <div>
+              Project: {sprint.project}
+            </div>
+          </div>
+        );
+      });
       return (
             <Container >
               <Row>

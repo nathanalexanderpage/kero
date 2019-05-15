@@ -31,9 +31,10 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
+    this.getUser();
     console.log("INSIDE componentDidMount");
 
-    function projectsList() {
+    function projectsList(projRet) {
       console.log(`POST ${SERVER_URL}/projects/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/projects/get`, {}, {
@@ -42,18 +43,17 @@ class App extends Component {
         }
       })
       .then(foundProjects=> {
-        console.log(token);
-        console.log('Success');
+        console.log('Success getting Projects');
         console.log(foundProjects.data);
-        return(foundProjects.data);
+        projRet(null, foundProjects.data);
       })
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
-      })
+      });
     }
 
-    function sprintsList() {
+    function sprintsList(sprintRet) {
       console.log(`POST ${SERVER_URL}/sprints/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/sprints/get`, {}, {
@@ -62,18 +62,17 @@ class App extends Component {
         }
       })
       .then(foundSprints=> {
-        console.log(token);
-        console.log('Success');
+        console.log('Success getting Sprints');
         console.log(foundSprints.data);
-        return(foundSprints.data);
+        sprintRet(null, foundSprints.data);
       })
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
-      })
+      });
     }
 
-    function tasksList() {
+    function tasksList(taskRet) {
       console.log(`POST ${SERVER_URL}/tasks/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/tasks/get`, {}, {
@@ -82,21 +81,64 @@ class App extends Component {
         }
       })
       .then(foundTasks=> {
-        console.log(token);
-        console.log('Success');
+        console.log('Success getting Tasks');
         console.log(foundTasks.data);
-        return(foundTasks.data);
+        taskRet(null, foundTasks.data);
       })
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
-      })
+      });
     }
 
-    async.parallel([projectsList, sprintsList, tasksList], function (error, dataLists) {
+    async.parallel([projectsList, sprintsList, tasksList], (error, dataLists) => {
       console.log("ready to setState");
       console.log(dataLists);
+      this.setState({
+        projects: dataLists[0],
+        sprints: dataLists[1],
+        tasks: dataLists[2]
+      });
     });
+  }
+
+  // methods for altering existing data for this user
+  // at the end of each will setState so front-end page reflects database changes
+  addProject = () => {
+    let updatedProjects;
+    this.setState({projects: updatedProjects});
+  }
+  removeProject = () => {
+    let updatedProjects;
+    this.setState({projects: updatedProjects});
+  }
+  editProject = () => {
+    let updatedProjects;
+    this.setState({projects: updatedProjects});
+  }
+  addSprint = () => {
+    let updatedSprints;
+    this.setState({sprints: updatedSprints});
+  }
+  removeSprint = () => {
+    let updatedSprints;
+    this.setState({sprints: updatedSprints});
+  }
+  editSprint = () => {
+    let updatedSprints;
+    this.setState({sprints: updatedSprints});
+  }
+  addTask = () => {
+    let updatedTasks;
+    this.setState({tasks: updatedTasks});
+  }
+  removeTask = () => {
+    let updatedTasks;
+    this.setState({tasks: updatedTasks});
+  }
+  editTask = () => {
+    let updatedTasks;
+    this.setState({tasks: updatedTasks});
   }
 
   resetUser = () => {
@@ -138,29 +180,63 @@ class App extends Component {
             <Nav user={this.state.user} resetUser={this.resetUser} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
-              () => (<Login user={this.state.user} getUser={this.getUser} />)
+              () => (
+                <Login user={this.state.user} getUser={this.getUser} />
+              )
             } />
             <Route path="/signup" component={
-              () => (<Signup user={this.state.user} getUser={this.getUser} />)
+              () => (
+                <Signup user={this.state.user} getUser={this.getUser} />
+              )
             } />
             <Route path="/profile" component={
-              () => (<Profile user={this.state.user} />)
+              () => (
+                <Profile user={this.state.user} />
+              )
             } />
             <Route path="/adminprofile" component={
-                () => (<AdminProfile user={this.state.user} />)
-              } />
+              () => (
+                <AdminProfile
+                  user={this.state.user}
+                  projects={this.state.projects}
+                  addProject={this.state.addProject}
+                  removeProject={this.state.removeProject}
+                  editProject={this.state.editProject}
+                />
+              )
+            } />
             <Route path="/board" component={
-                () => (<Board user={this.state.user} />)
-              } />
+              () => (
+                <Board user={this.state.user}/>
+              )
+            } />
             <Route path="/examplesprint" component={
-                () => (<Sprint user={this.state.user} />)
-              } />
+              () => (
+                <Sprint
+                  user={this.state.user}
+                  tasks={this.state.tasks}
+                  addTask={this.state.addTask}
+                  removeTask={this.state.removeTask}
+                  editTask={this.state.editTask}
+                />
+              )
+            } />
             <Route path="/exampletask" component={
-                () => (<Task user={this.state.user} />)
-              } />
+              () => (
+                <Task user={this.state.user} />
+              )
+            } />
             <Route path="/exampleproject" component={
-                  () => (<Project user={this.state.user} />)
-                } />
+              () => (
+                <Project
+                  user={this.state.user}
+                  sprints={this.state.sprints}
+                  addSprint={this.state.addSprint}
+                  removeSprint={this.state.removeSprint}
+                  editSprint={this.state.editSprint}
+                />
+              )
+            } />
           </div>
         </Router>
         <Footer />
