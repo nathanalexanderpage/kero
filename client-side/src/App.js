@@ -26,6 +26,8 @@ class App extends Component {
       projects: [],
       sprints: [],
       tasks: [],
+      project: null,
+      sprint: null,
       task: null
     }
   }
@@ -146,20 +148,7 @@ class App extends Component {
     this.setState({tasks: updatedTasks});
   }
   getTask = (taskId) => {
-    let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/tasks/get/${taskId}`, {}, {
-      headers: {
-        'Authorization' : `Bearer ${token}`
-      }
-    })
-    .then(foundTask=> {
-      console.log('Success getting Sprints');
-      console.log(foundTask.data);
-    })
-    .catch(err => {
-      console.log('error axios to server:');
-      console.log(err);
-    });
+    
   }
 
   resetUser = () => {
@@ -189,8 +178,26 @@ class App extends Component {
       this.resetUser();
       console.log('no user token found');
     }
+  }
 
-    // IF THERE IS, TRY TO GET USER INFO
+  getUserProfInfo = (userProfId) => {
+    console.log('inside getUserProfInfo');
+    console.log(userProfId);
+    let token = localStorage.getItem('serverToken');
+    axios.post(`${SERVER_URL}/users/get/${userProfId}`, {}, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundUser=> {
+      console.log('Success getting userProfInfo');
+      console.log(foundUser);
+      return foundUser;
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    });
   }
 
   render() {

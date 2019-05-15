@@ -47,6 +47,11 @@ app.use('/tasks', expressJWT({
   secret: process.env.JWT_SECRET
 }), require('./controllers/tasks'))
 
+app.use('/users', expressJWT({
+  secret: process.env.JWT_SECRET
+}), require('./controllers/users'))
+
+
 // This is the catch-all route. Ideally you don't get here unless you made a mistake on your front-end
 app.get('*', function(req, res, next) {
 	res.status(404).send({ message: 'Not Found' });
