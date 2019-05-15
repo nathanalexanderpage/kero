@@ -3,6 +3,7 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 
 class AdminProfile extends Component {
