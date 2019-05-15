@@ -80,10 +80,49 @@ class Sprint extends Component {
         </div>
       );
     }
+
+    let tasksList = this.props.tasks.map((task, i) => {
+      return(
+        <div key="{i}">
+          <div>
+            No: {i}
+          </div>
+          <div>
+            Title: {task.title}
+          </div>
+          <div>
+            Desc: {task.desc}
+          </div>
+          <div>
+            Assigned to: {task.assignedTo}
+          </div>
+          <div>
+            Status: {task.status}
+          </div>
+          <div>
+            Expected man hours: {task.manHourBudget}
+          </div>
+          <div>
+            Date assigned: {task.dateAssigned}
+          </div>
+          <div>
+            Date completed: {task.dateCompleted}
+          </div>
+          <div>
+            Stoppers: {task.prerequisiteTasks}
+          </div>
+          <div>
+            Priority level: {task.basePriority}
+          </div>
+        </div>
+      );
+    })
+
     return(
       <Container >
         <Row>
           <Col>
+
             <Form inline onSubmit={(e) => e.preventDefault()}>
               <Button color="danger" onClick={this.toggle}>New Task</Button>
             </Form>
@@ -164,6 +203,7 @@ class Sprint extends Component {
                 </ModalFooter>
               </Form>
             </Modal>
+            {tasksList}
           </Col>
         </Row>
       </Container>

@@ -49,7 +49,7 @@ class App extends Component {
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
-      })
+      });
     }
 
     function sprintsList(sprintRet) {
@@ -68,7 +68,7 @@ class App extends Component {
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
-      })
+      });
     }
 
     function tasksList(taskRet) {
@@ -87,7 +87,7 @@ class App extends Component {
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
-      })
+      });
     }
 
     async.parallel([projectsList, sprintsList, tasksList], (error, dataLists) => {
@@ -97,7 +97,7 @@ class App extends Component {
         projects: dataLists[0],
         sprints: dataLists[1],
         tasks: dataLists[2]
-      })
+      });
     });
   }
 
@@ -140,30 +140,54 @@ class App extends Component {
             <Nav user={this.state.user} resetUser={this.resetUser} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
-              () => (<Login user={this.state.user} getUser={this.getUser} />)
+              () => (
+                <Login user={this.state.user} getUser={this.getUser} />
+              );
             } />
             <Route path="/signup" component={
-              () => (<Signup user={this.state.user} getUser={this.getUser} />)
+              () => (
+                <Signup user={this.state.user} getUser={this.getUser} />
+              );
             } />
             <Route path="/profile" component={
-              () => (<Profile user={this.state.user} />)
+              () => (
+                <Profile user={this.state.user} />
+              );
             } />
             <Route path="/adminprofile" component={
-                () => (<AdminProfile user={this.state.user} />)
-              } />
+              () => (
+                <AdminProfile
+                  user={this.state.user}
+                  projects={this.state.projects}
+                />
+              );
+            } />
             <Route path="/board" component={
-                () => (<Board user={this.state.user} />)
-              } />
+              () => (
+                <Board user={this.state.user}/>
+              );
+            } />
             <Route path="/examplesprint" component={
-                () => (<Sprint user={this.state.user} />)
-              } />
+              () => (
+                <Sprint
+                  user={this.state.user}
+                  tasks={this.state.tasks}
+                />
+              );
+            } />
             <Route path="/exampletask" component={
-                () => (<Task user={this.state.user}
-                tasks={this.state.tasks} />)
-              } />
+              () => (
+                <Task user={this.state.user} />
+              );
+            } />
             <Route path="/exampleproject" component={
-                  () => (<Project user={this.state.user} />)
-                } />
+              () => (
+                <Project
+                  user={this.state.user}
+                  sprints={this.state.sprints}
+                />
+              );
+            } />
           </div>
         </Router>
         <Footer />

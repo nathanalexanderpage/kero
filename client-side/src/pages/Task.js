@@ -34,44 +34,12 @@ class Task extends Component {
       );
     }
 
-    let tasksList = this.props.tasks.map((task, i) => {
-      return(
-        <div key="{i}">
-          <div>
-            Title: {task.title}
-          </div>
-          <div>
-            Desc: {task.desc}
-          </div>
-          <div>
-            Assigned to: {task.assignedTo}
-          </div>
-          <div>
-            Status: {task.status}
-          </div>
-          <div>
-            Expected man hours: {task.manHourBudget}
-          </div>
-          <div>
-            Date assigned: {task.dateAssigned}
-          </div>
-          <div>
-            Date completed: {task.dateCompleted}
-          </div>
-          <div>
-            Stoppers: {task.prerequisiteTasks}
-          </div>
-          <div>
-            Priority level: {task.basePriority}
-          </div>
-        </div>
-      );
-    })
+    
 
     return(
       <div>
         <div>
-          {tasksList}
+          {8}
         </div>
         <div>
           <div className="task-name">
