@@ -25,7 +25,8 @@ class App extends Component {
       user: null,
       projects: [],
       sprints: [],
-      tasks: []
+      tasks: [],
+      task: null
     }
   }
 
@@ -144,6 +145,22 @@ class App extends Component {
     let updatedTasks;
     this.setState({tasks: updatedTasks});
   }
+  getTask = (taskId) => {
+    let token = localStorage.getItem('serverToken');
+    axios.post(`${SERVER_URL}/tasks/get/${taskId}`, {}, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundTask=> {
+      console.log('Success getting Sprints');
+      console.log(foundTask.data);
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    });
+  }
 
   resetUser = () => {
     this.setState({user: null});
@@ -185,8 +202,11 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
               () => (
-                <Login user={this.state.user} getUser={this.getUser}
-                loadUserData={this.loadUserData} />
+                <Login
+                  user={this.state.user}
+                  getUser={this.getUser}
+                  loadUserData={this.loadUserData}
+                />
               )
             } />
             <Route path="/signup" component={

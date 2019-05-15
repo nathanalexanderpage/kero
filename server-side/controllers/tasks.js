@@ -19,6 +19,19 @@ router.post('/get', (req, res) => {
   })
 })
 
+//get tasks/:id
+router.post('/get/:id', (req, res) => {
+  db.Task.findById(req.params.id)
+  .then(foundTask => {
+    res.send(foundTask)
+  })
+  .catch( err => {
+    console.log('error in get /task/:id', err);
+    res.status(500).send('Something went wrong. Contact administrator')
+  })
+})
+
+
 //post tasks
 router.post('/post', (req, res) => {
 
@@ -36,17 +49,6 @@ router.post('/post', (req, res) => {
 
 })
 
-//get tasks/:id
-router.get('/:id', (req, res) => {
-  db.Task.findById(req.params.id)
-  .then(foundTask => {
-    res.send(foundTask)
-  })
-  .catch( err => {
-    console.log('error in get /task/:id', err);
-    res.status(500).send('Something went wrong. Contact administrator')
-  })
-})
 
 //put tasks
 router.put('/:id', (req, res) => {
