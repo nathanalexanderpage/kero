@@ -121,7 +121,8 @@ class Sprint extends Component {
                           value={this.state.role}
                           onChange={this.handleStatusChange}>
                             <option defaultValue="todo">To Do</option>
-                            <option value="doing">Doing</option>
+                            <option value="inprogress">In progress</option>
+                            <option value="codereview">Code review</option>
                             <option value="done">Done</option>
                   </Input>
                   <Label>Assigned Date</Label>
