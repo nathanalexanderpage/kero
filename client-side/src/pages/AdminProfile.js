@@ -68,24 +68,23 @@ class AdminProfile extends Component {
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
-          <div>
+          <div key="{i}">
             <div>
-              {proj.title}
+              Title: {proj.title}
             </div>
             <div>
-              {proj.startdate}
+              Start date: {proj.startdate}
             </div>
             <div>
-              {proj.finishdate}
+              End date: {proj.finishdate}
             </div>
             <div>
-              {proj.purpose}
+              Description: {proj.purpose}
             </div>
             <div>
-              {proj.user}
+              Project lead: {proj.user}
             </div>
           </div>
-
         );
       });
 

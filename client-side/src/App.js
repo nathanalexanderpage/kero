@@ -31,6 +31,7 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
+    this.getUser();
     console.log("INSIDE componentDidMount");
 
     function projectsList(projRet) {
@@ -101,6 +102,45 @@ class App extends Component {
     });
   }
 
+  // methods for altering existing data for this user
+  // at the end of each will setState so front-end page reflects database changes
+  addProject = () => {
+    let updatedProjects;
+    this.setState({projects: updatedProjects});
+  }
+  removeProject = () => {
+    let updatedProjects;
+    this.setState({projects: updatedProjects});
+  }
+  editProject = () => {
+    let updatedProjects;
+    this.setState({projects: updatedProjects});
+  }
+  addSprint = () => {
+    let updatedSprints;
+    this.setState({sprints: updatedSprints});
+  }
+  removeSprint = () => {
+    let updatedSprints;
+    this.setState({sprints: updatedSprints});
+  }
+  editSprint = () => {
+    let updatedSprints;
+    this.setState({sprints: updatedSprints});
+  }
+  addTask = () => {
+    let updatedTasks;
+    this.setState({tasks: updatedTasks});
+  }
+  removeTask = () => {
+    let updatedTasks;
+    this.setState({tasks: updatedTasks});
+  }
+  editTask = () => {
+    let updatedTasks;
+    this.setState({tasks: updatedTasks});
+  }
+
   resetUser = () => {
     this.setState({user: null});
   }
@@ -159,6 +199,9 @@ class App extends Component {
                 <AdminProfile
                   user={this.state.user}
                   projects={this.state.projects}
+                  addProject={this.state.addProject}
+                  removeProject={this.state.removeProject}
+                  editProject={this.state.editProject}
                 />
               )
             } />
@@ -172,6 +215,9 @@ class App extends Component {
                 <Sprint
                   user={this.state.user}
                   tasks={this.state.tasks}
+                  addTask={this.state.addTask}
+                  removeTask={this.state.removeTask}
+                  editTask={this.state.editTask}
                 />
               )
             } />
@@ -185,6 +231,9 @@ class App extends Component {
                 <Project
                   user={this.state.user}
                   sprints={this.state.sprints}
+                  addSprint={this.state.addSprint}
+                  removeSprint={this.state.removeSprint}
+                  editSprint={this.state.editSprint}
                 />
               )
             } />

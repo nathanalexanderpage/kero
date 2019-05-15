@@ -7,10 +7,10 @@ let projectSchema = new mongoose.Schema({
   startdate: Date,
   finishdate: Date,
   purpose: String,
-	  user: {
-	    type: mongoose.Schema.Types.ObjectId,
-	    ref: 'User'
-	  }
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 // Use schema to create model
