@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Fade, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props){
@@ -43,7 +44,8 @@ class Login extends Component {
     }
     return(
       <div>
-        <h2>Log In</h2>
+        <h2>Log in to Kero</h2>
+        <Link to="/signup">or create an account</Link>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row>
             <Label for="Email">Email</Label>

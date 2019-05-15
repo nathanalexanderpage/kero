@@ -49,9 +49,9 @@ class Sprint extends Component {
     axios.post(`${SERVER_URL}/tasks/post`, newState,
       {
         headers: {
-         'Authorization' : `Bearer ${token}`
-       }
-     })
+        'Authorization' : `Bearer ${token}`
+      }
+    })
     .then(response=> {
       console.log('Success');
       console.log(response);
@@ -84,7 +84,7 @@ class Sprint extends Component {
 
     let tasksList = this.props.tasks.map((task, i) => {
       return(
-        <div key="{i}">
+        <div key={`task-${i}`}>
           <div>
             No: {i}
           </div>

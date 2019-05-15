@@ -24,9 +24,9 @@ class Project extends Component {
 
 
   toggle() {
-      this.setState(prevState => ({
-          modal: !prevState.modal
-      }));
+    this.setState(prevState => ({
+        modal: !prevState.modal
+    }));
   }
 
   handleSubmit = (e) => {
@@ -62,7 +62,7 @@ class Project extends Component {
 
       let sprintsList = this.props.sprints.map((sprint, i) => {
         return (
-          <div key="{i}">
+          <div key={`sprint-${i}`}>
             <div>
               Number: {sprint.number}
             </div>
@@ -79,51 +79,55 @@ class Project extends Component {
         );
       });
       return (
-            <Container >
-              <Row>
-                <Col>
-                  <Form inline onSubmit={(e) => e.preventDefault()}>
-                    <Button color="danger" onClick={this.toggle}>New Sprint</Button>
-                  </Form>
-                  <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
-                    <Form onSubmit={this.handleSubmit}>
-                        <ModalHeader toggle={this.toggle}>Create a New Sprint</ModalHeader>
-                        <ModalBody>
-                          <Label>Number</Label>
-                          <Input
-                            type="number"
-                            name="number"
-                            placeholder="Sprint number"
-                            value={this.state.number}
-                            onChange={this.handleNumberChange}
+
+        <div>
+          <Container >
+            <Row>
+              <Col>
+                <Form inline onSubmit={(e) => e.preventDefault()}>
+                  <Button color="danger" onClick={this.toggle}>New Sprint</Button>
+                </Form>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
+                  <Form onSubmit={this.handleSubmit}>
+                    <ModalHeader toggle={this.toggle}>Create a New Sprint</ModalHeader>
+                    <ModalBody>
+                      <Label>Number</Label>
+                      <Input
+                        type="number"
+                        name="number"
+                        placeholder="Sprint number"
+                        value={this.state.number}
+                        onChange={this.handleNumberChange}
+                          />
+                          <Label>Start Date</Label>
+                           <Input
+                            type="date"
+                            name="startDate"
+                            placeholder="date placeholder"
+                            value={this.state.startDate}
+                            onChange={this.handleStartDateChange}
                               />
-                              <Label>Start Date</Label>
-                               <Input
-                                type="date"
-                                name="startDate"
-                                placeholder="date placeholder"
-                                value={this.state.startDate}
-                                onChange={this.handleStartDateChange}
-                                  />
-                              <Label>End Date</Label>
-                                <Input
-                                type="date"
-                                name="finishDate"
-                                placeholder="date placeholder"
-                                value={this.state.finishdate}
-                                onChange={this.handleFinishDateChange}
-                                  />
-                                </ModalBody>
-                              <ModalFooter>
-                                <Button color="primary" type="submit" onClick={this.toggle}>Create</Button>{' '}
-                                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                          </ModalFooter>
-                    </Form>
-                  </Modal>
-                </Col>
-              </Row>
-            </Container>
-        );
+                          <Label>End Date</Label>
+                            <Input
+                            type="date"
+                            name="finishDate"
+                            placeholder="date placeholder"
+                            value={this.state.finishdate}
+                            onChange={this.handleFinishDateChange}
+                              />
+                            </ModalBody>
+                          <ModalFooter>
+                            <Button color="primary" type="submit" onClick={this.toggle}>Create</Button>{' '}
+                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                      </ModalFooter>
+                  </Form>
+                </Modal>
+              </Col>
+            </Row>
+          </Container>
+          {sprintsList}
+        </div>
+    );
     }
     return(
       <div>
