@@ -142,17 +142,17 @@ class App extends Component {
             <Route path="/login" component={
               () => (
                 <Login user={this.state.user} getUser={this.getUser} />
-              );
+              )
             } />
             <Route path="/signup" component={
               () => (
                 <Signup user={this.state.user} getUser={this.getUser} />
-              );
+              )
             } />
             <Route path="/profile" component={
               () => (
                 <Profile user={this.state.user} />
-              );
+              )
             } />
             <Route path="/adminprofile" component={
               () => (
@@ -160,12 +160,12 @@ class App extends Component {
                   user={this.state.user}
                   projects={this.state.projects}
                 />
-              );
+              )
             } />
             <Route path="/board" component={
               () => (
                 <Board user={this.state.user}/>
-              );
+              )
             } />
             <Route path="/examplesprint" component={
               () => (
@@ -173,12 +173,12 @@ class App extends Component {
                   user={this.state.user}
                   tasks={this.state.tasks}
                 />
-              );
+              )
             } />
             <Route path="/exampletask" component={
               () => (
                 <Task user={this.state.user} />
-              );
+              )
             } />
             <Route path="/exampleproject" component={
               () => (
@@ -186,7 +186,7 @@ class App extends Component {
                   user={this.state.user}
                   sprints={this.state.sprints}
                 />
-              );
+              )
             } />
           </div>
         </Router>
