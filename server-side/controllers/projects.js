@@ -26,9 +26,7 @@ router.post('/get', (req, res) => {
 //post tasks
 router.post('/post', (req, res) => {
   console.log('In the POST /project/ route');
-  console.log('ESTE ES EL USUARIO', req.user);
-  console.log(req.body);
-  req.body.user = req.user.id
+  req.body.admin = req.user.id
   db.Project.create(req.body)
   .then(createdProject => {
     res.send(createdProject)

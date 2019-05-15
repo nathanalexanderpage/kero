@@ -13,7 +13,13 @@ var sprintSchema = new mongoose.Schema({
   project: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project'
-  }
+  },
+  tasks:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Task'
+    }
+  ]
 });
 
 let Sprint = mongoose.model('Sprint', sprintSchema);

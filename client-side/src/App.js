@@ -6,7 +6,7 @@ import './App.css';
 import Footer from './layout/Footer';
 import Home from './Home';
 import Login from './auth/Login';
-import Nav from './layout/Nav';
+import Navigation from './layout/Navigation';
 import Profile from './pages/Profile';
 import AdminProfile from './pages/AdminProfile';
 import Signup from './auth/Signup';
@@ -198,7 +198,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div className="container">
-            <Nav user={this.state.user} resetUser={this.resetUser} />
+            <Navigation user={this.state.user} resetUser={this.resetUser} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
               () => (

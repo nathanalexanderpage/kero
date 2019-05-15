@@ -37,7 +37,9 @@ router.post('/post', (req, res) => {
 
   console.log('In the POST /sprint/ route');
   console.log(req.body);
-
+  if(req.body.status === ''){
+      req.body.status = 'todo'
+  }
   db.Task.create(req.body)
   .then(createdTask => {
     res.send(createdTask)
