@@ -10,8 +10,8 @@ class Project extends Component {
     super(props);
     this.state = {
         number: 0,
-        startdate:'',
-        finishdate:'',
+        startDate:'',
+        finishDate:'',
         modal: false
     };
 
@@ -19,8 +19,8 @@ class Project extends Component {
   }
 
   handleNumberChange = (e) => { this.setState({ number: e.target.value }); }
-  handleStartDateChange = (e) => { this.setState({ startdate: e.target.value }); }
-  handleFinishDateChange = (e) => { this.setState({ finishdate: e.target.value }); }
+  handleStartDateChange = (e) => { this.setState({ startDate: e.target.value }); }
+  handleFinishDateChange = (e) => { this.setState({ finishDate: e.target.value }); }
 
 
   toggle() {
@@ -34,6 +34,7 @@ class Project extends Component {
     let newState = {...this.state}
     delete newState.modal
     let token = localStorage.getItem('serverToken');
+    console.log(newState);
     axios.post(`${SERVER_URL}/sprints/post`, newState,
       {
         headers: {
@@ -45,8 +46,8 @@ class Project extends Component {
       console.log(response);
       this.setState({
         number: 0,
-        startdate:'',
-        finishdate:'',
+        startDate:'',
+        finishDate:'',
       })
     })
     .catch(err => {
@@ -80,15 +81,15 @@ class Project extends Component {
                               <Label>Start Date</Label>
                                <Input
                                 type="date"
-                                name="startdate"
+                                name="startDate"
                                 placeholder="date placeholder"
-                                value={this.state.startdate}
+                                value={this.state.startDate}
                                 onChange={this.handleStartDateChange}
                                   />
                               <Label>End Date</Label>
                                 <Input
                                 type="date"
-                                name="finishdate"
+                                name="finishDate"
                                 placeholder="date placeholder"
                                 value={this.state.finishdate}
                                 onChange={this.handleFinishDateChange}

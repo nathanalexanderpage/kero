@@ -10,3 +10,5 @@ mongoose.set('useCreateIndex', true);
 // Include models from this folder
 module.exports.User = require('./user');
 module.exports.Project = require('./project');
+module.exports.Sprint = require('./sprint');
+module.exports.Task = require('./task');

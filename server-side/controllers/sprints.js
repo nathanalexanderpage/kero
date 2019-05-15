@@ -26,13 +26,14 @@ router.post('/get', (req, res) => {
 
 //post tasks
 router.post('/post', (req, res) => {
-  console.log('In the POST /project/ route');
-  console.log('ESTE ES EL USUARIO', req.user);
+  console.log('In the POST /sprint/ route');
   console.log(req.body);
-  req.body.project =
-  db.Sprint.create(req.body)
-  .then(createdProject => {
-    res.send(createdProject)
+  let newsprint = {...req.body}
+  newsprint.project = '5cdb6b3796f250daf48129eb'
+  console.log(newsprint);
+  db.Sprint.create(newsprint)
+  .then(createdSprint => {
+    res.send(createdSprint)
   })
   .catch( err => {
     console.log('error in post /Projects', err);

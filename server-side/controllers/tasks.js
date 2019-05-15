@@ -20,13 +20,15 @@ router.get('/', (req, res) => {
 })
 
 //post tasks
-router.post('/', (req, res) => {
+router.post('/post', (req, res) => {
+  console.log('In the POST /sprint/ route');
+  console.log(req.body);
   db.Task.create(req.body)
   .then(createdTask => {
     res.send(createdTask)
   })
   .catch( err => {
-    console.log('error in post /tasks', err);
+    console.log('error in post /Projects', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 
