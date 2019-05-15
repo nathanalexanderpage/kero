@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -16,6 +15,9 @@ import Task from './pages/Task';
 import Sprint from './pages/Sprint';
 import Project from './pages/Project';
 
+let async = require("async");
+
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -29,12 +31,9 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
-
     console.log("INSIDE componentDidMount");
 
-    let promise1 = 1;
-    let promise2 = 42;
-    let promise3 = new Promise(function(resolve, reject) {
+    function projectsList() {
       console.log(`POST ${SERVER_URL}/projects/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/projects/get`, {}, {
@@ -46,18 +45,57 @@ class App extends Component {
         console.log(token);
         console.log('Success');
         console.log(foundProjects.data);
-        resolve(foundProjects.data);
+        return(foundProjects.data);
       })
       .catch(err => {
         console.log('error axios to server:');
         console.log(err);
       })
-    });
+    }
 
-    Promise.all([promise1, promise2, promise3])
-    .then(() => {
-      console.log(`ready to setState`);
-      console.log(promise3);
+    function sprintsList() {
+      console.log(`POST ${SERVER_URL}/sprints/get`);
+      let token = localStorage.getItem('serverToken');
+      axios.post(`${SERVER_URL}/sprints/get`, {}, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      .then(foundSprints=> {
+        console.log(token);
+        console.log('Success');
+        console.log(foundSprints.data);
+        return(foundSprints.data);
+      })
+      .catch(err => {
+        console.log('error axios to server:');
+        console.log(err);
+      })
+    }
+
+    function tasksList() {
+      console.log(`POST ${SERVER_URL}/tasks/get`);
+      let token = localStorage.getItem('serverToken');
+      axios.post(`${SERVER_URL}/tasks/get`, {}, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      .then(foundTasks=> {
+        console.log(token);
+        console.log('Success');
+        console.log(foundTasks.data);
+        return(foundTasks.data);
+      })
+      .catch(err => {
+        console.log('error axios to server:');
+        console.log(err);
+      })
+    }
+
+    async.parallel([projectsList, sprintsList, tasksList], function (error, dataLists) {
+      console.log("ready to setState");
+      console.log(dataLists);
     });
   }
 
