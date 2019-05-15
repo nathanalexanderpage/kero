@@ -27,6 +27,7 @@ class Login extends Component {
       localStorage.setItem('serverToken', response.data.token)
       // update user state info (in App.js)
       this.props.getUser();
+      this.props.loadUserData();
     })
     .catch(err => {
       console.log('TODO: make error messages for user to see');

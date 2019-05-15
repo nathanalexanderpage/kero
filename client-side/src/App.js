@@ -32,6 +32,10 @@ class App extends Component {
   componentDidMount = () => {
     // GET USER INFO
     this.getUser();
+    this.loadUserData();
+  }
+
+  loadUserData = () => {
     console.log("INSIDE componentDidMount");
 
     function projectsList(projRet) {
@@ -181,7 +185,8 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
               () => (
-                <Login user={this.state.user} getUser={this.getUser} />
+                <Login user={this.state.user} getUser={this.getUser}
+                loadUserData={this.loadUserData} />
               )
             } />
             <Route path="/signup" component={
