@@ -7,7 +7,7 @@ let projectSchema = new mongoose.Schema({
   startdate: Date,
   finishdate: Date,
   purpose: String,
-  user: {
+  admin: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }

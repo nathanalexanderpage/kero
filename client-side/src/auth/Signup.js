@@ -29,7 +29,7 @@ class Signup extends Component {
 
   handleRoleChange = (e) => { this.setState({ role: e.target.value }); }
 
-  handleCompanyChange = (e) => { this.setState({ role: e.target.value }); }
+  handleCompanyChange = (e) => { this.setState({ company: e.target.value }); }
 
 
   handleSubmit = (e) => {

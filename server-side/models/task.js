@@ -20,16 +20,16 @@ var taskSchema = new mongoose.Schema({
     type: String,
   },
   dateAssigned: {
-    type: String
+    type: Date
   },
   dateCompleted: {
-    type: String
+    type: Date
   },
   prerequisiteTasks:
     {
       required: false,
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Task'    
+      ref: 'Task'
     },
   basePriority: {
     type: Number
