@@ -12,7 +12,6 @@ let db = require('../models')
 //get tasks
 router.post('/get', (req, res) => {
   console.log("PROJECTS HIT");
-  console.log(req);
   db.Project.find()
   .then(foundProject => {
     console.log(foundProject);
@@ -38,7 +37,6 @@ router.post('/post', (req, res) => {
     console.log('error in post /Projects', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
-
 })
 
 //get tasks/:id

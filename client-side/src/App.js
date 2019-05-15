@@ -33,7 +33,7 @@ class App extends Component {
     // GET USER INFO
     console.log("INSIDE componentDidMount");
 
-    function projectsList() {
+    function projectsList(projRet) {
       console.log(`POST ${SERVER_URL}/projects/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/projects/get`, {}, {
@@ -42,10 +42,9 @@ class App extends Component {
         }
       })
       .then(foundProjects=> {
-        console.log(token);
-        console.log('Success');
+        console.log('Success getting Projects');
         console.log(foundProjects.data);
-        return(foundProjects.data);
+        projRet(null, foundProjects.data);
       })
       .catch(err => {
         console.log('error axios to server:');
@@ -53,7 +52,7 @@ class App extends Component {
       })
     }
 
-    function sprintsList() {
+    function sprintsList(sprintRet) {
       console.log(`POST ${SERVER_URL}/sprints/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/sprints/get`, {}, {
@@ -62,10 +61,9 @@ class App extends Component {
         }
       })
       .then(foundSprints=> {
-        console.log(token);
-        console.log('Success');
+        console.log('Success getting Sprints');
         console.log(foundSprints.data);
-        return(foundSprints.data);
+        sprintRet(null, foundSprints.data);
       })
       .catch(err => {
         console.log('error axios to server:');
@@ -73,7 +71,7 @@ class App extends Component {
       })
     }
 
-    function tasksList() {
+    function tasksList(taskRet) {
       console.log(`POST ${SERVER_URL}/tasks/get`);
       let token = localStorage.getItem('serverToken');
       axios.post(`${SERVER_URL}/tasks/get`, {}, {
@@ -82,10 +80,9 @@ class App extends Component {
         }
       })
       .then(foundTasks=> {
-        console.log(token);
-        console.log('Success');
+        console.log('Success getting Tasks');
         console.log(foundTasks.data);
-        return(foundTasks.data);
+        taskRet(null, foundTasks.data);
       })
       .catch(err => {
         console.log('error axios to server:');
@@ -93,9 +90,14 @@ class App extends Component {
       })
     }
 
-    async.parallel([projectsList, sprintsList, tasksList], function (error, dataLists) {
+    async.parallel([projectsList, sprintsList, tasksList], (error, dataLists) => {
       console.log("ready to setState");
       console.log(dataLists);
+      this.setState({
+        projects: dataLists[0],
+        sprints: dataLists[1],
+        tasks: dataLists[2]
+      })
     });
   }
 
@@ -156,7 +158,8 @@ class App extends Component {
                 () => (<Sprint user={this.state.user} />)
               } />
             <Route path="/exampletask" component={
-                () => (<Task user={this.state.user} />)
+                () => (<Task user={this.state.user}
+                tasks={this.state.tasks} />)
               } />
             <Route path="/exampleproject" component={
                   () => (<Project user={this.state.user} />)
