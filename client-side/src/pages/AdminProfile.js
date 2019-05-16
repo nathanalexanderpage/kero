@@ -17,6 +17,7 @@ class AdminProfile extends Component {
         purpose:'',
         modal: false,
         redirect:false,
+        information:false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -48,20 +49,21 @@ class AdminProfile extends Component {
     axios.post(`${SERVER_URL}/projects/post`, newState,
       {
         headers: {
-        'Authorization' : `Bearer ${token}`
-      }
-    })
+         'Authorization' : `Bearer ${token}`
+       }
+     })
     .then(response=> {
       console.log('Success');
       console.log(response);
-      this.props.getProject(response._id)
       this.setState({
           title: '',
           startdate: '',
           finishdate: '',
           purpose:'',
           redirect:true
-      });
+      } , this.props.rerender());
+
+
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -70,7 +72,7 @@ class AdminProfile extends Component {
   }
 
   render() {
-    if(this.props.redirects.project === true){
+    if(this.state.redirect === true){
     return <Redirect to='/board' />
     }
 
