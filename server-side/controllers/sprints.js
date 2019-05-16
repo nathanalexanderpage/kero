@@ -14,7 +14,9 @@ let db = require('../models')
 // GET sprints
 router.get('/:id', (req, res) => {
   console.log('SPRINTS HIT');
-  db.Sprint.findById()
+  db.Sprint.findById({
+    _id: req.params.id
+  })
   .then(foundSprint => {
     console.log(foundSprint);
     res.send(foundSprint)

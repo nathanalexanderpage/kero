@@ -48,7 +48,7 @@ class App extends Component {
     console.log("INSIDE componentDidMount");
 
     function projectsList(projRet) {
-      console.log(`POST ${SERVER_URL}/projects/get`);
+      console.log(`GET ${SERVER_URL}/projects/`);
       let token = localStorage.getItem('serverToken');
       console.log(token)
 
@@ -68,52 +68,55 @@ class App extends Component {
       });
     }
 
-    function sprintsList(sprintRet) {
-      console.log(`POST ${SERVER_URL}/sprints/get`);
-      let token = localStorage.getItem('serverToken');
-      axios.post(`${SERVER_URL}/sprints/get`, {}, {
-        headers: {
-          'Authorization' : `Bearer ${token}`
-        }
-      })
-      .then(foundSprints=> {
-        console.log('Success getting Sprints');
-        console.log(foundSprints.data);
-        sprintRet(null, foundSprints.data);
-      })
-      .catch(err => {
-        console.log('error axios to server:');
-        console.log(err);
-      });
-    }
+    // function sprintsList(sprintRet) {
+    //   console.log(`POST ${SERVER_URL}/sprints/get`);
+    //   let token = localStorage.getItem('serverToken');
+    //   axios.post(`${SERVER_URL}/sprints/get`, {}, {
+    //     headers: {
+    //       'Authorization' : `Bearer ${token}`
+    //     }
+    //   })
+    //   .then(foundSprints=> {
+    //     console.log('Success getting Sprints');
+    //     console.log(foundSprints.data);
+    //     sprintRet(null, foundSprints.data);
+    //   })
+    //   .catch(err => {
+    //     console.log('error axios to server:');
+    //     console.log(err);
+    //   });
+    // }
+    //
+    // function tasksList(taskRet) {
+    //   console.log(`POST ${SERVER_URL}/tasks/get`);
+    //   let token = localStorage.getItem('serverToken');
+    //   axios.post(`${SERVER_URL}/tasks/get`, {}, {
+    //     headers: {
+    //       'Authorization' : `Bearer ${token}`
+    //     }
+    //   })
+    //   .then(foundTasks=> {
+    //     console.log('Success getting Tasks');
+    //     console.log(foundTasks.data);
+    //     taskRet(null, foundTasks.data);
+    //   })
+    //   .catch(err => {
+    //     console.log('error axios to server:');
+    //     console.log(err);
+    //   });
+    // }
 
-    function tasksList(taskRet) {
-      console.log(`POST ${SERVER_URL}/tasks/get`);
-      let token = localStorage.getItem('serverToken');
-      axios.post(`${SERVER_URL}/tasks/get`, {}, {
-        headers: {
-          'Authorization' : `Bearer ${token}`
-        }
-      })
-      .then(foundTasks=> {
-        console.log('Success getting Tasks');
-        console.log(foundTasks.data);
-        taskRet(null, foundTasks.data);
-      })
-      .catch(err => {
-        console.log('error axios to server:');
-        console.log(err);
-      });
-    }
-
-    async.parallel([projectsList, sprintsList, tasksList], (error, dataLists) => {
+    async.parallel([projectsList
+      // , sprintsList, tasksList
+    ], (error, dataLists) => {
       console.log("ready to setState");
       console.log(dataLists);
       this.setState({
         projects: dataLists[0],
-        sprints: dataLists[1],
-        tasks: dataLists[2]
+        // sprints: dataLists[1],
+        // tasks: dataLists[2]
       });
+      console.log(this.state.projects);
     });
   }
 
