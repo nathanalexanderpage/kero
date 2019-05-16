@@ -26,6 +26,11 @@ class App extends Component {
       projects: [],
       sprints: [],
       tasks: [],
+      redirects : {
+        project:false,
+        sprint:false,
+        task:false
+      },
       project: null,
       sprint: null,
       task: null
@@ -122,6 +127,14 @@ class App extends Component {
   editProject = () => {
     let updatedProjects;
     this.setState({projects: updatedProjects});
+  }
+  getProject = (gotProject) => {
+    this.setState({
+      project: gotProject,
+      redirect: {
+        project: true
+      }
+    })
   }
   addSprint = () => {
     let updatedSprints;
@@ -234,6 +247,8 @@ class App extends Component {
                   addProject={this.state.addProject}
                   removeProject={this.state.removeProject}
                   editProject={this.state.editProject}
+                  getProject={this.state.getProject}
+                  redirects={this.state.redirects}
                 />
               )
             } />

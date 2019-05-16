@@ -3,6 +3,7 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 
 class AdminProfile extends Component {
@@ -14,7 +15,8 @@ class AdminProfile extends Component {
         startdate: '',
         finishdate: '',
         purpose:'',
-        modal: false
+        modal: false,
+        redirect:false,
     };
 
     this.toggle = this.toggle.bind(this);
@@ -29,6 +31,7 @@ class AdminProfile extends Component {
     // GET USER INFO
 
   }
+
   toggle() {
       this.setState(prevState => ({
           modal: !prevState.modal
@@ -51,11 +54,13 @@ class AdminProfile extends Component {
     .then(response=> {
       console.log('Success');
       console.log(response);
+      this.props.getProject(response._id)
       this.setState({
           title: '',
           startdate: '',
           finishdate: '',
-          purpose:''
+          purpose:'',
+          redirect:true
       });
     })
     .catch(err => {
@@ -65,10 +70,14 @@ class AdminProfile extends Component {
   }
 
   render() {
+    if(this.props.redirects.project === true){
+    return <Redirect to='/board' />
+    }
+
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
-          <div key={`project-${i}`}>
+          <div key="{i}">
             <div>
               Title: {proj.title}
             </div>
@@ -82,7 +91,7 @@ class AdminProfile extends Component {
               Description: {proj.purpose}
             </div>
             <div>
-              Project lead: {proj.user}
+              Project lead: {proj.admin}
             </div>
           </div>
         );
