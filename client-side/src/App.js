@@ -161,7 +161,7 @@ class App extends Component {
     this.setState({tasks: updatedTasks});
   }
   getTask = (taskId) => {
-    
+
   }
 
   resetUser = () => {
@@ -257,7 +257,7 @@ class App extends Component {
                 <Board user={this.state.user}/>
               )
             } />
-            <Route path="/examplesprint" component={
+            <Route path="/sprint" component={
               () => (
                 <Sprint
                   user={this.state.user}
@@ -268,12 +268,12 @@ class App extends Component {
                 />
               )
             } />
-            <Route path="/exampletask" component={
+            <Route path="/task" component={
               () => (
                 <Task user={this.state.user} />
               )
             } />
-            <Route path="/exampleproject" component={
+            <Route path="/project" component={
               () => (
                 <Project
                   user={this.state.user}
