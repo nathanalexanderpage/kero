@@ -33,8 +33,8 @@ export default class Navigation extends React.Component {
             <a onClick={this.handleLogout}>Logout</a>
             <Link to="/profile">Profile</Link>
             <Link to="/board">Board</Link>
-            <Link to="/examplesprint">Sprint</Link>
-            <Link to="/exampletask">Task</Link>
+            <Link to="/sprint">Sprint</Link>
+            <Link to="/task">Task</Link>
           </span>
         );
     }else if (this.props.user && this.props.user.role === 'admin') {
@@ -43,9 +43,9 @@ export default class Navigation extends React.Component {
             <a onClick={this.handleLogout}>Logout</a>
             <Link to="/adminprofile">Profile</Link>
             <Link to="/board">Board</Link>
-            <Link to="/examplesprint">Sprint</Link>
-            <Link to="/exampletask">Task</Link>
-            <Link to="/exampleproject">Project</Link>
+            <Link to="/sprint">Sprint</Link>
+            <Link to="/task">Task</Link>
+            <Link to="/project">Project</Link>
           </span>
         );
 
