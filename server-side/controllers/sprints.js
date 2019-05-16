@@ -12,14 +12,14 @@ let db = require('../models')
 
 
 // GET sprints
-router.get('/:id', (req, res) => {
+router.get('/mySprints', (req, res) => {
   console.log('SPRINTS HIT');
-  db.Sprint.findById({
-    _id: req.params.id
+  db.Task.find({
+    assignedTo: req.user.id
   })
-  .then(foundSprint => {
-    console.log(foundSprint);
-    res.send(foundSprint)
+  .populate('sprints')
+  .then(foundTasks => {
+    res.send(foundTasks)
   })
   .catch(err => {
     console.log('error in get /tasks', err);
@@ -29,21 +29,20 @@ router.get('/:id', (req, res) => {
 
 // POST sprints
 router.post('/', (req, res) => {
-  console.log('In the POST /sprint/ route');
-  console.log(req.body);
-  let newsprint = {...req.body}
-  newsprint.project = '5cdb6b3796f250daf48129eb'
-  console.log(newsprint);
-  db.Sprint.create(newsprint)
-
+  console.log('In the POST /sprints/ route');
+  console.log(req.user);
+  let newSprintData = {...req.body}
+  newSprintData.project = "NEED TO GRAB";
+  console.log('before going into db');
+  console.log(newSprintData);
+  db.Sprint.create(newSprintData)
   .then(createdSprint => {
+    console.log(createdSprint);
     res.send(createdSprint)
   })
-  .catch( err => {
-    console.log('error in post /Sprints', err);
+  .catch(err => {
     res.status(500).send('Something went wrong. Contact administrator')
   })
-
 })
 
 //get sprints/:id
@@ -63,7 +62,7 @@ router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
   db.Sprint.findOneAndUpdate(
     { _id: req.params.id},
-    req.body ,
+    req.body,
     {new: true, useFindAndModify:false }) //this will return what was updated
   .then(editedSprint => {
     res.send(editedSprint)
@@ -76,9 +75,10 @@ router.put('/:id', (req, res) => {
 
 //delete sprints
 router.delete('/:id', (req, res) => {
-  db.Sprint.findOneAndDelete({
-    _id: req.params.id
-  },{ useFindAndModify: false})
+  db.Sprint.findOneAndDelete(
+    {_id: req.params.id},
+    { useFindAndModify: false}
+  )
   .then(() => {
     res.status(204).send()
   })

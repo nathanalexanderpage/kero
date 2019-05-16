@@ -4,10 +4,10 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 
 //router instances
-let router = express.Router()
+let router = express.Router();
 
 //include models
-let db = require('../models')
+let db = require('../models');
 
 //get projects
 router.get('/', (req, res) => {
