@@ -29,7 +29,10 @@ nav a:hover {
 .App {
   text-align: center;
   background-color: palegoldenrod;
+  height: 100%;
+  width: 100%;
 }
+
 
 .App-header {
   background-color: #222;
@@ -50,11 +53,20 @@ nav a:hover {
   height: 300px;
   width: 300px;
   border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+#username{
+  font-size: 35px;
 }
 
 .profile-info {
   margin: 5px;
   border-radius: 10px;
+}
+
+.profile{
+  margin-top: 30px;
 }
 
 .profile-todo {

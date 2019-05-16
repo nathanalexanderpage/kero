@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Container, ListGroupItem, Col, Card, CardTitle, CardText, Row, Button } from 'reactstrap';
+import { Container, Col, Card, CardTitle, CardText, Row, Button } from 'reactstrap';
 import '../App.css';
 
 class Profile extends Component {
   render() {
     if(this.props.user){
       return (
-      <Container>
+      <Container className="profile">
         <Row>
           <Col md="6">
             <img  id="userprofile" src={this.props.user.image}  />
-              <h5>{this.props.user.firstName+ ' ' + this.props.user.lastName}</h5>
-              <Button outline color="secondary" size="lg" onClick={this.handleSubmit}>Manage your account</Button>
+              <h5 id="username">{this.props.user.firstName+ ' ' + this.props.user.lastName}</h5>
                 <h5>Email : {this.props.user.email}</h5>
                 <h5>Your role is : {this.props.user.role}</h5>
                 <h5>Your are working in Project: {this.props.user.project}</h5>
