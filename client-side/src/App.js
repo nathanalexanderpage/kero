@@ -249,6 +249,7 @@ class App extends Component {
                   editProject={this.state.editProject}
                   getProject={this.state.getProject}
                   redirects={this.state.redirects}
+                  rerender={this.loadUserData}
                 />
               )
             } />
