@@ -3,6 +3,7 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 
 
 class AdminProfile extends Component {
@@ -65,13 +66,11 @@ class AdminProfile extends Component {
   }
 
   render() {
-<<<<<<< HEAD
+
     if(this.state.redirect === true){
     return <Redirect to='/project' />
     }
 
-=======
->>>>>>> 446d65f193faa3bb3bc59e05925b66466d367233
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
