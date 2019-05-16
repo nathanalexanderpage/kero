@@ -70,6 +70,7 @@ class AdminProfile extends Component {
     })
   }
 
+
   render() {
 
     if(this.state.redirect === true){
@@ -80,21 +81,13 @@ class AdminProfile extends Component {
       let projectsList = this.props.projects.map((proj, i) => {
         return (
           <div key={`project-${i}`}>
-            <div>
-              Title: {proj.title}
-            </div>
-            <div>
-              Start date: {proj.startdate}
-            </div>
-            <div>
-              End date: {proj.finishdate}
-            </div>
-            <div>
-              Description: {proj.purpose}
-            </div>
-            <div>
-              Project lead: {proj.admin}
-            </div>
+
+            <Card body className="text-center" id="card-body">
+              <CardTitle>Title: {proj.title}</CardTitle>
+              <CardText>
+                Description: {proj.purpose}
+              </CardText>
+            </Card>
           </div>
         );
       });
@@ -111,35 +104,8 @@ class AdminProfile extends Component {
                   <h5>Your are working in Project: {this.props.user.project}</h5>
             </Col>
             <Col md="6">
-              <h1>To Do</h1>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
-              <Card body className="text-center" id="card-body">
-                <CardTitle></CardTitle>
-                <CardText></CardText>
-              </Card>
+              <h1>Your Projects</h1>
+              {projectsList}
             </Col>
           </Row>
           <Row>
@@ -216,7 +182,6 @@ class AdminProfile extends Component {
             </Modal>
           </Col>
         </Row>
-        {projectsList}
         </Container>
     );
     }
