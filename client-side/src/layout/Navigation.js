@@ -74,8 +74,10 @@ export default class Navigation extends Component {
              </NavItem>
              <NavItem>
                <Link to="/login">Log In</Link>
-                 {links}
              </NavItem>
+           <NavItem>
+             {links}
+          </NavItem>   
            </Nav>
          </Collapse>
        </Navbar>

@@ -16,7 +16,8 @@ class AdminProfile extends Component {
         startdate: '',
         finishdate: '',
         purpose:'',
-        modal: false
+        modal: false,
+        redirect:false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -42,6 +43,7 @@ class AdminProfile extends Component {
     e.preventDefault();
     let newState = {...this.state};
     delete newState.modal;
+    delete newState.redirect;
     console.log(newState);
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/projects/`, newState,
@@ -57,8 +59,10 @@ class AdminProfile extends Component {
           title: '',
           startdate: '',
           finishdate: '',
-          purpose:''
-      });
+          purpose:'',
+          redirect: true
+      })
+      this.props.rerender()
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -210,9 +214,9 @@ class AdminProfile extends Component {
               </ModalFooter>
               </Form>
             </Modal>
-            {projectsList}
           </Col>
         </Row>
+        {projectsList}
         </Container>
     );
     }

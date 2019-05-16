@@ -50,9 +50,7 @@ class App extends Component {
     function projectsList(projRet) {
       console.log(`GET ${SERVER_URL}/projects/`);
       let token = localStorage.getItem('serverToken');
-      console.log(token)
-
-      axios.get(`${SERVER_URL}/projects/`, {
+      axios.get(`${SERVER_URL}/projects`, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
