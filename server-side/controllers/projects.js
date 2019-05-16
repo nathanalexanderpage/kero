@@ -51,6 +51,26 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// sends list of sprints related to project in URL
+router.get('/:id/sprints', (req, res) => {
+  db.Project.findById(req.params.id).populate('sprints')
+  .then(foundProject => {
+    db.Sprint.find({
+      project: req.params.id
+    })
+    .then(foundSprints => {
+      res.send({
+        foundProjects: foundProjects,
+        foundSprints: foundSprints
+      })
+    })
+  })
+  .catch(err => {
+    console.log('error in get /Project/:id', err);
+    res.status(500).send('Something went wrong. Contact administrator');
+  });
+});
+
 // PUT projects
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
