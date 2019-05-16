@@ -113,8 +113,8 @@ class App extends Component {
       console.log(dataLists);
       this.setState({
         projects: dataLists[0],
-        // sprints: dataLists[1],
         tasks: dataLists[1]
+        // sprints: dataLists[2]
       });
       console.log(this.state.projects);
     });
