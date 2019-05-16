@@ -12,8 +12,9 @@ let db = require('../models')
 //get projects
 router.get('/', (req, res) => {
   console.log("PROJECTS HIT");
+  console.log(req.user);
   db.Project.find({
-    admin: req.user._id
+    admin: req.user.id
   })
   .then(foundProjects => {
     console.log(foundProjects);

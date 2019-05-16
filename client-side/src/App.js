@@ -71,7 +71,7 @@ class App extends Component {
     // function sprintsList(sprintRet) {
     //   console.log(`POST ${SERVER_URL}/sprints/get`);
     //   let token = localStorage.getItem('serverToken');
-    //   axios.post(`${SERVER_URL}/sprints/get`, {}, {
+    //   axios.get(`${SERVER_URL}/sprints`, {
     //     headers: {
     //       'Authorization' : `Bearer ${token}`
     //     }
@@ -90,7 +90,7 @@ class App extends Component {
     // function tasksList(taskRet) {
     //   console.log(`POST ${SERVER_URL}/tasks/get`);
     //   let token = localStorage.getItem('serverToken');
-    //   axios.post(`${SERVER_URL}/tasks/get`, {}, {
+    //   axios.get(`${SERVER_URL}/tasks`, {
     //     headers: {
     //       'Authorization' : `Bearer ${token}`
     //     }
