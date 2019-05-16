@@ -223,8 +223,9 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+          <Navigation user={this.state.user} resetUser={this.resetUser} />
+
           <div className="container">
-            <Navigation user={this.state.user} resetUser={this.resetUser} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
               () => (
