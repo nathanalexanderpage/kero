@@ -9,21 +9,23 @@ let router = express.Router()
 //include models
 let db = require('../models')
 
-//get tasks
-router.post('/get', (req, res) => {
+//get projects
+router.get('/', (req, res) => {
   console.log("PROJECTS HIT");
-  db.Project.find()
-  .then(foundProject => {
-    console.log(foundProject);
-    res.send(foundProject)
+  db.Project.find({
+    admin: req.user._id
+  })
+  .then(foundProjects => {
+    console.log(foundProjects);
+    res.send(foundProjects);
   })
   .catch( err => {
-    console.log('error in get /tasks', err);
+    console.log('error in get /projects', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//post tasks
+//post projects
 router.post('/post', (req, res) => {
   console.log('In the POST /project/ route');
   req.body.admin = req.user.id
@@ -37,7 +39,7 @@ router.post('/post', (req, res) => {
   })
 })
 
-//get tasks/:id
+//get projects/:id
 router.post('/get/:id', (req, res) => {
   db.Project.findById(req.params._id)
   .then(foundProject => {
@@ -49,7 +51,7 @@ router.post('/get/:id', (req, res) => {
   })
 })
 
-//put tasks
+//put projects
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
   db.Project.findOneAndUpdate(
@@ -65,7 +67,7 @@ router.put('/:id', (req, res) => {
   })
 })
 
-//delete tasks
+//delete projects
 router.delete('/:id', (req, res) => {
   db.Project.findOneAndDelete({
     _id: req.params.id
