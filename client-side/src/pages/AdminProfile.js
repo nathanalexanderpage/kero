@@ -73,7 +73,7 @@ class AdminProfile extends Component {
 
   render() {
     if(this.state.redirect === true){
-    return <Redirect to='/board' />
+    return <Redirect to='/project' />
     }
 
     if(this.props.user){
