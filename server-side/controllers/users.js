@@ -7,77 +7,78 @@ let router = express.Router()
 //include models
 let db = require('../models')
 
-//get tasks
+//get users
 router.post('/get', (req, res) => {
-  db.Task.find()
-  .then(foundTasks => {
-    res.send(foundTasks)
+  db.User.find()
+  .then(foundUser => {
+    res.send(foundUser)
   })
   .catch( err => {
-    console.log('error in get /tasks', err);
+    console.log('error in get /users', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//get tasks/:id
+//get users/:id
 router.post('/get/:id', (req, res) => {
-  db.Task.findById(req.params.id)
-  .then(foundTask => {
-    res.send(foundTask)
+  db.User.findById(req.params.id)
+  .then(foundUser => {
+    console.log(foundUser);
+    res.send(foundUser)
   })
-  .catch( err => {
-    console.log('error in get /task/:id', err);
+  .catch(err => {
+    console.log('error in get /user/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
-  })
+  });
 })
 
 
-//post tasks
+//post users
 router.post('/post', (req, res) => {
 
-  console.log('In the POST /sprint/ route');
+  console.log('In the POST /users/ route');
   console.log(req.body);
   if(req.body.status === ''){
       req.body.status = 'todo'
   }
-  db.Task.create(req.body)
-  .then(createdTask => {
-    res.send(createdTask)
+  db.User.create(req.body)
+  .then(createdUser => {
+    res.send(createdUser)
   })
   .catch( err => {
-    console.log('error in post /Projects', err);
+    console.log('error in post /user', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 
 })
 
 
-//put tasks
+//put users
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
-  db.Task.findOneAndUpdate(
+  db.User.findOneAndUpdate(
     { _id: req.params.id},
     req.body ,
     {new: true, useFindAndModify:false }) //this will return what was updated
-  .then(editedTask => {
-    res.send(editedTask)
+  .then(editedUser => {
+    res.send(editedUser)
   })
   .catch( err => {
-    console.log('error in put /task/:id', err);
+    console.log('error in put /user/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//delete tasks
+//delete users
 router.delete('/:id', (req, res) => {
-  db.Task.findOneAndDelete({
+  db.User.findOneAndDelete({
     _id: req.params.id
   },{ useFindAndModify: false})
   .then(() => {
     res.status(204).send()
   })
   .catch( err => {
-    console.log('error in delete /tasks/:id', err);
+    console.log('error in delete /users/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })

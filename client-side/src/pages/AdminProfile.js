@@ -48,9 +48,9 @@ class AdminProfile extends Component {
     axios.post(`${SERVER_URL}/projects/post`, newState,
       {
         headers: {
-         'Authorization' : `Bearer ${token}`
-       }
-     })
+        'Authorization' : `Bearer ${token}`
+      }
+    })
     .then(response=> {
       console.log('Success');
       console.log(response);

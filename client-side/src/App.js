@@ -30,7 +30,10 @@ class App extends Component {
         project:false,
         sprint:false,
         task:false
-      }
+      },
+      project: null,
+      sprint: null,
+      task: null
     }
   }
 
@@ -157,6 +160,9 @@ class App extends Component {
     let updatedTasks;
     this.setState({tasks: updatedTasks});
   }
+  getTask = (taskId) => {
+    
+  }
 
   resetUser = () => {
     this.setState({user: null});
@@ -185,8 +191,26 @@ class App extends Component {
       this.resetUser();
       console.log('no user token found');
     }
+  }
 
-    // IF THERE IS, TRY TO GET USER INFO
+  getUserProfInfo = (userProfId) => {
+    console.log('inside getUserProfInfo');
+    console.log(userProfId);
+    let token = localStorage.getItem('serverToken');
+    axios.post(`${SERVER_URL}/users/get/${userProfId}`, {}, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundUser=> {
+      console.log('Success getting userProfInfo');
+      console.log(foundUser);
+      return foundUser;
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    });
   }
 
   render() {
@@ -198,8 +222,11 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
               () => (
-                <Login user={this.state.user} getUser={this.getUser}
-                loadUserData={this.loadUserData} />
+                <Login
+                  user={this.state.user}
+                  getUser={this.getUser}
+                  loadUserData={this.loadUserData}
+                />
               )
             } />
             <Route path="/signup" component={
