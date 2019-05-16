@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
     res.send(editedTask)
   })
   .catch( err => {
-    console.log('error in put /task/:id', err);
+    console.log('error in PUT /task/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
