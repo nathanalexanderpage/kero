@@ -52,7 +52,7 @@ class App extends Component {
       let token = localStorage.getItem('serverToken');
       console.log(token)
 
-      axios.post(`${SERVER_URL}/projects/get`, {}, {
+      axios.get(`${SERVER_URL}/projects/`, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
