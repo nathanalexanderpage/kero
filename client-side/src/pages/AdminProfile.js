@@ -44,7 +44,7 @@ class AdminProfile extends Component {
     delete newState.modal;
     console.log(newState);
     let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/projects/post`, newState,
+    axios.post(`${SERVER_URL}/projects/`, newState,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
