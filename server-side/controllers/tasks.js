@@ -21,8 +21,22 @@ router.get('/', (req, res) => {
   })
 })
 
+// GET mytasks for profile
+router.get('/mytasks', (req, res) => {
+  db.Task.find({
+    assignedTo: req.user.id
+  })
+  .then(foundTasks => {
+    res.send(foundTasks)
+  })
+  .catch( err => {
+    console.log('error in get /tasks', err);
+    res.status(500).send('Something went wrong. Contact administrator')
+  })
+})
+
 //get tasks/:id
-router.post('/get/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   db.Task.findById(req.params.id)
   .then(foundTask => {
     res.send(foundTask)
@@ -35,9 +49,9 @@ router.post('/get/:id', (req, res) => {
 
 
 //post tasks
-router.post('/post', (req, res) => {
+router.post('/', (req, res) => {
 
-  console.log('In the POST /sprint/ route');
+  console.log('In the POST /tasks route');
   console.log(req.body);
   if(req.body.status === ''){
       req.body.status = 'todo'
@@ -47,7 +61,7 @@ router.post('/post', (req, res) => {
     res.send(createdTask)
   })
   .catch( err => {
-    console.log('error in post /Projects', err);
+    console.log('error in POST /tasks', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 

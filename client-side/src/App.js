@@ -85,34 +85,36 @@ class App extends Component {
     //   });
     // }
     //
-    // function tasksList(taskRet) {
-    //   console.log(`POST ${SERVER_URL}/tasks/get`);
-    //   let token = localStorage.getItem('serverToken');
-    //   axios.get(`${SERVER_URL}/tasks`, {
-    //     headers: {
-    //       'Authorization' : `Bearer ${token}`
-    //     }
-    //   })
-    //   .then(foundTasks=> {
-    //     console.log('Success getting Tasks');
-    //     console.log(foundTasks.data);
-    //     taskRet(null, foundTasks.data);
-    //   })
-    //   .catch(err => {
-    //     console.log('error axios to server:');
-    //     console.log(err);
-    //   });
-    // }
+    function tasksList(taskRet) {
+      console.log(`GET ${SERVER_URL}/tasks/mytasks`);
+      let token = localStorage.getItem('serverToken');
+      axios.get(`${SERVER_URL}/tasks/mytasks`, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      .then(foundTasks=> {
+        console.log('Success getting Tasks');
+        console.log(foundTasks.data);
+        taskRet(null, foundTasks.data);
+      })
+      .catch(err => {
+        console.log('error axios to server:');
+        console.log(err);
+      });
+    }
 
-    async.parallel([projectsList
-      // , sprintsList, tasksList
+    async.parallel([
+      projectsList,
+      // sprintsList,
+      tasksList
     ], (error, dataLists) => {
       console.log("ready to setState");
       console.log(dataLists);
       this.setState({
         projects: dataLists[0],
         // sprints: dataLists[1],
-        // tasks: dataLists[2]
+        tasks: dataLists[1]
       });
       console.log(this.state.projects);
     });

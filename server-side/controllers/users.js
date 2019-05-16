@@ -8,7 +8,7 @@ let router = express.Router()
 let db = require('../models')
 
 //get users
-router.post('/get', (req, res) => {
+router.get('/', (req, res) => {
   db.User.find()
   .then(foundUser => {
     res.send(foundUser)
