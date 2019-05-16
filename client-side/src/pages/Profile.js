@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroupItem, Col, Card, CardTitle, CardText, Button, Row } from 'reactstrap';
+import { Container, ListGroupItem, Col, Card, CardTitle, CardText, Row } from 'reactstrap';
 import '../App.css';
 
 class Profile extends Component {
@@ -68,7 +68,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-
-
-
