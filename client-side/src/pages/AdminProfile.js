@@ -210,9 +210,9 @@ class AdminProfile extends Component {
               </ModalFooter>
               </Form>
             </Modal>
-            {projectsList}
           </Col>
         </Row>
+        {this.props.projects}
         </Container>
     );
     }
