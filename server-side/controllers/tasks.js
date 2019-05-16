@@ -57,9 +57,10 @@ router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
   db.Task.findOneAndUpdate(
     { _id: req.params.id},
-    req.body ,
+    req.body,
     {new: true, useFindAndModify:false }) //this will return what was updated
   .then(editedTask => {
+    console.log(editedTask);
     res.send(editedTask)
   })
   .catch( err => {
@@ -70,9 +71,10 @@ router.put('/:id', (req, res) => {
 
 //delete tasks
 router.delete('/:id', (req, res) => {
-  db.Task.findOneAndDelete({
-    _id: req.params.id
-  },{ useFindAndModify: false})
+  db.Task.findOneAndDelete(
+    {_id: req.params.id},
+    {useFindAndModify: false}
+  )
   .then(() => {
     res.status(204).send()
   })

@@ -33,7 +33,7 @@ class Task extends Component {
       );
     }
 
-    
+
 
     return(
       <div>
@@ -44,7 +44,7 @@ class Task extends Component {
           <div className="task-name">
             <h2>Task X</h2>
           </div>
-          <div className="task-details-imp">
+          <div className="task-details-imp" onClick={this.props.getUserProfInfo}>
             Owner: This Person
           </div>
           <div className="task-priority">

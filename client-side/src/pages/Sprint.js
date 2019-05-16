@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
+import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form } from 'reactstrap';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
 
@@ -65,7 +65,7 @@ class Sprint extends Component {
         prerequisiteTasks:'',
         description:''
       })
-      
+
     })
     .catch(err => {
       console.log('error axios to server:');

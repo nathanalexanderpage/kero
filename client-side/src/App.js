@@ -33,7 +33,8 @@ class App extends Component {
       },
       project: null,
       sprint: null,
-      task: null
+      task: null,
+      userProfInfo: null
     }
   }
 
@@ -162,6 +163,7 @@ class App extends Component {
   }
   getTask = (taskId) => {
 
+    this.setState({})
   }
 
   resetUser = () => {
@@ -205,7 +207,9 @@ class App extends Component {
     .then(foundUser=> {
       console.log('Success getting userProfInfo');
       console.log(foundUser);
-      return foundUser;
+      this.setState({
+        userProfInfo: foundUser
+      })
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -271,7 +275,7 @@ class App extends Component {
             } />
             <Route path="/task" component={
               () => (
-                <Task user={this.state.user} />
+                <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
               )
             } />
             <Route path="/project" component={

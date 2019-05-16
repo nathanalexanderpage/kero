@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroupItem, Col, Card, CardTitle, CardText, Button, Row } from 'reactstrap';
+import { Container, ListGroupItem, Col, Card, CardTitle, CardText, Row, Button } from 'reactstrap';
 import '../App.css';
 
 class Profile extends Component {
@@ -10,18 +10,11 @@ class Profile extends Component {
         <Row>
           <Col md="6">
             <img  id="userprofile" src={this.props.user.image}  />
-              <ListGroupItem className="profile-info">
-                <h3>Hello again, {this.props.user.firstName}!</h3>
-              </ListGroupItem>
-              <ListGroupItem className="profile-info">
+              <h5>{this.props.user.firstName+ ' ' + this.props.user.lastName}</h5>
+              <Button outline color="secondary" size="lg" onClick={this.handleSubmit}>Manage your account</Button>
                 <h5>Email : {this.props.user.email}</h5>
-              </ListGroupItem>
-              <ListGroupItem className="profile-info">
                 <h5>Your role is : {this.props.user.role}</h5>
-              </ListGroupItem>
-              <ListGroupItem className="profile-info">
                 <h5>Your are working in Project: {this.props.user.project}</h5>
-              </ListGroupItem>
           </Col>
           <Col md="6">
             <h1>To Do</h1>
@@ -68,7 +61,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-
-
-
