@@ -38,8 +38,8 @@ router.post('/post', (req, res) => {
 })
 
 //get tasks/:id
-router.get('/:id', (req, res) => {
-  db.Project.findById(req.params.id)
+router.post('/get/:id', (req, res) => {
+  db.Project.findById(req.params._id)
   .then(foundProject => {
     res.send(foundProject)
   })
