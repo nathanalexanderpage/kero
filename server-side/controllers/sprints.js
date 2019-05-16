@@ -26,7 +26,7 @@ router.post('/get', (req, res) => {
   })
 })
 
-//post tasks
+//post sprints
 router.post('/post', (req, res) => {
 
   console.log('In the POST /sprint/ route');
@@ -40,50 +40,50 @@ router.post('/post', (req, res) => {
     res.send(createdSprint)
   })
   .catch( err => {
-    console.log('error in post /Projects', err);
+    console.log('error in post /Sprints', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 
 })
 
-//get tasks/:id
+//get sprints/:id
 router.get('/:id', (req, res) => {
-  db.Project.findById(req.params.id)
-  .then(foundProject => {
-    res.send(foundProject)
+  db.Sprint.findById(req.params.id).populate('tasks')
+  .then(foundSprint => {
+    res.send(foundSprint)
   })
   .catch( err => {
-    console.log('error in get /Project/:id', err);
+    console.log('error in get /Sprint/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//put tasks
+//put sprints
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
-  db.Project.findOneAndUpdate(
+  db.Sprint.findOneAndUpdate(
     { _id: req.params.id},
     req.body ,
     {new: true, useFindAndModify:false }) //this will return what was updated
-  .then(editedProject => {
-     res.send(editedProject)
+  .then(editedSprint => {
+    res.send(editedSprint)
   })
   .catch( err => {
-    console.log('error in put /Project/:id', err);
+    console.log('error in put /Sprint/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//delete tasks
+//delete sprints
 router.delete('/:id', (req, res) => {
-  db.Project.findOneAndDelete({
+  db.Sprint.findOneAndDelete({
     _id: req.params.id
   },{ useFindAndModify: false})
   .then(() => {
     res.status(204).send()
   })
   .catch( err => {
-    console.log('error in delete /Projects/:id', err);
+    console.log('error in delete /Sprints/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })

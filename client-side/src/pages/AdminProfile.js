@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form } from 'reactstrap';
+import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom'
 
 
 class AdminProfile extends Component {
@@ -15,9 +14,7 @@ class AdminProfile extends Component {
         startdate: '',
         finishdate: '',
         purpose:'',
-        modal: false,
-        redirect:false,
-        information:false
+        modal: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -32,7 +29,6 @@ class AdminProfile extends Component {
     // GET USER INFO
 
   }
-
   toggle() {
       this.setState(prevState => ({
           modal: !prevState.modal
@@ -59,11 +55,8 @@ class AdminProfile extends Component {
           title: '',
           startdate: '',
           finishdate: '',
-          purpose:'',
-          redirect:true
-      } , this.props.rerender());
-
-
+          purpose:''
+      });
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -72,14 +65,10 @@ class AdminProfile extends Component {
   }
 
   render() {
-    if(this.state.redirect === true){
-    return <Redirect to='/board' />
-    }
-
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
-          <div key="{i}">
+          <div key={`project-${i}`}>
             <div>
               Title: {proj.title}
             </div>
@@ -93,7 +82,7 @@ class AdminProfile extends Component {
               Description: {proj.purpose}
             </div>
             <div>
-              Project lead: {proj.admin}
+              Project lead: {proj.user}
             </div>
           </div>
         );
