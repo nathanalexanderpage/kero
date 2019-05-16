@@ -5,6 +5,11 @@ var taskSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  sprint: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Sprint',
+    required: true
+  },
   title: {
     type: String,
     required: true

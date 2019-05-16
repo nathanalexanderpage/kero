@@ -1,34 +1,32 @@
 require('dotenv').config();
 
-//Required models
+// Required models
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-//router instances
+// router instances
 let router = express.Router()
 
-//include models
+// include models
 let db = require('../models')
 
 
-//GET sprints
-router.post('/get', (req, res) => {
+// GET sprints
+router.get('/:id', (req, res) => {
   console.log('SPRINTS HIT');
-  db.Sprint.find()
+  db.Sprint.findById()
   .then(foundSprint => {
     console.log(foundSprint);
     res.send(foundSprint)
-
   })
-  .catch( err => {
+  .catch(err => {
     console.log('error in get /tasks', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//post sprints
-router.post('/post', (req, res) => {
-
+// POST sprints
+router.post('/', (req, res) => {
   console.log('In the POST /sprint/ route');
   console.log(req.body);
   let newsprint = {...req.body}

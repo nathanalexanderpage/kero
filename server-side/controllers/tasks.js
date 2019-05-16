@@ -1,15 +1,17 @@
-//Required models
+// Required models
 let express = require('express')
 
-//router instances
+// router instances
 let router = express.Router()
 
-//include models
+// include models
 let db = require('../models')
 
-//get tasks
-router.post('/get', (req, res) => {
-  db.Task.find()
+// get tasks
+router.get('/', (req, res) => {
+  db.Task.find({
+    sprint: req.params.id
+  })
   .then(foundTasks => {
     res.send(foundTasks)
   })
@@ -52,7 +54,7 @@ router.post('/post', (req, res) => {
 })
 
 
-//put tasks
+//put tasks //DONE
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
   db.Task.findOneAndUpdate(
