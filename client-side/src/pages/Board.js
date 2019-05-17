@@ -3,6 +3,7 @@ import { Container, Row, Card, Button, CardTitle, CardText, Col, Modal, ModalHea
 import '../App.css';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+import Swimlane from './SwimLane'
 
 
 class Board extends Component {
@@ -82,42 +83,6 @@ class Board extends Component {
       );
     }
 
-    // let tasksList = this.props.tasks.map((task, i) => {
-    //   return(
-    //     <div key={`task-${i}`}>
-    //       <div>
-    //         No: {i}
-    //       </div>
-    //       <div>
-    //         Title: {task.title}
-    //       </div>
-    //       <div>
-    //         Desc: {task.desc}
-    //       </div>
-    //       <div>
-    //         Assigned to: {task.assignedTo}
-    //       </div>
-    //       <div>
-    //         Status: {task.status}
-    //       </div>
-    //       <div>
-    //         Expected man hours: {task.manHourBudget}
-    //       </div>
-    //       <div>
-    //         Date assigned: {task.dateAssigned}
-    //       </div>
-    //       <div>
-    //         Date completed: {task.dateCompleted}
-    //       </div>
-    //       <div>
-    //         Stoppers: {task.prerequisiteTasks}
-    //       </div>
-    //       <div>
-    //         Priority level: {task.basePriority}
-    //       </div>
-    //     </div>
-    //   );
-    // })
 
     return(
       <Container >
@@ -125,55 +90,7 @@ class Board extends Component {
           <Col>
           <div>{this.props.project}</div>
             <div>{this.props.sprint}</div>
-            <Row id="mainboard">
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name'>To Do</h6>
-                  <hr></hr>
-                    {/* <Card body className="text-center">
-                      <CardTitle></CardTitle>
-                      <CardText></CardText>
-                </Card> */}
-                  <Form inline onSubmit={(e) => e.preventDefault()}>
-                    <Button color="primary" 
-                            onClick={this.toggle} 
-                            id="new-task">➕</Button>
-                  </Form>
-                </ div>
-              </Col>
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name'>Doing</h6>
-                  <hr></hr>
-                  {/* <Card body className="text-center">
-                    <CardTitle></CardTitle>
-                    <CardText></CardText>
-                  </Card> */}
-                </div>
-              </Col>
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name'>Code Review</h6>
-                  <hr></hr>
-                  {/* <Card body className="text-center">
-                    <CardTitle></CardTitle>
-                    <CardText></CardText>
-                    <Button outline color="primary">👍</Button>
-                    <Button outline color="primary">👎</Button>
-                  </Card> */}
-                </ div>
-              </Col>
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name'>Done</h6>
-                  <hr></hr>
-                  {/* <Card body className="text-center">
-                    <CardTitle></CardTitle>
-                    <CardText></CardText>
-                  </Card> */}
-                </div>
-              </Col>
-            </Row>
+            <Row id="mainboard"></Row>
 
             <Modal isOpen={this.state.modal} 
                     toggle={this.toggle} 
@@ -255,7 +172,6 @@ class Board extends Component {
                 </ModalFooter>
               </Form>
             </Modal>
-            {/* {tasksList} */}
           </Col>
         </Row>
       </Container>

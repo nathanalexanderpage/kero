@@ -4,72 +4,93 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 
 //router instances
-let router = express.Router()
+let router = express.Router();
 
 //include models
-let db = require('../models')
+let db = require('../models');
 
-//get tasks
-router.post('/get', (req, res) => {
+//get projects
+router.get('/', (req, res) => {
   console.log("PROJECTS HIT");
-  db.Project.find()
-  .then(foundProject => {
-    console.log(foundProject);
-    res.send(foundProject)
+  console.log(req.user);
+  db.Project.find({
+    admin: req.user.id
+  })
+  .then(foundProjects => {
+    console.log(foundProjects);
+    res.send(foundProjects);
   })
   .catch( err => {
-    console.log('error in get /tasks', err);
+    console.log('error in get /projects', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//post tasks
-router.post('/post', (req, res) => {
+//post projects
+router.post('/', (req, res) => {
   console.log('In the POST /project/ route');
-  req.body.admin = req.user.id
+  req.body.admin = req.user.id;
   db.Project.create(req.body)
   .then(createdProject => {
     res.send(createdProject)
   })
   .catch( err => {
     console.log('error in post /Projects', err);
-    res.status(500).send('Something went wrong. Contact administrator')
-  })
-})
+    res.status(500).send('Something went wrong. Contact administrator');
+  });
+});
 
-//get tasks/:id
-router.post('/get/:id', (req, res) => {
-  db.Project.findById(req.params._id)
+// GET projects/:id
+router.get('/:id', (req, res) => {
+  db.Project.findById(req.params.id)
   .then(foundProject => {
-    res.send(foundProject)
+    res.send(foundProject);
   })
-  .catch( err => {
+  .catch(err => {
     console.log('error in get /Project/:id', err);
-    res.status(500).send('Something went wrong. Contact administrator')
-  })
-})
+    res.status(500).send('Something went wrong. Contact administrator');
+  });
+});
 
-//put tasks
+// sends list of sprints related to project in URL
+router.get('/:id/sprints', (req, res) => {
+  db.Sprint.find({
+    project: req.params.id
+  })
+  .then(foundSprints => {
+    res.send({
+      foundSprints
+    })
+  })
+  .catch(err => {
+    console.log('error in get /Project/:id', err);
+    res.status(500).send('Something went wrong. Contact administrator');
+  });
+});
+
+// PUT projects
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
   db.Project.findOneAndUpdate(
     { _id: req.params.id},
-    req.body ,
-    {new: true, useFindAndModify:false }) //this will return what was updated
+    req.body,
+    {new: true, useFindAndModify:false }
+  ) //this will return what was updated
   .then(editedProject => {
     res.send(editedProject)
   })
-  .catch( err => {
+  .catch(err => {
     console.log('error in put /Project/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
 
-//delete tasks
+// DELETE projects
 router.delete('/:id', (req, res) => {
-  db.Project.findOneAndDelete({
-    _id: req.params.id
-  },{ useFindAndModify: false})
+  db.Project.findOneAndDelete(
+    {_id: req.params.id},
+    { useFindAndModify: false}
+  )
   .then(() => {
     res.status(204).send()
   })

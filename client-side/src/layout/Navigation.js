@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
 
 
@@ -45,29 +56,32 @@ export default class Navigation extends Component {
             <Link to="/board">Board</Link>
             <Link to="/sprint">Sprint</Link>
             <Link to="/task">Task</Link>
-            <Link to="/project">Project</Link>
           </span>
         );
 
     }
       return(
-        <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Kero</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <Link to="/login">Log In</Link>
-                  {links}
-              </NavItem>
-              <NavItem>
-                <Link to="/signup">Sign Up</Link>
-              </NavItem>
-              </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+
+      <div>
+       <Navbar color="light" light expand="md">
+         <NavbarBrand href="/">KERO</NavbarBrand>
+         <NavbarToggler onClick={this.toggle} />
+         <Collapse isOpen={this.state.isOpen} navbar>
+           <Nav className="ml-auto" navbar>
+             <NavItem>
+               <Link to="/signup">Sign Up</Link>
+             </NavItem>
+             <NavItem>
+               <Link to="/login">Log In</Link>
+             </NavItem>
+           <NavItem>
+             {links}
+          </NavItem>
+           </Nav>
+         </Collapse>
+       </Navbar>
+     </div>
+
     );
   }
 }
