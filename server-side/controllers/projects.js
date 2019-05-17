@@ -54,16 +54,12 @@ router.get('/:id', (req, res) => {
 
 // sends list of sprints related to project in URL
 router.get('/:id/sprints', (req, res) => {
-  db.Project.findById(req.params.id).populate('sprints')
-  .then(foundProject => {
-    db.Sprint.find({
-      project: req.params.id
-    })
-    .then(foundSprints => {
-      res.send({
-        foundProjects: foundProjects,
-        foundSprints: foundSprints
-      })
+  db.Sprint.find({
+    project: req.params.id
+  })
+  .then(foundSprints => {
+    res.send({
+      foundSprints
     })
   })
   .catch(err => {

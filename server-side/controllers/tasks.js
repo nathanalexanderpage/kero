@@ -64,17 +64,17 @@ router.post('/', (req, res) => {
     console.log('error in POST /tasks', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
-
 })
 
 
-//put tasks //DONE
+//put tasks
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
   db.Task.findOneAndUpdate(
     { _id: req.params.id},
     req.body,
-    {new: true, useFindAndModify:false }) //this will return what was updated
+    {new: true, useFindAndModify:false}
+  ) //this will return what was updated
   .then(editedTask => {
     console.log(editedTask);
     res.send(editedTask)

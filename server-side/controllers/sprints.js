@@ -60,10 +60,12 @@ router.get('/:id', (req, res) => {
 // returns array of all tasks associated to given sprint id
 // get sprints/:id/tasks
 router.get('/:id/tasks', (req, res) => {
+  console.log(req.params.id);
   db.Task.find({
     sprint: req.params.id
   })
   .then(foundSprintTasks => {
+    console.log(foundSprintTasks);
     res.send(foundSprintTasks)
   })
   .catch( err => {
