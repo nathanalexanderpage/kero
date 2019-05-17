@@ -34,8 +34,11 @@ class Project extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    let projectReference = this.state.projectdata._id
     let newState = {...this.state}
     delete newState.modal
+    delete newState.projectdata
+    newState.project = projectReference
     let token = localStorage.getItem('serverToken');
     console.log(newState);
     axios.post(`${SERVER_URL}/sprints`, newState,
@@ -81,40 +84,45 @@ class Project extends Component {
     })
   }
 
-
   componentDidMount = () => {
     // GET USER INFO
     this.getProject();
   }
 
-
-
   render() {
+    let projectData = this.state.projectdata
+    let adminInfo = "loading"
+    if(projectData.admin) {
+      adminInfo = <img  id="adminprojectpic" src={projectData.admin.image} alt="hello" />
+    }
 
-let projectData = this.state.projectdata
-
-      return (
-
-
+    return (
           <Container >
             <Row>
-              <div >
-                <div>
-                 <h1>Title: {projectData.title}</h1>
+              <Col>
+                <div >
+                  <div>
+                    <h1> Project Title: {projectData.title}</h1>
+                  </div>
+                  <div>
+                    Start date: {projectData.startdate}
+                  </div>
+                  <div>
+                    End date: {projectData.finishdate}
+                  </div>
+                  <div>
+                    Purpose: {projectData.purpose}
+                  </div>
+                  <div>
+                    Admin: {adminInfo}
+
+                  </div>
                 </div>
-                <div>
-                  Start date: {projectData.startdate}
-                </div>
-                <div>
-                  End date: {projectData.finishdate}
-                </div>
-                <div>
-                  Purpose: {projectData.purpose}
-                </div>
-                <div>
-                  Admin: <img  id="userprofile" src={projectData.admin}  />
-                </div>
-              </div>
+              </Col>
+              <Col><h1>Sprints Related to this project</h1></Col>
+              <Col id="displayProjects">{this.props.sprints}</Col>
+              <Col>
+              </Col>
 
             </Row>
             <Row>
