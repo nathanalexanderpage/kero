@@ -44,6 +44,15 @@ class App extends Component {
     this.loadUserData();
   }
 
+  convertDateEpochUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()).getTime()/1000 - 25200;
+  }
+  convertEpochToLocal(utcSeconds) {
+    let d = new Date(0);
+    d.setUTCSeconds(utcSeconds);
+    return d;
+  }
+
   loadUserData = () => {
     console.log("INSIDE componentDidMount");
 
@@ -130,9 +139,8 @@ class App extends Component {
     let updatedProjects;
     this.setState({projects: updatedProjects});
   }
-  editProject = () => {
-    let updatedProjects;
-    this.setState({projects: updatedProjects});
+  editProject = (projData) => {
+    
   }
   getProject = (gotProject) => {
     this.setState({
