@@ -190,9 +190,6 @@ class AdminProfile extends Component {
             </Modal>
           </Col>
         </Row>
-      <Row>
-        <h1>Your Tasks</h1>
-      </Row>
     </Container>
     );
     }
