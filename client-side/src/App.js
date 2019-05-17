@@ -293,7 +293,7 @@ class App extends Component {
 
             <Route path="/swimlane" component={
               () => (
-                <Swimlane 
+                <Swimlane
                   user={this.state.user}
                   tasks={this.state.tasks}
                   addTask={this.state.addTask}
@@ -301,10 +301,10 @@ class App extends Component {
                   editTask={this.state.editTask}
                   />
               )
-            } />      
+            } />
 
-            <Route path="/sprint" component={
-              () => (
+          <Route path="/sprint/:id" component={
+              ({match}) => (
                 <Sprint
                   user={this.state.user}
                   tasks={this.state.tasks}

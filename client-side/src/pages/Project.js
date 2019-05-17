@@ -39,7 +39,7 @@ class Project extends Component {
     delete newState.modalCreateSprint
     delete newState.projectdata
     newState.project = projectReference
-   
+
 
     let token = localStorage.getItem('serverToken');
     console.log(newState);
@@ -102,7 +102,7 @@ class Project extends Component {
     return (
       <Container >
         <Row>
-          <Col>
+          <Col md="6">
             <div >
               <div>
                 <h1> Project Title: {projectData.title}</h1>
@@ -121,10 +121,10 @@ class Project extends Component {
 
               </div>
             </div>
-          </Col>
-          <Col><h1>Sprints Related to this project</h1></Col>
-          <Col id="displayProjects">{this.props.sprints}</Col>
-          <Col>
+          </Col >
+          <Col md="6">
+            <Col><h1>Sprints Related to this project</h1></Col>
+            <Col id="displayProjects"></Col>
           </Col>
 
         </Row>
@@ -172,6 +172,7 @@ class Project extends Component {
         </Row>
     </Container>
   );
+ }
 }
 
 export default Project;
