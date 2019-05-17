@@ -14,6 +14,7 @@ import Board from './pages/Board';
 import Task from './pages/Task';
 import Sprint from './pages/Sprint';
 import Project from './pages/Project';
+import Swimlane from './pages/SwimLane';
 
 let async = require("async");
 
@@ -289,6 +290,19 @@ class App extends Component {
                 <Board user={this.state.user}/>
               )
             } />
+
+            <Route path="/swimlane" component={
+              () => (
+                <Swimlane 
+                  user={this.state.user}
+                  tasks={this.state.tasks}
+                  addTask={this.state.addTask}
+                  removeTask={this.state.removeTask}
+                  editTask={this.state.editTask}
+                  />
+              )
+            } />      
+
             <Route path="/sprint" component={
               () => (
                 <Sprint
