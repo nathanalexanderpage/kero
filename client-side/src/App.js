@@ -284,14 +284,15 @@ class App extends Component {
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
               )
             } />
-          <Route path="/project/:id" component={
-              () => (
+          <Route path="/project/:id"  component={
+              ({match}) => (
                 <Project
                   user={this.state.user}
                   sprints={this.state.sprints}
                   addSprint={this.state.addSprint}
                   removeSprint={this.state.removeSprint}
                   editSprint={this.state.editSprint}
+                  id={match.params.id}
                 />
               )
             } />

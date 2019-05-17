@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
 
 // GET projects/:id
 router.get('/:id', (req, res) => {
-  db.Project.findById(req.params.id)
+  db.Project.findById(req.params.id).populate('admin')
   .then(foundProject => {
     res.send(foundProject);
   })
