@@ -100,14 +100,3 @@ body{
   padding-top: 10px
 }
 
-
-#displayProjects{
-  height: 500px;
-  overflow-y: scroll;
-}
-
-#adminprojectpic{
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-}
