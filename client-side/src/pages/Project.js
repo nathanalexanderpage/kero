@@ -34,8 +34,13 @@ class Project extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    let projectReference = this.state.projectdata._id
     let newState = {...this.state}
     delete newState.modalCreateSprint
+    delete newState.projectdata
+    newState.project = projectReference
+   
+
     let token = localStorage.getItem('serverToken');
     console.log(newState);
     axios.post(`${SERVER_URL}/sprints`, newState,
@@ -60,7 +65,7 @@ class Project extends Component {
   }
 
   getProject = () => {
-    console.log("Im working!!!");
+    console.log("I'm working!!!");
     let token = localStorage.getItem('serverToken');
     axios.get(`${SERVER_URL}/projects/${this.props.id}`,
       {
@@ -81,50 +86,56 @@ class Project extends Component {
     })
   }
 
-
   componentDidMount = () => {
     // GET USER INFO
     this.getProject();
   }
 
-  componentWillUnmount = () => {
-    // STOP subscription to info
-  }
-
-
 
   render() {
     let projectData = this.state.projectdata
+    let adminInfo = "loading"
+    if(projectData.admin) {
+      adminInfo = <img id="adminprojectpic" src={projectData.admin.image} alt="no profile pic available" />
+    }
+
     return (
-      <Container>
+      <Container >
         <Row>
-          <div>
-            <div>
-             <h1>Title: {projectData.title}</h1>
+          <Col>
+            <div >
+              <div>
+                <h1> Project Title: {projectData.title}</h1>
+              </div>
+              <div>
+                Start date: {projectData.startdate}
+              </div>
+              <div>
+                End date: {projectData.finishdate}
+              </div>
+              <div>
+                Purpose: {projectData.purpose}
+              </div>
+              <div>
+                Admin: {adminInfo}
+
+              </div>
             </div>
-            <div>
-              Start date: {projectData.startdate}
-            </div>
-            <div>
-              End date: {projectData.finishdate}
-            </div>
-            <div>
-              Purpose: {projectData.purpose}
-            </div>
-            <div>
-              Admin: <img id="userprofile" src={projectData.admin}  />
-            </div>
-          </div>
+          </Col>
+          <Col><h1>Sprints Related to this project</h1></Col>
+          <Col id="displayProjects">{this.props.sprints}</Col>
+          <Col>
+          </Col>
 
         </Row>
         <Row>
           <Col>
             <Form inline onSubmit={(e) => e.preventDefault()}>
-              <Button color="danger" onClick={this.toggleCreateSprint}>New Sprint</Button>
+              <Button color="danger" onClick={this.toggle}>New Sprint</Button>
             </Form>
-            <Modal isOpen={this.state.modalCreateSprint} toggleCreateSprint={this.toggleCreateSprint} className={this.props.className} >
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
               <Form onSubmit={this.handleSubmit}>
-                <ModalHeader toggleCreateSprint={this.toggleCreateSprint}>Create a New Sprint</ModalHeader>
+                <ModalHeader toggle={this.toggle}>Create a New Sprint</ModalHeader>
                 <ModalBody>
                   <Label>Number</Label>
                   <Input
@@ -133,42 +144,34 @@ class Project extends Component {
                     placeholder="Sprint number"
                     value={this.state.number}
                     onChange={this.handleNumberChange}
-                  />
-                  <Label>Start Date</Label>
-                  <Input
-                    type="date"
-                    name="startDate"
-                    placeholder="date placeholder"
-                    value={this.state.startDate}
-                    onChange={this.handleStartDateChange}
-                  />
-                  <Label>End Date</Label>
-                  <Input
-                    type="date"
-                    name="finishDate"
-                    placeholder="date placeholder"
-                    value={this.state.finishdate}
-                    onChange={this.handleFinishDateChange}
-                  />
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="primary" type="submit" onClick={this.toggleCreateSprint}>Create</Button>{' '}
-                  <Button color="secondary" onClick={this.toggleCreateSprint}>Cancel</Button>
-                </ModalFooter>
+                      />
+                      <Label>Start Date</Label>
+                       <Input
+                        type="date"
+                        name="startDate"
+                        placeholder="date placeholder"
+                        value={this.state.startDate}
+                        onChange={this.handleStartDateChange}
+                          />
+                      <Label>End Date</Label>
+                        <Input
+                        type="date"
+                        name="finishDate"
+                        placeholder="date placeholder"
+                        value={this.state.finishdate}
+                        onChange={this.handleFinishDateChange}
+                          />
+                        </ModalBody>
+                      <ModalFooter>
+                        <Button color="primary" type="submit" onClick={this.toggle}>Create</Button>{' '}
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                  </ModalFooter>
               </Form>
             </Modal>
           </Col>
         </Row>
     </Container>
-    );
-
-    return(
-      <div>
-        <p>This is a profile page. You must be logged in to see it.</p>
-        <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
-      </div>
-    );
-  }
+  );
 }
 
 export default Project;
