@@ -11,10 +11,10 @@ class Project extends Component {
     super(props);
     this.state = {
         number: 0,
-        startDate:'',
-        finishDate:'',
+        startDate: '',
+        finishDate: '',
         modalCreateSprint: false,
-        projectdata:{}
+        projectdata: {}
     };
 
 
