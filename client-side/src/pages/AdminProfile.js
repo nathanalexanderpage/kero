@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
+import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody,
+  ModalFooter, Input, Label, Form, FormGroup, Card, CardTitle, CardText } from 'reactstrap';
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 class AdminProfile extends Component {
@@ -13,8 +16,10 @@ class AdminProfile extends Component {
         title: '',
         startdate: '',
         finishdate: '',
-        purpose:'',
-        modal: false
+        purpose: '',
+        modal: false,
+        redirect: false,
+        newproject: ''
     };
 
     this.toggle = this.toggle.bind(this);
@@ -40,9 +45,11 @@ class AdminProfile extends Component {
     e.preventDefault();
     let newState = {...this.state};
     delete newState.modal;
+    delete newState.redirect;
+    delete newState.newproject;
     console.log(newState);
     let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/projects/post`, newState,
+    axios.post(`${SERVER_URL}/projects/`, newState,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
@@ -50,13 +57,16 @@ class AdminProfile extends Component {
      })
     .then(response=> {
       console.log('Success');
-      console.log(response);
+      console.log('esta respuesta',response);
       this.setState({
           title: '',
           startdate: '',
           finishdate: '',
-          purpose:''
-      });
+          purpose:'',
+          newproject:response.data._id,
+          redirect: true
+      })
+      this.props.rerender()
     })
     .catch(err => {
       console.log('error axios to server:');
@@ -64,106 +74,104 @@ class AdminProfile extends Component {
     })
   }
 
+
   render() {
+
+    if(this.state.redirect === true){
+    return <Redirect to={'/project/'+ this.state.newproject} />
+    }
+
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
-          <div key={`project-${i}`}>
-            <div>
-              Title: {proj.title}
-            </div>
-            <div>
-              Start date: {proj.startdate}
-            </div>
-            <div>
-              End date: {proj.finishdate}
-            </div>
-            <div>
-              Description: {proj.purpose}
-            </div>
-            <div>
-              Project lead: {proj.user}
-            </div>
+          <div key={`project-${proj._id}`}>
+            <Link to={`/project/${proj._id}`}>
+              <Card body className="text-center" id="card-body">
+                <CardTitle>Title: {proj.title}</CardTitle>
+                <CardText>
+                  Description: {proj.purpose}
+                </CardText>
+              </Card>
+            </Link>
           </div>
         );
       });
 
       return (
-        <Container >
+        <Container className="profile">
+          <Row>
+            <Col md="6">
+              <img  id="userprofile" src={this.props.user.image}  />
+                <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
+                <h5>Email : {this.props.user.email}</h5>
+                <h5>Your role is : {this.props.user.role}</h5>
+                <h5>You are working in Project: {this.props.user.project}</h5>
+            </Col>
+            <Col md="6" >
+              <Col><h1>Your Projects</h1></Col>
+              <Col id="displayProjects">{projectsList}</Col>
+            </Col>
+          </Row>
           <Row>
             <Col>
-              <img
-                id="userprofile"
-                src={this.props.user.image}
-              />
-            </Col>
-            <Col>
-              <h2>Hello again, {this.props.user.firstName+ ' ' + this.props.user.lastName} You are an admin!</h2>
-              <h4>Your email is : {this.props.user.email}</h4>
-              <h4>Your role is : {this.props.user.role}</h4>
-              <h4>Your are working in :  {this.props.user.project}</h4>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form
-                  inline
-                  onSubmit={(e) => e.preventDefault()}
+              <Form
+                inline
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <Button
+                  color="danger"
+                  onClick={this.toggle}
                 >
-                  <Button
-                    color="danger"
-                    onClick={this.toggle}
-                  >
-                    New Project
-                  </Button>
-                </Form>
-                <Modal
-                  isOpen={this.state.modal}
-                  toggle={this.toggle}
-                  className={this.props.className}
-                >
-                  <Form onSubmit={this.handleSubmit}>
-                  <ModalHeader toggle={this.toggle}>Create a New Project</ModalHeader>
-                  <ModalBody>
-                    <Label>Title</Label>
-                      <Input
-                        type="text"
-                        name="title"
-                        placeholder="title placeholder"
-                        value={this.state.title}
-                        onChange={this.handleTitleChange}
-                      />
-                    <Label>Start Date</Label>
-                      <Input
-                        type="date"
-                        name="startdate"
-                        placeholder="start date placeholder"
-                        value={this.state.startdate}
-                        onChange={this.handleStartDateChange}
-                      />
-                    <Label>End Date</Label>
-                      <Input
-                        type="date"
-                        name="finishdate"
-                        placeholder="finish date placeholder"
-                        value={this.state.finishdate}
-                        onChange={this.handleFinishDateChange}
-                      />
-                    <Label>Purpose</Label>
-                      <Input
-                        type="textarea"
-                        name="purpose"
-                        placeholder="Write something"
-                        rows={5}
-                        value={this.state.purpose}
-                        onChange={this.handlePurposeChange}
-                      />
-                    <Label > Author </Label>
-                      <Input
-                        name="author"
-                        plaintext
-                        value={this.props.user.firstName+ ' ' + this.props.user.lastName}
-                      />
+                  New Project
+                </Button>
+              </Form>
+              <Modal
+                isOpen={this.state.modal}
+                toggle={this.toggle}
+                className={this.props.className}
+              >
+                <Form onSubmit={this.handleSubmit}>
+                <ModalHeader toggle={this.toggle}>Create a New Project</ModalHeader>
+                <ModalBody>
+                  <Label>Title</Label>
+                  <Input
+                    type="text"
+                    name="title"
+                    placeholder="title placeholder"
+                    value={this.state.title}
+                    onChange={this.handleTitleChange}
+                  />
+                  <Label>Start Date</Label>
+                  <Input
+                    type="date"
+                    name="startdate"
+                    placeholder="start date placeholder"
+                    value={this.state.startdate}
+                    onChange={this.handleStartDateChange}
+                  />
+                  <Label>End Date</Label>
+                  <Input
+                    type="date"
+                    name="finishdate"
+                    placeholder="finish date placeholder"
+                    value={this.state.finishdate}
+                    onChange={this.handleFinishDateChange}
+                  />
+                  <Label>Purpose</Label>
+                  <Input
+                    type="textarea"
+                    name="purpose"
+                    placeholder="Write something"
+                    rows={5}
+                    value={this.state.purpose}
+                    onChange={this.handlePurposeChange}
+                  />
+                  <Label > Author </Label>
+                  <Input
+                    name="author"
+                    plaintext
+                    value={this.props.user.firstName+ ' ' + this.props.user.lastName}
+                  />
                 </ModalBody>
                 <ModalFooter>
                   <Button
@@ -174,20 +182,22 @@ class AdminProfile extends Component {
                   </Button>{' '}
                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
-                </Form>
-            	</Modal>
-              {projectsList}
-            </Col>
-          </Row>
-        </Container>
+              </Form>
+            </Modal>
+          </Col>
+        </Row>
+      <Row>
+        <h1>Your Tasks</h1>
+      </Row>
+    </Container>
     );
     }
-    return(
+    return (
       <div>
         <p>This is a profile page. You must be logged in to see it.</p>
         <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
       </div>
-      );
+    );
   }
 }
 

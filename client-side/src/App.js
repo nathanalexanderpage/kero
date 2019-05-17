@@ -44,13 +44,22 @@ class App extends Component {
     this.loadUserData();
   }
 
+  convertDateEpochUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()).getTime()/1000 - 25200;
+  }
+  convertEpochToLocal(utcSeconds) {
+    let d = new Date(0);
+    d.setUTCSeconds(utcSeconds);
+    return d;
+  }
+
   loadUserData = () => {
     console.log("INSIDE componentDidMount");
 
     function projectsList(projRet) {
-      console.log(`POST ${SERVER_URL}/projects/get`);
+      console.log(`GET ${SERVER_URL}/projects/`);
       let token = localStorage.getItem('serverToken');
-      axios.post(`${SERVER_URL}/projects/get`, {}, {
+      axios.get(`${SERVER_URL}/projects`, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
@@ -66,29 +75,29 @@ class App extends Component {
       });
     }
 
-    function sprintsList(sprintRet) {
-      console.log(`POST ${SERVER_URL}/sprints/get`);
-      let token = localStorage.getItem('serverToken');
-      axios.post(`${SERVER_URL}/sprints/get`, {}, {
-        headers: {
-          'Authorization' : `Bearer ${token}`
-        }
-      })
-      .then(foundSprints=> {
-        console.log('Success getting Sprints');
-        console.log(foundSprints.data);
-        sprintRet(null, foundSprints.data);
-      })
-      .catch(err => {
-        console.log('error axios to server:');
-        console.log(err);
-      });
-    }
-
+    // function sprintsList(sprintRet) {
+    //   console.log(`POST ${SERVER_URL}/sprints/get`);
+    //   let token = localStorage.getItem('serverToken');
+    //   axios.get(`${SERVER_URL}/sprints`, {
+    //     headers: {
+    //       'Authorization' : `Bearer ${token}`
+    //     }
+    //   })
+    //   .then(foundSprints=> {
+    //     console.log('Success getting Sprints');
+    //     console.log(foundSprints.data);
+    //     sprintRet(null, foundSprints.data);
+    //   })
+    //   .catch(err => {
+    //     console.log('error axios to server:');
+    //     console.log(err);
+    //   });
+    // }
+    //
     function tasksList(taskRet) {
-      console.log(`POST ${SERVER_URL}/tasks/get`);
+      console.log(`GET ${SERVER_URL}/tasks/mytasks`);
       let token = localStorage.getItem('serverToken');
-      axios.post(`${SERVER_URL}/tasks/get`, {}, {
+      axios.get(`${SERVER_URL}/tasks/mytasks`, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
@@ -104,14 +113,19 @@ class App extends Component {
       });
     }
 
-    async.parallel([projectsList, sprintsList, tasksList], (error, dataLists) => {
+    async.parallel([
+      projectsList,
+      // sprintsList,
+      tasksList
+    ], (error, dataLists) => {
       console.log("ready to setState");
       console.log(dataLists);
       this.setState({
         projects: dataLists[0],
-        sprints: dataLists[1],
-        tasks: dataLists[2]
+        tasks: dataLists[1]
+        // sprints: dataLists[2]
       });
+      console.log(this.state.projects);
     });
   }
 
@@ -125,9 +139,8 @@ class App extends Component {
     let updatedProjects;
     this.setState({projects: updatedProjects});
   }
-  editProject = () => {
-    let updatedProjects;
-    this.setState({projects: updatedProjects});
+  editProject = (projData) => {
+    
   }
   getProject = (gotProject) => {
     this.setState({
@@ -221,8 +234,9 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+          <Navigation user={this.state.user} resetUser={this.resetUser} />
+
           <div className="container">
-            <Navigation user={this.state.user} resetUser={this.resetUser} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
               () => (
@@ -278,7 +292,7 @@ class App extends Component {
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
               )
             } />
-            <Route path="/project" component={
+          <Route path="/project/:id" component={
               () => (
                 <Project
                   user={this.state.user}

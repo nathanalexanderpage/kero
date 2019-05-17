@@ -1,15 +1,31 @@
-//Required models
+// Required models
 let express = require('express')
 
-//router instances
+// router instances
 let router = express.Router()
 
-//include models
+// include models
 let db = require('../models')
 
-//get tasks
-router.post('/get', (req, res) => {
-  db.Task.find()
+// get tasks
+router.get('/', (req, res) => {
+  db.Task.find({
+    sprint: req.params.id
+  })
+  .then(foundTasks => {
+    res.send(foundTasks)
+  })
+  .catch( err => {
+    console.log('error in get /tasks', err);
+    res.status(500).send('Something went wrong. Contact administrator')
+  })
+})
+
+// GET mytasks for profile
+router.get('/mytasks', (req, res) => {
+  db.Task.find({
+    assignedTo: req.user.id
+  })
   .then(foundTasks => {
     res.send(foundTasks)
   })
@@ -20,7 +36,7 @@ router.post('/get', (req, res) => {
 })
 
 //get tasks/:id
-router.post('/get/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   db.Task.findById(req.params.id)
   .then(foundTask => {
     res.send(foundTask)
@@ -33,9 +49,9 @@ router.post('/get/:id', (req, res) => {
 
 
 //post tasks
-router.post('/post', (req, res) => {
+router.post('/', (req, res) => {
 
-  console.log('In the POST /sprint/ route');
+  console.log('In the POST /tasks route');
   console.log(req.body);
   if(req.body.status === ''){
       req.body.status = 'todo'
@@ -45,10 +61,9 @@ router.post('/post', (req, res) => {
     res.send(createdTask)
   })
   .catch( err => {
-    console.log('error in post /Projects', err);
+    console.log('error in POST /tasks', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
-
 })
 
 
@@ -58,13 +73,14 @@ router.put('/:id', (req, res) => {
   db.Task.findOneAndUpdate(
     { _id: req.params.id},
     req.body,
-    {new: true, useFindAndModify:false }) //this will return what was updated
+    {new: true, useFindAndModify:false}
+  ) //this will return what was updated
   .then(editedTask => {
     console.log(editedTask);
     res.send(editedTask)
   })
   .catch( err => {
-    console.log('error in put /task/:id', err);
+    console.log('error in PUT /task/:id', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
