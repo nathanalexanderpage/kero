@@ -284,7 +284,7 @@ class App extends Component {
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
               )
             } />
-            <Route path="/project" component={
+          <Route path="/project/:id" component={
               () => (
                 <Project
                   user={this.state.user}

@@ -28,9 +28,12 @@ nav a:hover {
 /* DEFAULT STYLES */
 .App {
   text-align: center;
-  background-color: palegoldenrod;
   height: 100%;
   width: 100%;
+}
+
+body{
+  background-color: greenyellow !important;
 }
 
 
@@ -77,4 +80,9 @@ nav a:hover {
 #card-body {
   margin: 8px;
   border-radius: 10px;
+}
+
+#displayProjects{
+  height: 500px;
+  overflow-y: scroll;
 }

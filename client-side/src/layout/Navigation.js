@@ -56,7 +56,6 @@ export default class Navigation extends Component {
             <Link to="/board">Board</Link>
             <Link to="/sprint">Sprint</Link>
             <Link to="/task">Task</Link>
-            <Link to="/project">Project</Link>
           </span>
         );
 
@@ -77,7 +76,7 @@ export default class Navigation extends Component {
              </NavItem>
            <NavItem>
              {links}
-          </NavItem>   
+          </NavItem>
            </Nav>
          </Collapse>
        </Navbar>

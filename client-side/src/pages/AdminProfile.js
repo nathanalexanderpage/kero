@@ -4,7 +4,8 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody,
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 class AdminProfile extends Component {
@@ -17,7 +18,8 @@ class AdminProfile extends Component {
         finishdate: '',
         purpose:'',
         modal: false,
-        redirect:false
+        redirect:false,
+        newproject:''
     };
 
     this.toggle = this.toggle.bind(this);
@@ -44,6 +46,7 @@ class AdminProfile extends Component {
     let newState = {...this.state};
     delete newState.modal;
     delete newState.redirect;
+    delete newState.newproject;
     console.log(newState);
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/projects/`, newState,
@@ -54,12 +57,13 @@ class AdminProfile extends Component {
      })
     .then(response=> {
       console.log('Success');
-      console.log(response);
+      console.log('esta respuesta',response);
       this.setState({
           title: '',
           startdate: '',
           finishdate: '',
           purpose:'',
+          newproject:response.data._id,
           redirect: true
       })
       this.props.rerender()
@@ -74,20 +78,21 @@ class AdminProfile extends Component {
   render() {
 
     if(this.state.redirect === true){
-    return <Redirect to='/project' />
+    return <Redirect to={'/project/'+ this.state.newproject} />
     }
 
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
         return (
-          <div key={`project-${i}`}>
-
-            <Card body className="text-center" id="card-body">
-              <CardTitle>Title: {proj.title}</CardTitle>
-              <CardText>
-                Description: {proj.purpose}
-              </CardText>
-            </Card>
+          <div key={`project-${proj._id}`}>
+            <Link to={`/project/${proj._id}`}>
+              <Card body className="text-center" id="card-body">
+                <CardTitle>Title: {proj.title}</CardTitle>
+                <CardText>
+                  Description: {proj.purpose}
+                </CardText>
+              </Card>
+            </Link>
           </div>
         );
       });
@@ -103,9 +108,9 @@ class AdminProfile extends Component {
                   <h5>Your role is : {this.props.user.role}</h5>
                   <h5>Your are working in Project: {this.props.user.project}</h5>
             </Col>
-            <Col md="6">
-              <h1>Your Projects</h1>
-              {projectsList}
+            <Col md="6" >
+              <Col><h1>Your Projects</h1></Col>
+              <Col id="displayProjects">{projectsList}</Col>
             </Col>
           </Row>
           <Row>
@@ -182,6 +187,9 @@ class AdminProfile extends Component {
             </Modal>
           </Col>
         </Row>
+      <Row>
+        <h1>Your Tasks</h1>
+      </Row>
         </Container>
     );
     }
