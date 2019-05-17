@@ -14,11 +14,6 @@ class SwimLane extends Component {
                 <div className= 'board-columns'>
                   <h6 className= 'column-name'>To Do</h6>
                   <hr></hr>
-                  <Form inline onSubmit={(e) => e.preventDefault()}>
-                    <Button color="primary" 
-                            onClick={this.toggle} 
-                            id="new-task">➕</Button>
-                  </Form>
                 </ div>
               </Col>
               <Col>
@@ -31,8 +26,8 @@ class SwimLane extends Component {
                 <div className= 'board-columns'>
                   <h6 className= 'column-name' id='code-review'>Code Review</h6>
                   <hr></hr>
-                    <Button outline color="primary">👍</Button>
-                    <Button outline color="primary">👎</Button>
+                    {/* <Button outline color="primary">👍</Button>
+                    <Button outline color="primary">👎</Button> */}
                 </ div>
               </Col>
               <Col>

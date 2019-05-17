@@ -82,8 +82,6 @@ class Board extends Component {
         </div>
       );
     }
-
-
     return(
       <Container >
         <Row >
@@ -91,7 +89,13 @@ class Board extends Component {
           <div>{this.props.project}</div>
             <div>{this.props.sprint}</div>
             <Row id="mainboard"></Row>
+            <Swimlane />
 
+            <Form inline onSubmit={(e) => e.preventDefault()}>
+              <Button color="primary" 
+                      onClick={this.toggle} 
+                      id="new-task">➕</Button>
+            </Form>
             <Modal isOpen={this.state.modal} 
                     toggle={this.toggle} 
                     className={this.props.className} >
