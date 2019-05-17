@@ -3,6 +3,7 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFoote
 import '../App.css';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+import { Redirect , Router, withRouter } from 'react-router-dom';
 
 class Project extends Component {
 
@@ -12,8 +13,10 @@ class Project extends Component {
         number: 0,
         startDate:'',
         finishDate:'',
-        modal: false
+        modal: false,
+        projectdata:{}
     };
+
 
     this.toggle = this.toggle.bind(this);
   }
@@ -56,32 +59,64 @@ class Project extends Component {
     })
   }
 
+  getProject = () => {
+    console.log("Im working!!!");
+    let token = localStorage.getItem('serverToken');
+    axios.get(`${SERVER_URL}/projects/${this.props.id}`,
+      {
+        headers: {
+         'Authorization' : `Bearer ${token}`
+       }
+     })
+    .then(response=> {
+      console.log('Success');
+      console.log('response from project id',response);
+      this.setState({
+        projectdata: response.data,
+      });
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    })
+  }
+
+
+  componentDidMount = () => {
+    // GET USER INFO
+    this.getProject();
+  }
+
+
 
   render() {
-    if(this.props.user){
 
-      let sprintsList = this.props.sprints.map((sprint, i) => {
-        return (
-          <div key={`sprint-${i}`}>
-            <div>
-              Number: {sprint.number}
-            </div>
-            <div>
-              Start date: {sprint.startDate}
-            </div>
-            <div>
-              End date: {sprint.finishDate}
-            </div>
-            <div>
-              Project: {sprint.project}
-            </div>
-          </div>
-        );
-      });
+let projectData = this.state.projectdata
+
       return (
 
-        <div>
+
           <Container >
+            <Row>
+              <div >
+                <div>
+                 <h1>Title: {projectData.title}</h1>
+                </div>
+                <div>
+                  Start date: {projectData.startdate}
+                </div>
+                <div>
+                  End date: {projectData.finishdate}
+                </div>
+                <div>
+                  Purpose: {projectData.purpose}
+                </div>
+                <div>
+                  Admin: <img  id="userprofile" src={projectData.admin}  />
+                </div>
+              </div>
+
+            </Row>
             <Row>
               <Col>
                 <Form inline onSubmit={(e) => e.preventDefault()}>
@@ -124,11 +159,11 @@ class Project extends Component {
                 </Modal>
               </Col>
             </Row>
-          </Container>
-          {sprintsList}
-        </div>
+        </Container>
+
     );
-    }
+
+
     return(
       <div>
         <p>This is a profile page. You must be logged in to see it.</p>

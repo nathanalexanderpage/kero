@@ -4,8 +4,8 @@ import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody,
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router'
 
 
 class AdminProfile extends Component {
@@ -57,7 +57,6 @@ class AdminProfile extends Component {
      })
     .then(response=> {
       console.log('Success');
-      console.log('esta respuesta',response);
       this.setState({
           title: '',
           startdate: '',
@@ -78,8 +77,12 @@ class AdminProfile extends Component {
   render() {
 
     if(this.state.redirect === true){
-    return <Redirect to={'/project/'+ this.state.newproject} />
-    }
+    return(
+      <Redirect to={{
+      pathname: '/project/'+ this.state.newproject
+       }} />
+   )
+   }
 
     if(this.props.user){
       let projectsList = this.props.projects.map((proj, i) => {
