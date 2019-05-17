@@ -17,12 +17,13 @@ class AdminProfile extends Component {
         startdate: '',
         finishdate: '',
         purpose: '',
-        modal: false,
+        modalCreate: false,
+        modalEdit: false,
         redirect: false,
         newproject: ''
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleCreate = this.toggleCreate.bind(this);
   }
 
   handleTitleChange = (e) => { this.setState({ title: e.target.value }); }
@@ -34,9 +35,9 @@ class AdminProfile extends Component {
     // GET USER INFO
 
   }
-  toggle() {
+  toggleCreate() {
       this.setState(prevState => ({
-          modal: !prevState.modal
+          modalCreate: !prevState.modalCreate
       }));
   }
 
@@ -44,7 +45,7 @@ class AdminProfile extends Component {
 
     e.preventDefault();
     let newState = {...this.state};
-    delete newState.modal;
+    delete newState.modalCreate;
     delete newState.redirect;
     delete newState.newproject;
     console.log(newState);
@@ -123,18 +124,18 @@ class AdminProfile extends Component {
               >
                 <Button
                   color="danger"
-                  onClick={this.toggle}
+                  onClick={this.toggleCreate}
                 >
                   New Project
                 </Button>
               </Form>
               <Modal
-                isOpen={this.state.modal}
-                toggle={this.toggle}
+                isOpen={this.state.modalCreate}
+                toggleCreate={this.toggleCreate}
                 className={this.props.className}
               >
                 <Form onSubmit={this.handleSubmit}>
-                <ModalHeader toggle={this.toggle}>Create a New Project</ModalHeader>
+                <ModalHeader toggleCreate={this.toggleCreate}>Create a New Project</ModalHeader>
                 <ModalBody>
                   <Label>Title</Label>
                   <Input
@@ -179,11 +180,11 @@ class AdminProfile extends Component {
                 <ModalFooter>
                   <Button
                     color="primary"
-                    type="submit" onClick={this.toggle}
+                    type="submit" onClick={this.toggleCreate}
                   >
                     Create
                   </Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    <Button color="secondary" onClick={this.toggleCreate}>Cancel</Button>
                 </ModalFooter>
               </Form>
             </Modal>

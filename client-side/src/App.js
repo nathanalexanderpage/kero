@@ -17,7 +17,6 @@ import Project from './pages/Project';
 
 let async = require("async");
 
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -140,7 +139,7 @@ class App extends Component {
     this.setState({projects: updatedProjects});
   }
   editProject = (projData) => {
-    
+
   }
   getProject = (gotProject) => {
     this.setState({
@@ -180,7 +179,21 @@ class App extends Component {
   }
 
   resetUser = () => {
-    this.setState({user: null});
+    this.setState({
+      user: null,
+      projects: [],
+      sprints: [],
+      tasks: [],
+      redirects : {
+        project:false,
+        sprint:false,
+        task:false
+      },
+      project: null,
+      sprint: null,
+      task: null,
+      userProfInfo: null
+    });
   }
 
   getUser = () => {
@@ -292,7 +305,7 @@ class App extends Component {
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
               )
             } />
-          <Route path="/project/:id"  component={
+            <Route path="/project/:id" component={
               ({match}) => (
                 <Project
                   user={this.state.user}
