@@ -66,3 +66,21 @@ nav a:hover {
   margin: 8px;
   border-radius: 10px;
 }
+
+#new-task {
+  display: flex;
+  border-radius: 50%;
+  align-content: center;
+  margin-left: 65px;
+}
+
+.board-columns {
+  height: 450px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.column-name {
+  padding-top: 10px
+}
