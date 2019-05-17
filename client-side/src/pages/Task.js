@@ -32,9 +32,6 @@ class Task extends Component {
         </div>
       );
     }
-
-
-
     return(
       <div>
         <div>
@@ -73,6 +70,9 @@ class Task extends Component {
           </div>
         </div>
       </div>
+
+
+
 
     );
   }
