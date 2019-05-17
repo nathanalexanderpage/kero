@@ -47,12 +47,27 @@ router.post('/', (req, res) => {
 
 //get sprints/:id
 router.get('/:id', (req, res) => {
-  db.Sprint.findById(req.params.id).populate('tasks')
+  db.Sprint.findById(req.params.id)
   .then(foundSprint => {
     res.send(foundSprint)
   })
   .catch( err => {
     console.log('error in get /Sprint/:id', err);
+    res.status(500).send('Something went wrong. Contact administrator')
+  })
+})
+
+// returns array of all tasks associated to given sprint id
+// get sprints/:id/tasks
+router.get('/:id/tasks', (req, res) => {
+  db.Task.find({
+    sprint: req.params.id
+  })
+  .then(foundSprintTasks => {
+    res.send(foundSprintTasks)
+  })
+  .catch( err => {
+    console.log('error in get /sprints/:id/tasks', err);
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
