@@ -14,9 +14,9 @@ import Board from './pages/Board';
 import Task from './pages/Task';
 import Sprint from './pages/Sprint';
 import Project from './pages/Project';
+import Swimlane from './pages/SwimLane';
 
 let async = require("async");
-
 
 class App extends Component {
   constructor(props){
@@ -42,6 +42,15 @@ class App extends Component {
     // GET USER INFO
     this.getUser();
     this.loadUserData();
+  }
+
+  convertDateEpochUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()).getTime()/1000 - 25200;
+  }
+  convertEpochToLocal(utcSeconds) {
+    let d = new Date(0);
+    d.setUTCSeconds(utcSeconds);
+    return d;
   }
 
   loadUserData = () => {
@@ -130,9 +139,8 @@ class App extends Component {
     let updatedProjects;
     this.setState({projects: updatedProjects});
   }
-  editProject = () => {
-    let updatedProjects;
-    this.setState({projects: updatedProjects});
+  editProject = (projData) => {
+
   }
   getProject = (gotProject) => {
     this.setState({
@@ -172,7 +180,21 @@ class App extends Component {
   }
 
   resetUser = () => {
-    this.setState({user: null});
+    this.setState({
+      user: null,
+      projects: [],
+      sprints: [],
+      tasks: [],
+      redirects : {
+        project:false,
+        sprint:false,
+        task:false
+      },
+      project: null,
+      sprint: null,
+      task: null,
+      userProfInfo: null
+    });
   }
 
   getUser = () => {
@@ -268,6 +290,19 @@ class App extends Component {
                 <Board user={this.state.user}/>
               )
             } />
+
+            <Route path="/swimlane" component={
+              () => (
+                <Swimlane 
+                  user={this.state.user}
+                  tasks={this.state.tasks}
+                  addTask={this.state.addTask}
+                  removeTask={this.state.removeTask}
+                  editTask={this.state.editTask}
+                  />
+              )
+            } />      
+
             <Route path="/sprint" component={
               () => (
                 <Sprint
@@ -284,7 +319,7 @@ class App extends Component {
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
               )
             } />
-          <Route path="/project/:id"  component={
+            <Route path="/project/:id" component={
               ({match}) => (
                 <Project
                   user={this.state.user}

@@ -16,13 +16,14 @@ class AdminProfile extends Component {
         title: '',
         startdate: '',
         finishdate: '',
-        purpose:'',
-        modal: false,
-        redirect:false,
-        newproject:''
+        purpose: '',
+        modalCreate: false,
+        modalEdit: false,
+        redirect: false,
+        newproject: ''
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleCreate = this.toggleCreate.bind(this);
   }
 
   handleTitleChange = (e) => { this.setState({ title: e.target.value }); }
@@ -34,9 +35,9 @@ class AdminProfile extends Component {
     // GET USER INFO
 
   }
-  toggle() {
+  toggleCreate() {
       this.setState(prevState => ({
-          modal: !prevState.modal
+          modalCreate: !prevState.modalCreate
       }));
   }
 
@@ -44,7 +45,7 @@ class AdminProfile extends Component {
 
     e.preventDefault();
     let newState = {...this.state};
-    delete newState.modal;
+    delete newState.modalCreate;
     delete newState.redirect;
     delete newState.newproject;
     console.log(newState);
@@ -101,15 +102,14 @@ class AdminProfile extends Component {
       });
 
       return (
-
         <Container className="profile">
           <Row>
             <Col md="6">
               <img  id="userprofile" src={this.props.user.image}  />
-                <h5 id="username">{this.props.user.firstName+ ' ' + this.props.user.lastName}</h5>
-                  <h5>Email : {this.props.user.email}</h5>
-                  <h5>Your role is : {this.props.user.role}</h5>
-                  <h5>Your are working in Project: {this.props.user.project}</h5>
+                <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
+                <h5>Email : {this.props.user.email}</h5>
+                <h5>Your role is : {this.props.user.role}</h5>
+                <h5>You are working in Project: {this.props.user.project}</h5>
             </Col>
             <Col md="6" >
               <Col><h1>Your Projects</h1></Col>
@@ -124,68 +124,68 @@ class AdminProfile extends Component {
               >
                 <Button
                   color="danger"
-                  onClick={this.toggle}
+                  onClick={this.toggleCreate}
                 >
                   New Project
                 </Button>
               </Form>
               <Modal
-                isOpen={this.state.modal}
-                toggle={this.toggle}
+                isOpen={this.state.modalCreate}
+                toggleCreate={this.toggleCreate}
                 className={this.props.className}
               >
                 <Form onSubmit={this.handleSubmit}>
-                <ModalHeader toggle={this.toggle}>Create a New Project</ModalHeader>
+                <ModalHeader toggleCreate={this.toggleCreate}>Create a New Project</ModalHeader>
                 <ModalBody>
                   <Label>Title</Label>
-                    <Input
-                      type="text"
-                      name="title"
-                      placeholder="title placeholder"
-                      value={this.state.title}
-                      onChange={this.handleTitleChange}
-                    />
+                  <Input
+                    type="text"
+                    name="title"
+                    placeholder="title placeholder"
+                    value={this.state.title}
+                    onChange={this.handleTitleChange}
+                  />
                   <Label>Start Date</Label>
-                    <Input
-                      type="date"
-                      name="startdate"
-                      placeholder="start date placeholder"
-                      value={this.state.startdate}
-                      onChange={this.handleStartDateChange}
-                    />
+                  <Input
+                    type="date"
+                    name="startdate"
+                    placeholder="start date placeholder"
+                    value={this.state.startdate}
+                    onChange={this.handleStartDateChange}
+                  />
                   <Label>End Date</Label>
-                    <Input
-                      type="date"
-                      name="finishdate"
-                      placeholder="finish date placeholder"
-                      value={this.state.finishdate}
-                      onChange={this.handleFinishDateChange}
-                    />
+                  <Input
+                    type="date"
+                    name="finishdate"
+                    placeholder="finish date placeholder"
+                    value={this.state.finishdate}
+                    onChange={this.handleFinishDateChange}
+                  />
                   <Label>Purpose</Label>
-                    <Input
-                      type="textarea"
-                      name="purpose"
-                      placeholder="Write something"
-                      rows={5}
-                      value={this.state.purpose}
-                      onChange={this.handlePurposeChange}
-                    />
+                  <Input
+                    type="textarea"
+                    name="purpose"
+                    placeholder="Write something"
+                    rows={5}
+                    value={this.state.purpose}
+                    onChange={this.handlePurposeChange}
+                  />
                   <Label > Author </Label>
-                    <Input
-                      name="author"
-                      plaintext
-                      value={this.props.user.firstName+ ' ' + this.props.user.lastName}
-                    />
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="primary"
-                  type="submit" onClick={this.toggle}
-                >
-                  Create
-                </Button>{' '}
-                  <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-              </ModalFooter>
+                  <Input
+                    name="author"
+                    plaintext
+                    value={this.props.user.firstName+ ' ' + this.props.user.lastName}
+                  />
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="primary"
+                    type="submit" onClick={this.toggleCreate}
+                  >
+                    Create
+                  </Button>{' '}
+                    <Button color="secondary" onClick={this.toggleCreate}>Cancel</Button>
+                </ModalFooter>
               </Form>
             </Modal>
           </Col>
@@ -193,15 +193,15 @@ class AdminProfile extends Component {
       <Row>
         <h1>Your Tasks</h1>
       </Row>
-        </Container>
+    </Container>
     );
     }
-    return(
+    return (
       <div>
         <p>This is a profile page. You must be logged in to see it.</p>
         <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
       </div>
-      );
+    );
   }
 }
 

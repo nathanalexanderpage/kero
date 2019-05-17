@@ -30,6 +30,7 @@ router.post('/login', (req, res) => {
 
     // send the token
     res.send({token})
+    console.log(token)
   })
   .catch(err => {
     console.log('error when finding user in POST /auth/login', err);

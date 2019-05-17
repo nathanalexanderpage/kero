@@ -5,7 +5,6 @@ import SERVER_URL from '../constants/server';
 
 
 class Sprint extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -206,7 +205,6 @@ class Sprint extends Component {
               </Form>
             </Modal>
             {tasksList}
-
           </Col>
         </Row>
       </Container>

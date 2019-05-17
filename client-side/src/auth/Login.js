@@ -20,6 +20,7 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Why god why')
     // send data to server
     axios.post(`${SERVER_URL}/auth/login`, this.state)
     .then(response=> {
@@ -34,6 +35,7 @@ class Login extends Component {
       console.log('TODO: make error messages for user to see');
       console.log(err);
     })
+    console.log('after the flood')
   }
 
   render() {
@@ -65,7 +67,7 @@ class Login extends Component {
                         onChange={this.handlePasswordChange} />
           </FormGroup>
             <div>
-              <Button outline color="secondary" size="lg" onClick={this.toggle}>Log In</Button>
+              <Button outline color="secondary" size="lg" >Log In</Button>
               <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
           </Form>
