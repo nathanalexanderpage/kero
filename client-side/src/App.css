@@ -99,3 +99,12 @@ body{
 .column-name {
   padding-top: 10px
 }
+<<<<<<< HEAD
+=======
+
+#displayProjects{
+  height: 500px;
+  overflow-y: scroll;
+}
+
+>>>>>>> e27516205c3660848a7485c0c89f5a825ab994e2
