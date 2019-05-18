@@ -37,29 +37,43 @@ export default class Navigation extends Component {
   }
 
   render() {
-    let links = '';
-    if(this.props.user && this.props.user.role === 'user'){
-      links = (
-          <span>
-            <a onClick={this.handleLogout}>Logout</a>
-            <Link to="/profile">Profile</Link>
-            <Link to="/board">Board</Link>
-            <Link to="/sprint">Sprint</Link>
-            <Link to="/task">Task</Link>
-          </span>
-        );
-    }else if (this.props.user && this.props.user.role === 'admin') {
-      links = (
-          <span>
-            <a onClick={this.handleLogout}>Logout</a>
-            <Link to="/adminprofile">Profile</Link>
-            <Link to="/board">Board</Link>
-            <Link to="/sprint">Sprint</Link>
-            <Link to="/task">Task</Link>
-          </span>
-        );
+   let links = '';
 
+    if(this.props.user){
+
+      if(this.props.user && this.props.user.role === 'user'){
+        links = (
+            <span>
+              <a onClick={this.handleLogout}>Logout</a>
+              <Link to="/profile">Profile</Link>
+              <Link to="/board">Board</Link>
+              <Link to="/sprint">Sprint</Link>
+              <Link to="/task">Task</Link>
+            </span>
+          );
+      }else if (this.props.user && this.props.user.role === 'admin') {
+        links = (
+            <span>
+              <a onClick={this.handleLogout}>Logout</a>
+              <Link to="/adminprofile">Profile</Link>
+              <Link to="/board">Board</Link>
+              <Link to="/sprint">Sprint</Link>
+              <Link to="/task">Task</Link>
+            </span>
+          );
+
+      }
     }
+       else {
+         links = (
+             <span>
+               <Link to="/signup">Sign Up</Link>
+               <Link to="/login">Log In</Link>
+             </span>
+           );
+       }
+
+
       return(
 
       <div>
@@ -68,12 +82,6 @@ export default class Navigation extends Component {
          <NavbarToggler onClick={this.toggle} />
          <Collapse isOpen={this.state.isOpen} navbar>
            <Nav className="ml-auto" navbar>
-             <NavItem>
-               <Link to="/signup">Sign Up</Link>
-             </NavItem>
-             <NavItem>
-               <Link to="/login">Log In</Link>
-             </NavItem>
            <NavItem>
              {links}
           </NavItem>

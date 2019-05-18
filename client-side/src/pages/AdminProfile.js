@@ -14,21 +14,20 @@ class AdminProfile extends Component {
     super(props);
     this.state = {
         title: '',
-        startdate: '',
-        finishdate: '',
-        purpose: '',
+        startDate: '',
+        finishDate: '',
         modalCreate: false,
         modalEdit: false,
         redirect: false,
-        newproject: ''
+        newboard: ''
     };
 
     this.toggleCreate = this.toggleCreate.bind(this);
   }
 
   handleTitleChange = (e) => { this.setState({ title: e.target.value }); }
-  handleStartDateChange = (e) => { this.setState({ startdate: e.target.value }); }
-  handleFinishDateChange = (e) => { this.setState({ finishdate: e.target.value }); }
+  handleStartDateChange = (e) => { this.setState({ startDate: e.target.value }); }
+  handleFinishDateChange = (e) => { this.setState({ finishDate: e.target.value }); }
   handlePurposeChange = (e) => { this.setState({ purpose: e.target.value }); }
 
   componentDidMount = () => {
@@ -46,11 +45,12 @@ class AdminProfile extends Component {
     e.preventDefault();
     let newState = {...this.state};
     delete newState.modalCreate;
+    delete newState.modalEdit;
     delete newState.redirect;
-    delete newState.newproject;
-    console.log(newState);
+    delete newState.newboard;
+    console.log("esto es lo que mandas",newState);
     let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/projects/`, newState,
+    axios.post(`${SERVER_URL}/sprints/`, newState,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
@@ -60,10 +60,10 @@ class AdminProfile extends Component {
       console.log('Success');
       this.setState({
           title: '',
-          startdate: '',
-          finishdate: '',
+          startDate: '',
+          finishDate: '',
           purpose:'',
-          newproject:response.data._id,
+          newboard:response.data._id,
           redirect: true
       })
       this.props.rerender()
@@ -80,21 +80,18 @@ class AdminProfile extends Component {
     if(this.state.redirect === true){
     return(
       <Redirect to={{
-      pathname: '/project/'+ this.state.newproject
+      pathname: '/board/'+ this.state.newboard
        }} />
-   )
+     )
    }
 
     if(this.props.user){
-      let projectsList = this.props.projects.map((proj, i) => {
+      let sprintsList = this.props.sprints.map((sprint, i) => {
         return (
-          <div key={`project-${proj._id}`}>
-            <Link to={`/project/${proj._id}`}>
+          <div key={`sprint-${sprint._id}`}>
+            <Link to={`/board/${sprint._id}`}>
               <Card body className="text-center" id="card-body">
-                <CardTitle>Title: {proj.title}</CardTitle>
-                <CardText>
-                  Description: {proj.purpose}
-                </CardText>
+                <CardTitle>Title: {sprint.title}</CardTitle>
               </Card>
             </Link>
           </div>
@@ -112,8 +109,8 @@ class AdminProfile extends Component {
                 <h5>You are working in Project: {this.props.user.project}</h5>
             </Col>
             <Col md="6" >
-              <Col><h1>Your Projects</h1></Col>
-              <Col id="displayProjects">{projectsList}</Col>
+              <Col><h1>Your Sprints</h1></Col>
+              <Col id="displayProjects">{sprintsList}</Col>
             </Col>
           </Row>
           <Row>
@@ -126,7 +123,7 @@ class AdminProfile extends Component {
                   color="danger"
                   onClick={this.toggleCreate}
                 >
-                  New Project
+                  New Sprint
                 </Button>
               </Form>
               <Modal
@@ -135,7 +132,7 @@ class AdminProfile extends Component {
                 className={this.props.className}
               >
                 <Form onSubmit={this.handleSubmit}>
-                <ModalHeader toggleCreate={this.toggleCreate}>Create a New Project</ModalHeader>
+                <ModalHeader toggleCreate={this.toggleCreate}>Create a New Sprint</ModalHeader>
                 <ModalBody>
                   <Label>Title</Label>
                   <Input
@@ -148,27 +145,18 @@ class AdminProfile extends Component {
                   <Label>Start Date</Label>
                   <Input
                     type="date"
-                    name="startdate"
+                    name="startDate"
                     placeholder="start date placeholder"
-                    value={this.state.startdate}
+                    value={this.state.startDate}
                     onChange={this.handleStartDateChange}
                   />
                   <Label>End Date</Label>
                   <Input
                     type="date"
-                    name="finishdate"
+                    name="finishDate"
                     placeholder="finish date placeholder"
-                    value={this.state.finishdate}
+                    value={this.state.finishDate}
                     onChange={this.handleFinishDateChange}
-                  />
-                  <Label>Purpose</Label>
-                  <Input
-                    type="textarea"
-                    name="purpose"
-                    placeholder="Write something"
-                    rows={5}
-                    value={this.state.purpose}
-                    onChange={this.handlePurposeChange}
                   />
                   <Label > Author </Label>
                   <Input
@@ -190,9 +178,6 @@ class AdminProfile extends Component {
             </Modal>
           </Col>
         </Row>
-      <Row>
-        <h1>Your Tasks</h1>
-      </Row>
     </Container>
     );
     }

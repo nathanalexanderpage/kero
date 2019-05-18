@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var sprintSchema = new mongoose.Schema({
-  number: Number,
+  title: String,
   startDate: {
     type: String,
     required: true
@@ -10,9 +10,9 @@ var sprintSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  project: {
+  admin: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
+    ref: 'User'
   }
 });
 

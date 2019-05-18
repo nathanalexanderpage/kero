@@ -13,7 +13,6 @@ import Signup from './auth/Signup';
 import Board from './pages/Board';
 import Task from './pages/Task';
 import Sprint from './pages/Sprint';
-import Project from './pages/Project';
 import Swimlane from './pages/SwimLane';
 
 let async = require("async");
@@ -55,19 +54,18 @@ class App extends Component {
 
   loadUserData = () => {
     console.log("INSIDE componentDidMount");
-
-    function projectsList(projRet) {
-      console.log(`GET ${SERVER_URL}/projects/`);
+    function sprintList(sprintRet) {
+      console.log(`GET ${SERVER_URL}/sprints/admin`);
       let token = localStorage.getItem('serverToken');
-      axios.get(`${SERVER_URL}/projects`, {
+      axios.get(`${SERVER_URL}/sprints/admin`, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
       })
-      .then(foundProjects=> {
-        console.log('Success getting Projects');
-        console.log(foundProjects.data);
-        projRet(null, foundProjects.data);
+      .then(foundSprints => {
+        console.log('Success getting Sprints');
+        console.log(foundSprints.data);
+        sprintRet(null, foundSprints.data);
       })
       .catch(err => {
         console.log('error axios to server:');
@@ -75,25 +73,6 @@ class App extends Component {
       });
     }
 
-    // function sprintsList(sprintRet) {
-    //   console.log(`POST ${SERVER_URL}/sprints/get`);
-    //   let token = localStorage.getItem('serverToken');
-    //   axios.get(`${SERVER_URL}/sprints`, {
-    //     headers: {
-    //       'Authorization' : `Bearer ${token}`
-    //     }
-    //   })
-    //   .then(foundSprints=> {
-    //     console.log('Success getting Sprints');
-    //     console.log(foundSprints.data);
-    //     sprintRet(null, foundSprints.data);
-    //   })
-    //   .catch(err => {
-    //     console.log('error axios to server:');
-    //     console.log(err);
-    //   });
-    // }
-    //
     function tasksList(taskRet) {
       console.log(`GET ${SERVER_URL}/tasks/mytasks`);
       let token = localStorage.getItem('serverToken');
@@ -114,42 +93,23 @@ class App extends Component {
     }
 
     async.parallel([
-      projectsList,
-      // sprintsList,
+      sprintList,
       tasksList
     ], (error, dataLists) => {
       console.log("ready to setState");
       console.log(dataLists);
       this.setState({
-        projects: dataLists[0],
+        sprints: dataLists[0],
         tasks: dataLists[1]
-        // sprints: dataLists[2]
       });
-      console.log(this.state.projects);
+      console.log("all the user information", this.state.sprints);
+      console.log(this.state.user);
     });
   }
 
   // methods for altering existing data for this user
   // at the end of each will setState so front-end page reflects database changes
-  addProject = () => {
-    let updatedProjects;
-    this.setState({projects: updatedProjects});
-  }
-  removeProject = () => {
-    let updatedProjects;
-    this.setState({projects: updatedProjects});
-  }
-  editProject = (projData) => {
 
-  }
-  getProject = (gotProject) => {
-    this.setState({
-      project: gotProject,
-      redirect: {
-        project: true
-      }
-    })
-  }
   addSprint = () => {
     let updatedSprints;
     this.setState({sprints: updatedSprints});
@@ -182,15 +142,12 @@ class App extends Component {
   resetUser = () => {
     this.setState({
       user: null,
-      projects: [],
       sprints: [],
       tasks: [],
       redirects : {
-        project:false,
         sprint:false,
         task:false
       },
-      project: null,
       sprint: null,
       task: null,
       userProfInfo: null
@@ -275,7 +232,7 @@ class App extends Component {
               () => (
                 <AdminProfile
                   user={this.state.user}
-                  projects={this.state.projects}
+                  sprints={this.state.sprints}
                   addProject={this.state.addProject}
                   removeProject={this.state.removeProject}
                   editProject={this.state.editProject}
@@ -285,7 +242,7 @@ class App extends Component {
                 />
               )
             } />
-            <Route path="/board" component={
+          <Route path="/board/:id" component={
               () => (
                 <Board user={this.state.user}/>
               )
@@ -293,7 +250,7 @@ class App extends Component {
 
             <Route path="/swimlane" component={
               () => (
-                <Swimlane 
+                <Swimlane
                   user={this.state.user}
                   tasks={this.state.tasks}
                   addTask={this.state.addTask}
@@ -301,10 +258,10 @@ class App extends Component {
                   editTask={this.state.editTask}
                   />
               )
-            } />      
+            } />
 
-            <Route path="/sprint" component={
-              () => (
+          <Route path="/sprint/:id" component={
+              ({match}) => (
                 <Sprint
                   user={this.state.user}
                   tasks={this.state.tasks}
@@ -317,18 +274,6 @@ class App extends Component {
             <Route path="/task" component={
               () => (
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />
-              )
-            } />
-            <Route path="/project/:id" component={
-              ({match}) => (
-                <Project
-                  user={this.state.user}
-                  sprints={this.state.sprints}
-                  addSprint={this.state.addSprint}
-                  removeSprint={this.state.removeSprint}
-                  editSprint={this.state.editSprint}
-                  id={match.params.id}
-                />
               )
             } />
           </div>

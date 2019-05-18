@@ -11,15 +11,15 @@ let router = express.Router()
 let db = require('../models')
 
 
-// GET sprints
-router.get('/mySprints', (req, res) => {
+// GET sprints related to an admin
+router.get('/admin', (req, res) => {
   console.log('SPRINTS HIT');
-  db.Task.find({
-    assignedTo: req.user.id
+  console.log(req.user);
+  db.Sprint.find({
+    admin: req.user.id
   })
-  .populate('sprints')
-  .then(foundTasks => {
-    res.send(foundTasks)
+  .then(foundSprints => {
+    res.send(foundSprints)
   })
   .catch(err => {
     console.log('error in get /tasks', err);
@@ -27,14 +27,12 @@ router.get('/mySprints', (req, res) => {
   })
 })
 
-// POST sprints
+// POST NEW sprints
 router.post('/', (req, res) => {
   console.log('In the POST /sprints/ route');
-  console.log(req.user);
   let newSprintData = {...req.body}
-  newSprintData.project = "NEED TO GRAB";
-  console.log('before going into db');
-  console.log(newSprintData);
+ newSprintData.admin = req.user.id;
+ console.log(newSprintData);
   db.Sprint.create(newSprintData)
   .then(createdSprint => {
     console.log(createdSprint);
@@ -104,4 +102,6 @@ router.delete('/:id', (req, res) => {
     res.status(500).send('Something went wrong. Contact administrator')
   })
 })
+
+
 module.exports = router
