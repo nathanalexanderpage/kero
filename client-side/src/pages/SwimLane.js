@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import {Col, Container, Row, Form, Button} from 'reactstrap'
+import {Card, Col, Container, Row} from 'reactstrap'
 
 class SwimLane extends Component {
+  // You will have props!
+
   render() {
+    // map through this.props.tasks, call your variable below
+    let taskCards = this.props.tasks.map((task)=> {
+      return <Card task={task} />
+    })
+
     return (
       <Container >
         <Row >
@@ -12,29 +19,10 @@ class SwimLane extends Component {
             <Row id="mainboard">
               <Col>
                 <div className= 'board-columns'>
-                  <h6 className= 'column-name'>To Do</h6>
+                  <h6 className= 'column-name'>{this.props.title}</h6>
                   <hr></hr>
+                  {taskCards}
                 </ div>
-              </Col>
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name'>Doing</h6>
-                  <hr></hr>
-                </div>
-              </Col>
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name' id='code-review'>Code Review</h6>
-                  <hr></hr>
-                    {/* <Button outline color="primary">👍</Button>
-                    <Button outline color="primary">👎</Button> */}
-                </ div>
-              </Col>
-              <Col>
-                <div className= 'board-columns'>
-                  <h6 className= 'column-name'>Done</h6>
-                  <hr></hr>
-                </div>
               </Col>
             </Row>
             </Col>

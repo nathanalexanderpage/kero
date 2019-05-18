@@ -57,14 +57,50 @@ class Board extends Component {
       console.log('Success');
       console.log(response);
       this.setState({
-        assignedTo:'',
-        title:'',
-        manHourBudget: 0,
-        status:'',
-        dateAssigned:'',
-        dateCompleted:'',
-        prerequisiteTasks:'',
-        description:''
+        modal : {
+          assignedTo:'',
+          title:'',
+          manHourBudget: 0,
+          status:'',
+          dateAssigned:'',
+          dateCompleted:'',
+          prerequisiteTasks:'',
+          description:''
+        },
+        tasks: [
+          {
+            title: "Do stuff",
+            desc: "So much stuff to do, should really do",
+            manHourBudget: 20,
+            status: "to do",
+            dateAssigned: new Date(),
+            dateCompleted: null
+          },
+          {
+            title: "Do Things",
+            desc: "Make things that do things",
+            manHourBudget: 10,
+            status: "doing",
+            dateAssigned: new Date(),
+            dateCompleted: null
+          },
+          {
+            title: "Complete Thing",
+            desc: "take the partially done thing and complete it",
+            manHourBudget: 50,
+            status: "code review",
+            dateAssigned: new Date(),
+            dateCompleted: new Date()
+          },
+          {
+            title: "Finish",
+            desc: "Run down that damn finish line",
+            manHourBudget: 2,
+            status: "complete",
+            dateAssigned: new Date(),
+            dateCompleted: new Date()
+          },
+        ]
       })
 
     })
@@ -74,6 +110,8 @@ class Board extends Component {
     })
   }
 
+  // TODO Make call to DB to get all tasks associated with user, then set state to returned tasks
+
   render() {
     if(!this.props.user){
       return (
@@ -82,15 +120,34 @@ class Board extends Component {
         </div>
       );
     }
+
+    let toDo = []
+    let doing = []
+    let codeReview = []
+    let complete = []
+
+    // iterate through this.state.tasks and push tasks to their relevant array
+
     return(
       <Container >
         <Row >
           <Col>
           <div>{this.props.project}</div>
             <div>{this.props.sprint}</div>
-            <Row id="mainboard"></Row>
-            <Swimlane />
-
+            <Row id="mainboard">
+              <Col>
+                <Swimlane title="To-Do" tasks={toDo} />
+              </Col>
+              <Col>
+                <Swimlane title="Doing" task={doing} />
+              </Col>
+              <Col>
+                <Swimlane title="Code-Review" task={codeReview}/>
+              </Col>
+              <Col>
+                <Swimlane title="Done" task={complete}/>
+              </Col>
+            </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
               <Button color="primary" 
                       onClick={this.toggle} 
