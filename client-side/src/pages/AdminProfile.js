@@ -5,7 +5,8 @@ import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
 import {  Link } from 'react-router-dom';
-import { Route, Redirect, withRouter } from 'react-router'
+import { Route, Redirect, withRouter } from 'react-router';
+import { FaCity , FaEnvelopeSquare, FaSuitcase} from "react-icons/fa";
 
 
 class AdminProfile extends Component {
@@ -99,12 +100,22 @@ class AdminProfile extends Component {
       return (
         <Container className="profile">
           <Row>
-            <Col id="userabout" md="6">
-              <img  id="userprofile" src={this.props.user.image}  />
-                <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
-                <h5>Email : {this.props.user.email}</h5>
-                <h5>Your role is : {this.props.user.role}</h5>
-                <h5>You company: {this.props.user.company}</h5>
+            <Col md="6">
+              <Row>
+                <Col>
+                  <img  id="userprofile" src={this.props.user.image}  />
+                </Col>
+              </Row>
+              <Row id="userabout">
+                 <Col>
+                   <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
+                   <Col className="subinfo">
+                     <h5><FaEnvelopeSquare/>: {this.props.user.email}</h5>
+                     <h5><FaSuitcase/> : {this.props.user.role}</h5>
+                     <h5><FaCity/>: {this.props.user.company}</h5>
+                   </Col>
+                 </Col>
+              </Row>
             </Col>
             <Col md="6" >
               <Col><h1>Your Sprints</h1></Col>

@@ -56,7 +56,8 @@ body{
   height: 300px;
   width: 300px;
   border-radius: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+  margin-top: 25px;
 }
 
 #username{
@@ -100,6 +101,11 @@ body{
   padding-top: 10px
 }
 
+.subinfo{
+  margin-left: 40px;
+  text-align: initial;
+}
+
 
 #displayProjects{
   height: 500px;
@@ -110,4 +116,9 @@ body{
   height: 100px;
   width: 100px;
   border-radius: 50%;
+}
+
+#userabout{
+  background-color: white;
+  margin-bottom: 30px;
 }
