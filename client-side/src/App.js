@@ -55,6 +55,7 @@ class App extends Component {
 
   loadUserData = () => {
     console.log("INSIDE componentDidMount");
+
     function sprintList(sprintRet) {
       console.log(`GET ${SERVER_URL}/sprints/admin`);
       let token = localStorage.getItem('serverToken');
@@ -103,6 +104,14 @@ class App extends Component {
         sprints: dataLists[0],
         tasks: dataLists[1]
       });
+
+      console.log("all the state information");
+      console.log(this.state);
+      if (this.state.user) {
+        console.log('USER IS ROLE:');
+        console.log(this.state.user.role);
+        
+      }
     });
   }
 
