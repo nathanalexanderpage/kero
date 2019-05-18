@@ -81,7 +81,7 @@ class AdminProfile extends Component {
       <Redirect to={{
       pathname: '/board/'+ this.state.newboard
        }} />
-   )
+     )
    }
 
     if(this.props.user){

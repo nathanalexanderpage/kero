@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 })
 
 //get users/:id
-router.post('/get/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   db.User.findById(req.params.id)
   .then(foundUser => {
     console.log(foundUser);
@@ -32,6 +32,34 @@ router.post('/get/:id', (req, res) => {
   });
 })
 
+// use to get all sprints for a given regular user.
+// get users/:id/sprints
+router.get('/:id/sprints', (req, res) => {
+  db.Task.find({
+    assignedTo: req.params.id
+  }).populate('sprint')
+  .then(foundTasks => {
+    let uniqueSprintIdArr = []; // temporary holder of ALL sprints for searched user. will update with three different arrays for past, present, future.
+    let sprints = {};
+    sprints.uniqueCurrentSprintIdArr = [];
+    sprints.uniqueFutureSprintIdArr = [];
+    sprints.uniquePastSprintIdArr = [];
+    foundTasks.forEach((task, i) => {
+      console.log(task.title);
+      console.log(task.sprint);
+      let isInArr = uniqueSprintIdArr.includes(task.sprint);
+      console.log(isInArr);
+      if (!isInArr) {
+        uniqueSprintIdArr.push(task.sprint);
+      }
+    })
+    console.log(uniqueSprintIdArr);
+    res.send(uniqueSprintIdArr);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
 
 //post users
 router.post('/post', (req, res) => {
