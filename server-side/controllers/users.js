@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 })
 
 //get users/:id
-router.post('/get/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   db.User.findById(req.params.id)
   .then(foundUser => {
     console.log(foundUser);
@@ -32,6 +32,33 @@ router.post('/get/:id', (req, res) => {
   });
 })
 
+
+//get users/:id/sprints
+router.get('/:id/sprints', (req, res) => {
+  db.Task.find({
+    assignedTo: req.params.id
+  })
+  .then(foundTasks => {
+    let sprints = {};
+    sprints.uniqueCurrentSprintIdArr = [];
+    sprints.uniqueFutureSprintIdArr = [];
+    sprints.uniquePastSprintIdArr = [];
+    foundTasks.forEach((task, i) => {
+      console.log(task.title);
+      console.log(task.sprint);
+      let isInArr = sprints.uniqueCurrentSprintIdArr.includes(task.sprint);
+      console.log(isInArr);
+      if (!isInArr) {
+        sprints.uniqueCurrentSprintIdArr.push(task.sprint);
+      }
+    })
+    console.log(sprints.uniqueCurrentSprintIdArr);
+    res.send(sprints.uniqueCurrentSprintIdArr);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
 
 //post users
 router.post('/post', (req, res) => {

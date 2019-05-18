@@ -54,7 +54,7 @@ class App extends Component {
 
   loadUserData = () => {
     console.log("INSIDE componentDidMount");
-
+    
     function sprintList(sprintRet) {
       console.log(`GET ${SERVER_URL}/sprints/admin`);
       let token = localStorage.getItem('serverToken');

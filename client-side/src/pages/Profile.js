@@ -3,17 +3,23 @@ import { Container, Col, Card, CardTitle, CardText, Row, Button } from 'reactstr
 import '../App.css';
 
 class Profile extends Component {
+  state = {
+
+  }
+
+
   render() {
     if(this.props.user){
+      
       return (
       <Container className="profile">
         <Row>
           <Col md="6">
             <img  id="userprofile" src={this.props.user.image}  />
-              <h5 id="username">{this.props.user.firstName+ ' ' + this.props.user.lastName}</h5>
+              <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
                 <h5>Email : {this.props.user.email}</h5>
                 <h5>Your role is : {this.props.user.role}</h5>
-                <h5>Your are working in Project: {this.props.user.project}</h5>
+                <h5>You are working in Project: {this.props.user.project}</h5>
           </Col>
           <Col md="6">
             <h1>To Do</h1>
