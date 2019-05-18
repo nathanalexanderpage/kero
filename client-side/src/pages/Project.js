@@ -13,12 +13,12 @@ class Project extends Component {
         number: 0,
         startDate: '',
         finishDate: '',
-        modalCreateSprint: false,
+        modal: false,
         projectdata: {}
     };
 
 
-    this.toggleCreateSprint = this.toggleCreateSprint.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   handleNumberChange = (e) => { this.setState({ number: e.target.value }); }
@@ -26,9 +26,9 @@ class Project extends Component {
   handleFinishDateChange = (e) => { this.setState({ finishDate: e.target.value }); }
 
 
-  toggleCreateSprint() {
+  toggle() {
     this.setState(prevState => ({
-        modalCreateSprint: !prevState.modalCreateSprint
+        modal: !prevState.modal
     }));
   }
 
@@ -36,7 +36,7 @@ class Project extends Component {
     e.preventDefault();
     let projectReference = this.state.projectdata._id
     let newState = {...this.state}
-    delete newState.modalCreateSprint
+    delete newState.modal
     delete newState.projectdata
     newState.project = projectReference
 
@@ -65,9 +65,28 @@ class Project extends Component {
   }
 
   getProject = () => {
-    console.log("I'm working!!!");
     let token = localStorage.getItem('serverToken');
     axios.get(`${SERVER_URL}/projects/${this.props.id}`,
+      {
+        headers: {
+         'Authorization' : `Bearer ${token}`
+       }
+     })
+    .then(response=> {
+      this.setState({
+        projectdata: response.data,
+      });
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    })
+  }
+
+  getSprints = () => {
+    console.log("I'm working!!!");
+    let token = localStorage.getItem('serverToken');
+    axios.get(`${SERVER_URL}/sprints`,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
@@ -89,6 +108,7 @@ class Project extends Component {
   componentDidMount = () => {
     // GET USER INFO
     this.getProject();
+    this.getSprints();
   }
 
 
