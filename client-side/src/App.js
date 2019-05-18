@@ -41,6 +41,7 @@ class App extends Component {
     // GET USER INFO
     this.getUser();
     this.loadUserData();
+
   }
 
   convertDateEpochUTC(date) {
@@ -103,6 +104,7 @@ class App extends Component {
         sprints: dataLists[0],
         tasks: dataLists[1]
       });
+
       console.log("all the state information");
       console.log(this.state);
       if (this.state.user) {
@@ -165,12 +167,13 @@ class App extends Component {
     console.log(localStorage.getItem('serverToken'));
     let token = localStorage.getItem('serverToken');
     if (token) {
-      axios.post(`${SERVER_URL}/auth/current/user`,{}, {
+      axios.get(`${SERVER_URL}/auth/current/user`, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
       })
       .then(response=> {
+        console.log("this is what you are passing",);
         console.log(response);
         this.setState({user: response.data.user})
       })

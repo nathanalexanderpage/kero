@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Col, Card, CardTitle, CardText, Row, Button } from 'reactstrap';
 import '../App.css';
+import { FaCity , FaEnvelopeSquare, FaSuitcase} from "react-icons/fa";
 
 class Profile extends Component {
   state = {
@@ -10,47 +11,30 @@ class Profile extends Component {
 
   render() {
     if(this.props.user){
-      
+
       return (
       <Container className="profile">
         <Row>
           <Col md="6">
-            <img  id="userprofile" src={this.props.user.image}  />
-              <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
-                <h5>Email : {this.props.user.email}</h5>
-                <h5>Your role is : {this.props.user.role}</h5>
-                <h5>You are working in Project: {this.props.user.project}</h5>
+            <Row>
+              <Col>
+                <img  id="userprofile" src={this.props.user.image}  />
+              </Col>
+            </Row>
+            <Row id="userabout">
+               <Col>
+                 <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
+                 <Col className="subinfo">
+                   <h5><FaEnvelopeSquare id="modifyicon"/>: {this.props.user.email}</h5>
+                   <h5><FaSuitcase/> : {this.props.user.role}</h5>
+                   <h5><FaCity/>: {this.props.user.company}</h5>
+                 </Col>
+               </Col>
+            </Row>
           </Col>
-          <Col md="6">
-            <h1>To Do</h1>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
-            <Card body className="text-center" id="card-body">
-              <CardTitle></CardTitle>
-              <CardText></CardText>
-            </Card>
+          <Col md="6" >
+            <Col><h1>Your Sprints</h1></Col>
+            <Col id="displayProjects"></Col>
           </Col>
         </Row>
       </Container>

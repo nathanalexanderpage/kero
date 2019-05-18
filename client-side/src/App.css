@@ -17,6 +17,10 @@ nav a:hover {
   color: black;
 }
 
+.card-title{
+  margin-bottom: 0 !important;
+}
+
 .footer {
   background-color: #555;
   width: 100%;
@@ -56,7 +60,8 @@ body{
   height: 300px;
   width: 300px;
   border-radius: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+  margin-top: 25px;
 }
 
 #username{
@@ -100,3 +105,37 @@ body{
   padding-top: 10px
 }
 
+
+.subinfo{
+  margin-left: 40px;
+  text-align: initial;
+}
+
+
+#displayProjects{
+  height: 500px;
+  overflow-y: scroll;
+}
+
+#adminprojectpic{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+#userabout{
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+#modifyicon{
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
+}
+
+#deleteicon{
+  position: absolute;
+  left: 0;
+  margin-left: 15px;
+}

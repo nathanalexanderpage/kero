@@ -77,7 +77,7 @@ router.post('/signup', (req, res) => {
 });
 
 // This is what is returned when client queries for new user data
-router.post('/current/user', (req, res) => {
+router.get('/current/user', (req, res) => {
   console.log('In the current user route. Should be logged-in user.', req.user);
 
   if (!req.user || !req.user.id) {

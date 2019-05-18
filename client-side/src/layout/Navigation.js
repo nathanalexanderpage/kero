@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserAlt ,FaEdit, FaRegIdCard, FaFrog} from 'react-icons/fa';
+import { IoMdWalk } from "react-icons/io";
 import {
   Collapse,
   Navbar,
@@ -44,21 +46,15 @@ export default class Navigation extends Component {
       if(this.props.user && this.props.user.role === 'user'){
         links = (
             <span>
-              <a onClick={this.handleLogout}>Logout</a>
-              <Link to="/profile">Profile</Link>
-              <Link to="/board">Board</Link>
-              <Link to="/sprint">Sprint</Link>
-              <Link to="/task">Task</Link>
+              <a onClick={this.handleLogout}><IoMdWalk/> Logout</a>
+              <Link to="/profile"><FaRegIdCard/> Profile</Link>
             </span>
           );
       }else if (this.props.user && this.props.user.role === 'admin') {
         links = (
             <span>
-              <a onClick={this.handleLogout}>Logout</a>
-              <Link to="/adminprofile">Profile</Link>
-              <Link to="/board">Board</Link>
-              <Link to="/sprint">Sprint</Link>
-              <Link to="/task">Task</Link>
+              <a onClick={this.handleLogout}> <IoMdWalk/> Logout</a>
+              <Link to="/adminprofile"><FaRegIdCard/> Profile</Link>
             </span>
           );
 
@@ -67,8 +63,8 @@ export default class Navigation extends Component {
        else {
          links = (
              <span>
-               <Link to="/signup">Sign Up</Link>
-               <Link to="/login">Log In</Link>
+               <Link to="/signup"><FaEdit/> Sign Up</Link>
+               <Link to="/login"><FaUserAlt/> Log In</Link>
              </span>
            );
        }
@@ -78,7 +74,7 @@ export default class Navigation extends Component {
 
       <div>
        <Navbar color="light" light expand="md">
-         <NavbarBrand href="/">KERO</NavbarBrand>
+         <NavbarBrand href="/"><FaFrog/> KERO</NavbarBrand>
          <NavbarToggler onClick={this.toggle} />
          <Collapse isOpen={this.state.isOpen} navbar>
            <Nav className="ml-auto" navbar>
