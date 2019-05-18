@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody,
-  ModalFooter, Input, Label, Form, FormGroup, Card, CardTitle, CardText } from 'reactstrap';
+  ModalFooter, Input, Label, Form, FormGroup, Card, CardTitle, CardBody } from 'reactstrap';
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
 import {  Link } from 'react-router-dom';
 import { Route, Redirect, withRouter } from 'react-router';
-import { FaCity , FaEnvelopeSquare, FaSuitcase} from "react-icons/fa";
+import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
 
 
 class AdminProfile extends Component {
@@ -88,11 +88,12 @@ class AdminProfile extends Component {
       let sprintsList = this.props.sprints.map((sprint, i) => {
         return (
           <div key={`sprint-${sprint._id}`}>
-            <Link to={`/board/${sprint._id}`}>
               <Card body className="text-center" id="card-body">
-                <CardTitle>Title: {sprint.title}</CardTitle>
+                <CardTitle><FaTrash id="deleteicon"/>  <FaWrench id="modifyicon"/></CardTitle>
+                 <Link to={`/board/${sprint._id}`}>
+                    <CardBody>Title: {sprint.title}</CardBody>
+                 </Link>
               </Card>
-            </Link>
           </div>
         );
       });
@@ -119,7 +120,9 @@ class AdminProfile extends Component {
             </Col>
             <Col md="6" >
               <Col><h1>Your Sprints</h1></Col>
-              <Col id="displayProjects">{sprintsList}</Col>
+              <Col id="displayProjects">
+                {sprintsList}
+              </Col>
             </Col>
           </Row>
           <Row>

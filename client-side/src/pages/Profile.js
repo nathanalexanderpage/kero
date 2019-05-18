@@ -11,12 +11,11 @@ class Profile extends Component {
 
   render() {
     if(this.props.user){
-      
+
       return (
       <Container className="profile">
         <Row>
           <Col md="6">
-<<<<<<< HEAD
             <Row>
               <Col>
                 <img  id="userprofile" src={this.props.user.image}  />
@@ -26,19 +25,12 @@ class Profile extends Component {
                <Col>
                  <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
                  <Col className="subinfo">
-                   <h5><FaEnvelopeSquare/>: {this.props.user.email}</h5>
+                   <h5><FaEnvelopeSquare id="modifyicon"/>: {this.props.user.email}</h5>
                    <h5><FaSuitcase/> : {this.props.user.role}</h5>
                    <h5><FaCity/>: {this.props.user.company}</h5>
                  </Col>
                </Col>
             </Row>
-=======
-            <img  id="userprofile" src={this.props.user.image}  />
-              <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
-                <h5>Email : {this.props.user.email}</h5>
-                <h5>Your role is : {this.props.user.role}</h5>
-                <h5>You are working in Project: {this.props.user.project}</h5>
->>>>>>> 04c5ed342527f79b9f968107a406f9579917cd03
           </Col>
           <Col md="6" >
             <Col><h1>Your Sprints</h1></Col>

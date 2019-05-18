@@ -41,7 +41,7 @@ class App extends Component {
     // GET USER INFO
     this.getUser();
     this.loadUserData();
-    
+
   }
 
   convertDateEpochUTC(date) {
@@ -103,11 +103,6 @@ class App extends Component {
         sprints: dataLists[0],
         tasks: dataLists[1]
       });
-<<<<<<< HEAD
-=======
-      console.log("all the user information", this.state.sprints);
-      console.log(this.state.user);
->>>>>>> 04c5ed342527f79b9f968107a406f9579917cd03
     });
   }
 
