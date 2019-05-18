@@ -48,7 +48,6 @@ class AdminProfile extends Component {
     delete newState.modalEdit;
     delete newState.redirect;
     delete newState.newboard;
-    console.log("esto es lo que mandas",newState);
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/sprints/`, newState,
       {
@@ -57,7 +56,6 @@ class AdminProfile extends Component {
        }
      })
     .then(response=> {
-      console.log('Success');
       this.setState({
           title: '',
           startDate: '',
@@ -101,12 +99,12 @@ class AdminProfile extends Component {
       return (
         <Container className="profile">
           <Row>
-            <Col md="6">
+            <Col id="userabout" md="6">
               <img  id="userprofile" src={this.props.user.image}  />
                 <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
                 <h5>Email : {this.props.user.email}</h5>
                 <h5>Your role is : {this.props.user.role}</h5>
-                <h5>You are working in Project: {this.props.user.project}</h5>
+                <h5>You company: {this.props.user.company}</h5>
             </Col>
             <Col md="6" >
               <Col><h1>Your Sprints</h1></Col>

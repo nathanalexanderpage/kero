@@ -36,6 +36,10 @@ let userSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  company:{
+    type: String,
+    required: false
+  },
   image: {
     type: String,
     required: false
@@ -57,9 +61,10 @@ userSchema.set('toJSON', {
       id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
+      company: user.company,
       email: user.email,
       image: user.image,
-      role: user.role
+      role: user.role,
     }
   }
 });
