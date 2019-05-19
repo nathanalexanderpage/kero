@@ -85,6 +85,10 @@ class Board extends Component {
     let newState = {...this.state}
     delete newState.modal
     delete newState.t
+    console.log('NEW STATE');
+    if (newState.assignedTo === '') {
+      newState.assignedTo = null;
+    }
     console.log(newState);
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/tasks/`, newState,
