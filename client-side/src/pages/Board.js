@@ -180,7 +180,7 @@ class Board extends Component {
     let userSelects = this.state.userList.map((user, i) => {
       return (
         <option
-          value="{user.id}"
+          value={user.id}
         >
           {`${user.firstName} ${user.lastName}`}
         </option>
@@ -228,7 +228,7 @@ class Board extends Component {
                   <Input
                     type="select"
                     name="assignedTo"
-                    id="exampleSelect"
+                    onChange={this.handleAssignedToChange}
                   >
                     <option>TBD</option>
                     {userSelects}
