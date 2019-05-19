@@ -12,7 +12,6 @@ import AdminProfile from './pages/AdminProfile';
 import Signup from './auth/Signup';
 import Board from './pages/Board';
 import Task from './pages/Task';
-import Sprint from './pages/Sprint';
 import Swimlane from './pages/SwimLane';
 
 let async = require("async");
@@ -243,8 +242,11 @@ class App extends Component {
               )
             } />
           <Route path="/board/:id" component={
-              () => (
-                <Board user={this.state.user}/>
+              ({match}) => (
+                <Board
+                  user={this.state.user}
+                  sprintId={match.params.id}
+                  />
               )
             } />
 
@@ -260,17 +262,6 @@ class App extends Component {
               )
             } />
 
-          <Route path="/sprint/:id" component={
-              ({match}) => (
-                <Sprint
-                  user={this.state.user}
-                  tasks={this.state.tasks}
-                  addTask={this.state.addTask}
-                  removeTask={this.state.removeTask}
-                  editTask={this.state.editTask}
-                />
-              )
-            } />
             <Route path="/task" component={
               () => (
                 <Task user={this.state.user} getUserProfInfo={this.state.getUserProfInfo} />

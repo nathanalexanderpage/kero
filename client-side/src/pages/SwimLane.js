@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Col, Container, Row} from 'reactstrap'
+import {Card, Col, Container, Row, CardTitle, CardBody } from 'reactstrap'
 
 class SwimLane extends Component {
   // You will have props!
@@ -8,11 +8,17 @@ class SwimLane extends Component {
     // map through this.props.tasks, call your variable below
     if(this.props.tasks){
       let taskCards = this.props.tasks.map((task)=> {
-        return <Card task={task.tile} />
+        console.log(task);
+        return (
+          <div >
+              <Card body className="text-center" >
+                <CardTitle>
+                     Title : {task.title}
+                </CardTitle>
+              </Card>
+          </div>
+        )
       })
-
-
-
 
     return (
       <Container >
@@ -45,7 +51,6 @@ class SwimLane extends Component {
                <div className= 'board-columns'>
                  <h6 className= 'column-name'>{this.props.title}</h6>
                  <hr></hr>
-                 
                </ div>
              </Col>
            </Row>
