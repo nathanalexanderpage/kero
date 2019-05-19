@@ -10,25 +10,26 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        sprint:this.props.sprintId,
-        modal: false,
-        assignedTo:'',
-        title:'',
-        manHourBudget: 0,
-        status:'',
-        dateAssigned:'',
-        dateCompleted:'',
-        description:'',
-        tasks:[]
+      sprint: this.props.sprintId,
+      modal: false,
+      assignedTo: '',
+      title: '',
+      manHourBudget: 0,
+      status: '',
+      dateAssigned: '',
+      dateCompleted: '',
+      description: '',
+      tasks: [],
+      userList: []
     };
 
     this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
-      this.setState(prevState => ({
-          modal: !prevState.modal
-      }));
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
   }
 
   handleAssignedToChange = (e) => { this.setState({ assignedTo: e.target.value }); }
@@ -41,33 +42,45 @@ class Board extends Component {
   handleDescriptionChange = (e) => { this.setState({ description: e.target.value }); }
 
 
-   componentDidMount = () => {
-     this.loadSprintData()
-   }
+  componentDidMount = () => {
+    this.loadSprintData()
+  }
 
-   loadSprintData = () => {
-
-       let token = localStorage.getItem('serverToken');
-       axios.get(`${SERVER_URL}/sprints/${this.state.sprint}/tasks`, {
-         headers: {
-           'Authorization' : `Bearer ${token}`
-         }
-       })
-       .then(foundSprints => {
-         console.log('Success getting Sprints');
-         console.log(foundSprints.data);
-         this.setState({ tasks: foundSprints.data })
-       })
-       .catch(err => {
-         console.log('error axios to server:');
-         console.log(err);
-       });
-
-   }
+  loadSprintData = () => {
+    let token = localStorage.getItem('serverToken');
+    axios.get(`${SERVER_URL}/sprints/${this.state.sprint}/tasks`, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundSprints => {
+      console.log('Success getting Sprints');
+      console.log(foundSprints.data);
+      this.setState({ tasks: foundSprints.data })
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    });
+    // grab list of users to populate assignedTo dropdown select in 'new task' modal
+    axios.get(`${SERVER_URL}/users`, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(foundUsers => {
+      console.log('Success getting user list');
+      console.log(foundUsers.data);
+      this.setState({ userList: foundUsers.data })
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    });
+  }
 
 
   handleSubmit = (e) => {
-
     e.preventDefault();
     let newState = {...this.state}
     delete newState.modal
@@ -152,25 +165,36 @@ class Board extends Component {
     let codeReview = []
     let complete = []
 
-       this.state.tasks.forEach((task) => {
-         if(task.status === 'todo'){
-            toDo.push(task)
-         }else if(task.status === 'done'){
-            complete.push(task)
-         }else if(task.status === 'inprogress'){
-            doing.push(task)
-         }else if(task.status === 'codereview'){
-            codeReview.push(task)
-         }
+    this.state.tasks.forEach((task) => {
+      if(task.status === 'todo') {
+        toDo.push(task)
+      } else if(task.status === 'done') {
+        complete.push(task)
+      } else if(task.status === 'inprogress') {
+        doing.push(task)
+      } else if(task.status === 'codereview') {
+        codeReview.push(task)
+      }
+    })
 
-       })
+    let userSelects = this.state.userList.map((user, i) => {
+      return (
+        <option
+          value="{user.id}"
+        >
+          {`${user.firstName} ${user.lastName}`}
+        </option>
+      )
+    })
+
+
 
 
     // iterate through this.state.tasks and push tasks to their relevant array
 
-    return(
-      <Container >
-        <Row >
+    return (
+      <Container>
+        <Row>
           <Col>
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
@@ -189,23 +213,26 @@ class Board extends Component {
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
               <Button color="primary"
-                      onClick={this.toggle}
-                      id="new-task">➕ </Button>
+                onClick={this.toggle}
+                id="new-task">➕ </Button>
             </Form>
-            <Modal isOpen={this.state.modal}
-                    toggle={this.toggle}
-                    className={this.props.className} >
+            <Modal
+              isOpen={this.state.modal}
+              toggle={this.toggle}
+              className={this.props.className}
+            >
               <Form onSubmit={this.handleSubmit}>
                 <ModalHeader toggle={this.toggle}>Create a New Task</ModalHeader>
                 <ModalBody>
-                  <Label>Assigned To</Label>
+                  <Label for="assignedTo">Assigned To</Label>
                   <Input
-                    type="text"
+                    type="select"
                     name="assignedTo"
-                    placeholder="Who is gonna do this?"
-                    value={this.state.assignedTo}
-                    onChange={this.handleAssignedToChange}
-                      />
+                    id="exampleSelect"
+                  >
+                    <option>TBD</option>
+                    {userSelects}
+                  </Input>
                   <Label>Title</Label>
                   <Input
                     type="text"
@@ -213,24 +240,26 @@ class Board extends Component {
                     placeholder="Give it a name"
                     value={this.state.title}
                     onChange={this.handleTitleChange}
-                      />
-                    <Label>Man hours</Label>
+                  />
+                  <Label>Man hours</Label>
                   <Input
                     type="number"
                     name="manHourBudget"
                     placeholder="How many hours?"
                     value={this.state.manHourBudget}
                     onChange={this.handleManHourBudgetChange}
-                      />
-                    <Label for="Select Role">Status</Label>
-                  <Input type="select"
-                          name="status"
-                          value={this.state.status}
-                          onChange={this.handleStatusChange}>
-                            <option defaultValue="todo">To Do</option>
-                            <option value="inprogress">In progress</option>
-                            <option value="codereview">Code review</option>
-                            <option value="done">Done</option>
+                  />
+                  <Label for="Select Role">Status</Label>
+                  <Input
+                    type="select"
+                    name="status"
+                    value={this.state.status}
+                    onChange={this.handleStatusChange}
+                  >
+                    <option defaultValue="todo">To Do</option>
+                    <option value="inprogress">In progress</option>
+                    <option value="codereview">Code review</option>
+                    <option value="done">Done</option>
                   </Input>
                   <Label>Assigned Date</Label>
                   <Input
@@ -239,15 +268,15 @@ class Board extends Component {
                     placeholder="date placeholder"
                     value={this.state.dateAssigned}
                     onChange={this.handleDateAssignedChange}
-                      />
-                    <Label>Completed Date</Label>
+                  />
+                  <Label>Completed Date</Label>
                   <Input
                     type="date"
                     name="dateCompleted"
                     placeholder="date placeholder"
                     value={this.state.dateCompleted}
                     onChange={this.handleDateCompletedChange}
-                      />
+                  />
                     {/*/   <Label>Prerequisite Tasks</Label>
                   // <Input
                   //   type="text"
@@ -256,7 +285,7 @@ class Board extends Component {
                   //   value={this.state.prerequisiteTasks}
                   //   onChange={this.handlePrerequisiteTasksChange}
                   //     >*/}
-                    <Label>Description</Label>
+                  <Label>Description</Label>
                   <Input
                     type="textarea"
                     name="description"
@@ -264,7 +293,7 @@ class Board extends Component {
                     rows={5}
                     value={this.state.description}
                     onChange={this.handleDescriptionChange}
-                      />
+                  />
                 </ModalBody>
                 <ModalFooter>
                   <Button color="primary" type="submit" onClick={this.toggle}>Create</Button>{' '}
