@@ -39,7 +39,7 @@ export default class Navigation extends Component {
   }
 
   render() {
-   let links = '';
+  let links = '';
 
     if(this.props.user){
 
@@ -60,14 +60,14 @@ export default class Navigation extends Component {
 
       }
     }
-       else {
-         links = (
-             <span>
-               <Link to="/signup"><FaEdit/> Sign Up</Link>
-               <Link to="/login"><FaUserAlt/> Log In</Link>
-             </span>
-           );
-       }
+      else {
+        links = (
+            <span>
+              <Link to="/signup"><FaEdit/> Sign Up</Link>
+              <Link to="/login"><FaUserAlt/> Log In</Link>
+            </span>
+          );
+      }
 
 
       return(

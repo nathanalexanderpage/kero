@@ -96,16 +96,16 @@ body{
 }
 
 .board-columns {
-  height: 700px;
+  height: 400px;
   background-color: white;
   margin-top: 40px;
   border-radius: 10px;
+  overflow-y: scroll;
 }
 
 .column-name {
   padding-top: 10px
 }
-
 
 .subinfo{
   margin-left: 40px;

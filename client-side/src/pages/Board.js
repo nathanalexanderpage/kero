@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, Button, CardTitle, CardText, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
+import { Container, Row, Card, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
 import '../App.css';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
@@ -168,6 +168,9 @@ class Board extends Component {
     let doing = []
     let codeReview = []
     let complete = []
+    
+    // iterate through this.state.tasks and push tasks to their relevant array
+
 
     this.state.tasks.forEach((task) => {
       if(task.status === 'todo') {
@@ -191,10 +194,6 @@ class Board extends Component {
       )
     })
 
-
-
-
-    // iterate through this.state.tasks and push tasks to their relevant array
 
     return (
       <Container>
