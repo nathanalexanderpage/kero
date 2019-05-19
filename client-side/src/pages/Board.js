@@ -132,7 +132,6 @@ class Board extends Component {
       <Container >
         <Row >
           <Col>
-          <div>{this.props.project}</div>
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
               <Col>
@@ -149,12 +148,12 @@ class Board extends Component {
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
-              <Button color="primary" 
-                      onClick={this.toggle} 
-                      id="new-task">➕</Button>
+              <Button color="primary"
+                      onClick={this.toggle}
+                      id="new-task">➕ </Button>
             </Form>
-            <Modal isOpen={this.state.modal} 
-                    toggle={this.toggle} 
+            <Modal isOpen={this.state.modal}
+                    toggle={this.toggle}
                     className={this.props.className} >
               <Form onSubmit={this.handleSubmit}>
                 <ModalHeader toggle={this.toggle}>Create a New Task</ModalHeader>

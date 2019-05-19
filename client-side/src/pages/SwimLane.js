@@ -6,9 +6,13 @@ class SwimLane extends Component {
 
   render() {
     // map through this.props.tasks, call your variable below
-    let taskCards = this.props.tasks.map((task)=> {
-      return <Card task={task} />
-    })
+    if(this.props.tasks){
+      let taskCards = this.props.tasks.map((task)=> {
+        return <Card task={task.tile} />
+      })
+
+
+
 
     return (
       <Container >
@@ -28,7 +32,27 @@ class SwimLane extends Component {
             </Col>
         </Row>
       </Container>
-    )
+      )
+   }
+   return (
+     <Container >
+       <Row >
+         <Col>
+         <div>{this.props.project}</div>
+           <div>{this.props.sprint}</div>
+           <Row id="mainboard">
+             <Col>
+               <div className= 'board-columns'>
+                 <h6 className= 'column-name'>{this.props.title}</h6>
+                 <hr></hr>
+                 
+               </ div>
+             </Col>
+           </Row>
+           </Col>
+       </Row>
+     </Container>
+     )
   }
 }
 

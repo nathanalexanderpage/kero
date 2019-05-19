@@ -95,9 +95,9 @@ body{
 }
 
 .board-columns {
-  height: 450px;
+  height: 700px;
   background-color: white;
-  margin: 10px;
+  margin-top: 40px;
   border-radius: 10px;
 }
 
