@@ -75,9 +75,14 @@ router.get('/:id/tasks', (req, res) => {
 //put sprints
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
+  let realbody = {}
+  realbody.title = req.body.titlE
+  realbody.startDate = req.body.startDatE
+  realbody.finishDate = req.body.finishDatE
+
   db.Sprint.findOneAndUpdate(
     { _id: req.params.id},
-    req.body,
+    realbody,
     {new: true, useFindAndModify:false }) //this will return what was updated
   .then(editedSprint => {
     res.send(editedSprint)

@@ -17,19 +17,27 @@ class AdminProfile extends Component {
         title: '',
         startDate: '',
         finishDate: '',
+        titlE: '',
+        startDatE: '',
+        finishDatE: '',
         modalCreate: false,
         modalEdit: false,
         redirect: false,
-        newboard: ''
+        newboard: '',
+        editSprint:''
     };
 
     this.toggleCreate = this.toggleCreate.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
   }
 
   handleTitleChange = (e) => { this.setState({ title: e.target.value }); }
   handleStartDateChange = (e) => { this.setState({ startDate: e.target.value }); }
   handleFinishDateChange = (e) => { this.setState({ finishDate: e.target.value }); }
-  handlePurposeChange = (e) => { this.setState({ purpose: e.target.value }); }
+  handleTitlEChange = (e) => { this.setState({ titlE: e.target.value }); }
+  handleStartDatEChange = (e) => { this.setState({ startDatE: e.target.value }); }
+  handleFinishDatEChange = (e) => { this.setState({ finishDatE: e.target.value }); }
+
 
   componentDidMount = () => {
     // GET USER INFO
@@ -41,6 +49,12 @@ class AdminProfile extends Component {
       }));
   }
 
+  toggleEdit() {
+      this.setState(prevState => ({
+          modalEdit: !prevState.modalEdit
+      }));
+  }
+
   handleSubmit = (e) => {
 
     e.preventDefault();
@@ -49,6 +63,11 @@ class AdminProfile extends Component {
     delete newState.modalEdit;
     delete newState.redirect;
     delete newState.newboard;
+    delete newState.startDatE;
+    delete newState.titlE;
+    delete newState.finishDatE;
+    delete newState.editSprint;
+
     let token = localStorage.getItem('serverToken');
     axios.post(`${SERVER_URL}/sprints/`, newState,
       {
@@ -61,7 +80,6 @@ class AdminProfile extends Component {
           title: '',
           startDate: '',
           finishDate: '',
-          purpose:'',
           newboard:response.data._id,
           redirect: true
       })
@@ -72,6 +90,86 @@ class AdminProfile extends Component {
       console.log(err);
     })
   }
+
+  handleDeleteSprint = (sprint) =>{
+    let token = localStorage.getItem('serverToken');
+    axios.delete(`${SERVER_URL}/sprints/${sprint}`,
+      {
+        headers: {
+         'Authorization' : `Bearer ${token}`
+       }
+     })
+    .then(response=> {
+     console.log("deleted", response);
+     this.props.rerender()
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    })
+
+  }
+
+
+
+   editSprint = (sprint) =>{
+     this.setState({editSprint:sprint})
+     let token = localStorage.getItem('serverToken');
+     axios.get(`${SERVER_URL}/sprints/${sprint}`,
+       {
+         headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+     .then(response=> {
+      this.setState({
+          titlE: response.data.title,
+          startDatE: response.data.startDate,
+          finishDatE: response.data.finishDate
+      })
+      this.toggleEdit()
+     })
+     .catch(err => {
+       console.log('error axios to server:');
+       console.log(err);
+     })
+
+   }
+
+   handleSubmitEdit = (e) => {
+
+     e.preventDefault();
+     let newState2 = {...this.state};
+     delete newState2.modalCreate;
+     delete newState2.modalEdit;
+     delete newState2.redirect;
+     delete newState2.newboard;
+     delete newState2.startDate;
+     delete newState2.title;
+     delete newState2.finishDate;
+     delete newState2.editSprint;
+     let token = localStorage.getItem('serverToken');
+     axios.put(`${SERVER_URL}/sprints/${this.state.editSprint}`, newState2,
+       {
+         headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+     .then(response=> {
+       console.log("MODIFICADOS", response);
+       this.setState({
+           titlE: '',
+           startDatE: '',
+           finishDatE: '',
+           editSprint:''
+       })
+       this.props.rerender()
+     })
+     .catch(err => {
+       console.log('error axios to server:');
+       console.log(err);
+     })
+   }
 
 
   render() {
@@ -89,7 +187,16 @@ class AdminProfile extends Component {
         return (
           <div key={`sprint-${sprint._id}`}>
               <Card body className="text-center" id="card-body">
-                <CardTitle><FaTrash id="deleteicon"/>  <FaWrench id="modifyicon"/></CardTitle>
+                <CardTitle>
+                  <Link
+                    onClick={ () => this.handleDeleteSprint(sprint._id)} >
+                    <FaTrash id="deleteicon"/>
+                  </Link>
+                  <Link
+                  onClick={ () => this.editSprint(sprint._id)} >
+                    <FaWrench id="modifyicon"/>
+                  </Link>
+                </CardTitle>
                  <Link to={`/board/${sprint._id}`}>
                     <CardBody>Title: {sprint.title}</CardBody>
                  </Link>
@@ -125,6 +232,7 @@ class AdminProfile extends Component {
               </Col>
             </Col>
           </Row>
+          {/* THIS IS THE MODAL TO CREATE A SPRINT*/}
           <Row>
             <Col>
               <Form
@@ -190,6 +298,57 @@ class AdminProfile extends Component {
             </Modal>
           </Col>
         </Row>
+        {/* THIS IS THE MODAL TO EDIT A SPRINT*/}
+        <Row>
+          <Col>
+
+            <Modal
+              isOpen={this.state.modalEdit}
+              toggleCreate={this.toggleEdit}
+              className={this.props.className}
+            >
+              <Form onSubmit={this.handleSubmitEdit}>
+              <ModalHeader toggleCreate={this.toggleEdit}>Edit Sprint</ModalHeader>
+              <ModalBody>
+                <Label>Title</Label>
+                <Input
+                  type="text"
+                  name="title"
+                  placeholder="title placeholder"
+                  value={this.state.titlE}
+                  onChange={this.handleTitlEChange}
+                />
+                <Label>Start Date</Label>
+                <Input
+                  type="date"
+                  name="startDate"
+                  placeholder="start date placeholder"
+                  value={this.state.startDatE}
+                  onChange={this.handleStartDatEChange}
+                />
+                <Label>End Date</Label>
+                <Input
+                  type="date"
+                  name="finishDate"
+                  placeholder="finish date placeholder"
+                  value={this.state.finishDatE}
+                  onChange={this.handleFinishDatEChange}
+                />
+
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="primary"
+                  type="submit" onClick={this.toggleEdit}
+                >
+                  Update
+                </Button>{' '}
+                  <Button color="secondary" onClick={this.toggleEdit}>Cancel</Button>
+              </ModalFooter>
+            </Form>
+          </Modal>
+        </Col>
+      </Row>
     </Container>
     );
     }

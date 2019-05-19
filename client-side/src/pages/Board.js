@@ -10,6 +10,7 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        sprint:this.props.sprintId,
         modal: false,
         assignedTo:'',
         title:'',
@@ -17,8 +18,8 @@ class Board extends Component {
         status:'',
         dateAssigned:'',
         dateCompleted:'',
-        prerequisiteTasks:'',
-        description:''
+        description:'',
+        tasks:[]
     };
 
     this.toggle = this.toggle.bind(this);
@@ -40,14 +41,40 @@ class Board extends Component {
   handleDescriptionChange = (e) => { this.setState({ description: e.target.value }); }
 
 
+   componentDidMount = () => {
+     this.loadSprintData()
+   }
+
+   loadSprintData = () => {
+
+       let token = localStorage.getItem('serverToken');
+       axios.get(`${SERVER_URL}/sprints/${this.state.sprint}/tasks`, {
+         headers: {
+           'Authorization' : `Bearer ${token}`
+         }
+       })
+       .then(foundSprints => {
+         console.log('Success getting Sprints');
+         console.log(foundSprints.data);
+         this.setState({ tasks: foundSprints.data })
+       })
+       .catch(err => {
+         console.log('error axios to server:');
+         console.log(err);
+       });
+
+   }
+
+
   handleSubmit = (e) => {
 
     e.preventDefault();
     let newState = {...this.state}
     delete newState.modal
+    delete newState.t
     console.log(newState);
     let token = localStorage.getItem('serverToken');
-    axios.post(`${SERVER_URL}/tasks/post`, newState,
+    axios.post(`${SERVER_URL}/tasks/`, newState,
       {
         headers: {
         'Authorization' : `Bearer ${token}`
@@ -57,50 +84,49 @@ class Board extends Component {
       console.log('Success');
       console.log(response);
       this.setState({
-        modal : {
+        // modal : {
           assignedTo:'',
           title:'',
           manHourBudget: 0,
           status:'',
           dateAssigned:'',
           dateCompleted:'',
-          prerequisiteTasks:'',
           description:''
-        },
-        tasks: [
-          {
-            title: "Do stuff",
-            desc: "So much stuff to do, should really do",
-            manHourBudget: 20,
-            status: "to do",
-            dateAssigned: new Date(),
-            dateCompleted: null
-          },
-          {
-            title: "Do Things",
-            desc: "Make things that do things",
-            manHourBudget: 10,
-            status: "doing",
-            dateAssigned: new Date(),
-            dateCompleted: null
-          },
-          {
-            title: "Complete Thing",
-            desc: "take the partially done thing and complete it",
-            manHourBudget: 50,
-            status: "code review",
-            dateAssigned: new Date(),
-            dateCompleted: new Date()
-          },
-          {
-            title: "Finish",
-            desc: "Run down that damn finish line",
-            manHourBudget: 2,
-            status: "complete",
-            dateAssigned: new Date(),
-            dateCompleted: new Date()
-          },
-        ]
+        // },
+        // tasks: [
+        //   {
+        //     title: "Do stuff",
+        //     desc: "So much stuff to do, should really do",
+        //     manHourBudget: 20,
+        //     status: "to do",
+        //     dateAssigned: new Date(),
+        //     dateCompleted: null
+        //   },
+        //   {
+        //     title: "Do Things",
+        //     desc: "Make things that do things",
+        //     manHourBudget: 10,
+        //     status: "doing",
+        //     dateAssigned: new Date(),
+        //     dateCompleted: null
+        //   },
+        //   {
+        //     title: "Complete Thing",
+        //     desc: "take the partially done thing and complete it",
+        //     manHourBudget: 50,
+        //     status: "code review",
+        //     dateAssigned: new Date(),
+        //     dateCompleted: new Date()
+        //   },
+        //   {
+        //     title: "Finish",
+        //     desc: "Run down that damn finish line",
+        //     manHourBudget: 2,
+        //     status: "complete",
+        //     dateAssigned: new Date(),
+        //     dateCompleted: new Date()
+        //   },
+        // ]
       })
 
     })
@@ -126,35 +152,48 @@ class Board extends Component {
     let codeReview = []
     let complete = []
 
+       this.state.tasks.forEach((task) => {
+         if(task.status === 'todo'){
+            toDo.push(task)
+         }else if(task.status === 'done'){
+            complete.push(task)
+         }else if(task.status === 'inprogress'){
+            doing.push(task)
+         }else if(task.status === 'codereview'){
+            codeReview.push(task)
+         }
+
+       })
+
+
     // iterate through this.state.tasks and push tasks to their relevant array
 
     return(
       <Container >
         <Row >
           <Col>
-          <div>{this.props.project}</div>
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
               <Col>
                 <Swimlane title="To-Do" tasks={toDo} />
               </Col>
               <Col>
-                <Swimlane title="Doing" task={doing} />
+                <Swimlane title="Doing" tasks={doing} />
               </Col>
               <Col>
-                <Swimlane title="Code-Review" task={codeReview}/>
+                <Swimlane title="Code-Review" tasks={codeReview}/>
               </Col>
               <Col>
-                <Swimlane title="Done" task={complete}/>
+                <Swimlane title="Done" tasks={complete}/>
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
-              <Button color="primary" 
-                      onClick={this.toggle} 
-                      id="new-task">➕</Button>
+              <Button color="primary"
+                      onClick={this.toggle}
+                      id="new-task">➕ </Button>
             </Form>
-            <Modal isOpen={this.state.modal} 
-                    toggle={this.toggle} 
+            <Modal isOpen={this.state.modal}
+                    toggle={this.toggle}
                     className={this.props.className} >
               <Form onSubmit={this.handleSubmit}>
                 <ModalHeader toggle={this.toggle}>Create a New Task</ModalHeader>
@@ -209,14 +248,14 @@ class Board extends Component {
                     value={this.state.dateCompleted}
                     onChange={this.handleDateCompletedChange}
                       />
-                    <Label>Prerequisite Tasks</Label>
-                  <Input
-                    type="text"
-                    name="prerequisiteTasks"
-                    placeholder="related tasks"
-                    value={this.state.prerequisiteTasks}
-                    onChange={this.handlePrerequisiteTasksChange}
-                      />
+                    {/*/   <Label>Prerequisite Tasks</Label>
+                  // <Input
+                  //   type="text"
+                  //   name="prerequisiteTasks"
+                  //   placeholder="related tasks"
+                  //   value={this.state.prerequisiteTasks}
+                  //   onChange={this.handlePrerequisiteTasksChange}
+                  //     >*/}
                     <Label>Description</Label>
                   <Input
                     type="textarea"
