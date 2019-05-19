@@ -13,7 +13,7 @@ class SwimLane extends Component {
           <div >
               <Card body className="text-center" >
                 <CardTitle>
-                     Title : {task.title}
+                    Title : {task.title}
                 </CardTitle>
               </Card>
           </div>
@@ -39,25 +39,25 @@ class SwimLane extends Component {
         </Row>
       </Container>
       )
-   }
-   return (
-     <Container >
-       <Row >
-         <Col>
-         <div>{this.props.project}</div>
-           <div>{this.props.sprint}</div>
-           <Row id="mainboard">
-             <Col>
-               <div className= 'board-columns'>
-                 <h6 className= 'column-name'>{this.props.title}</h6>
-                 <hr></hr>
-               </ div>
-             </Col>
-           </Row>
-           </Col>
-       </Row>
-     </Container>
-     )
+  }
+  return (
+    <Container >
+      <Row >
+        <Col>
+        <div>{this.props.project}</div>
+          <div>{this.props.sprint}</div>
+          <Row id="mainboard">
+            <Col>
+              <div className= 'board-columns'>
+                <h6 className= 'column-name'>{this.props.title}</h6>
+                <hr></hr>
+              </ div>
+            </Col>
+          </Row>
+          </Col>
+      </Row>
+    </Container>
+    )
   }
 }
 

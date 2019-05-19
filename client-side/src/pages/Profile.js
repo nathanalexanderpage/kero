@@ -22,14 +22,14 @@ class Profile extends Component {
               </Col>
             </Row>
             <Row id="userabout">
-               <Col>
-                 <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
-                 <Col className="subinfo">
-                   <h5><FaEnvelopeSquare />: {this.props.user.email}</h5>
-                   <h5><FaSuitcase/> : {this.props.user.role}</h5>
-                   <h5><FaCity/>: {this.props.user.company}</h5>
-                 </Col>
-               </Col>
+              <Col>
+                <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
+              <Col className="subinfo">
+                <h5><FaEnvelopeSquare />: {this.props.user.email}</h5>
+                <h5><FaSuitcase/> : {this.props.user.role}</h5>
+                <h5><FaCity/>: {this.props.user.company}</h5>
+              </Col>
+              </Col>
             </Row>
           </Col>
           <Col md="6" >

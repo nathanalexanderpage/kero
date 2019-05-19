@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Card, Button, CardTitle, CardText, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
+import { Container, Row, Card, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
 import '../App.css';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
@@ -41,29 +41,29 @@ class Board extends Component {
   handleDescriptionChange = (e) => { this.setState({ description: e.target.value }); }
 
 
-   componentDidMount = () => {
-     this.loadSprintData()
-   }
+  componentDidMount = () => {
+    this.loadSprintData()
+  }
 
-   loadSprintData = () => {
+  loadSprintData = () => {
 
-       let token = localStorage.getItem('serverToken');
-       axios.get(`${SERVER_URL}/sprints/${this.state.sprint}/tasks`, {
-         headers: {
-           'Authorization' : `Bearer ${token}`
-         }
-       })
-       .then(foundSprints => {
-         console.log('Success getting Sprints');
-         console.log(foundSprints.data);
-         this.setState({ tasks: foundSprints.data })
-       })
-       .catch(err => {
-         console.log('error axios to server:');
-         console.log(err);
-       });
+      let token = localStorage.getItem('serverToken');
+      axios.get(`${SERVER_URL}/sprints/${this.state.sprint}/tasks`, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+      .then(foundSprints => {
+        console.log('Success getting Sprints');
+        console.log(foundSprints.data);
+        this.setState({ tasks: foundSprints.data })
+      })
+      .catch(err => {
+        console.log('error axios to server:');
+        console.log(err);
+      });
 
-   }
+  }
 
 
   handleSubmit = (e) => {
@@ -151,22 +151,22 @@ class Board extends Component {
     let doing = []
     let codeReview = []
     let complete = []
-
-       this.state.tasks.forEach((task) => {
-         if(task.status === 'todo'){
-            toDo.push(task)
-         }else if(task.status === 'done'){
-            complete.push(task)
-         }else if(task.status === 'inprogress'){
-            doing.push(task)
-         }else if(task.status === 'codereview'){
-            codeReview.push(task)
-         }
-
-       })
-
-
+    
     // iterate through this.state.tasks and push tasks to their relevant array
+
+      this.state.tasks.forEach((task) => {
+        if(task.status === 'todo'){
+            toDo.push(task)
+        }else if(task.status === 'done'){
+            complete.push(task)
+        }else if(task.status === 'inprogress'){
+            doing.push(task)
+        }else if(task.status === 'codereview'){
+            codeReview.push(task)
+        }
+      })
+
+
 
     return(
       <Container >
