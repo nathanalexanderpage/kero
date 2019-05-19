@@ -51,11 +51,12 @@ router.get('/:id', (req, res) => {
 //post tasks
 router.post('/', (req, res) => {
 
-  console.log('In the POST /tasks route');
-  console.log(req.body);
+
   if(req.body.status === ''){
       req.body.status = 'todo'
   }
+  console.log('In the POST /tasks route');
+  console.log(req.body);
   db.Task.create(req.body)
   .then(createdTask => {
     res.send(createdTask)
