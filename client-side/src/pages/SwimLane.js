@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Col, Container, Row, CardTitle, CardBody } from 'reactstrap'
+import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
+import {  Link } from 'react-router-dom';
 
 class SwimLane extends Component {
   // You will have props!
@@ -13,8 +15,20 @@ class SwimLane extends Component {
           <div >
               <Card body className="text-center" >
                 <CardTitle>
-                    Title : {task.title}
+                  <Link
+                    onClick={ () => this.handleDeleteSprint(task._id)}
+                  >
+                    <FaTrash id="deleteicon"/>
+                  </Link>
+                  <Link
+                    onClick={ () => this.editSprint(task._id)}
+                  >
+                    <FaWrench id="modifyicon"/>
+                  </Link>
                 </CardTitle>
+                <CardBody>
+                  Title : {task.title}
+                </CardBody>
               </Card>
           </div>
         )
