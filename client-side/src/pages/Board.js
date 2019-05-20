@@ -110,6 +110,7 @@ class Board extends Component {
           dateCompleted:'',
           description:''
       })
+      this.props.rerender()
 
     })
     .catch(err => {
