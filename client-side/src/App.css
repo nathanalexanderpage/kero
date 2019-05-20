@@ -107,6 +107,10 @@ body{
   padding-top: 10px
 }
 
+.tasks{
+  border: 3px solid yellow;
+  margin-top: 10px;
+}
 .subinfo{
   margin-left: 40px;
   text-align: initial;
