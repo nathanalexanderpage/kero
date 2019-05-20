@@ -37,7 +37,7 @@ nav a:hover {
 }
 
 body{
-  background-color: greenyellow !important;
+  background-color: green !important;
   padding-bottom: 40px;
 }
 
@@ -61,8 +61,8 @@ body{
   height: 300px;
   width: 300px;
   border-radius: 50%;
-  margin-bottom: 60px;
-  margin-top: 25px;
+  margin: 10px;
+  border: 5px solid white;
 }
 
 #username{
@@ -89,10 +89,9 @@ body{
 }
 
 #new-task {
-  display: flex;
-  border-radius: 50%;
   align-content: center;
-  margin-left: 65px;
+  margin: 10px 65px 0 0;
+  color: white;
 }
 
 .board-columns {
@@ -131,6 +130,7 @@ body{
 #userabout{
   background-color: white;
   margin-bottom: 30px;
+  border-radius: 10px;
 }
 
 #modifyicon{
@@ -157,10 +157,6 @@ body{
   text-align: center;
   width: 50vw;
   margin: 10px;
-  color: #555;
-}
-
-h1 {
   color: #222;
 }
 
@@ -169,3 +165,12 @@ h1 {
   margin: 10px;
 }
 
+.sign-in {
+  margin: 50px;
+  text-align: center;
+}
+
+.your-sprints {
+  background-color: white;
+  border-radius: 10px;
+}

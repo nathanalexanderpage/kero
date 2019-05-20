@@ -12,7 +12,7 @@ class Home extends Component {
           <h6>
           Task management software, like Kero, empowers software engineers to work more productively and efficiently together.
           </h6>
-          <Link to="/signup"><Button color="primary" size="lg" active>Sign up for free!</Button>{' '}</Link>
+          <Link to="/signup"><Button color="secondary" size="lg" active>Sign up for free!</Button>{' '}</Link>
         </div>
         <div className="coding-img">
           <img src="https://cdn-images-1.medium.com/max/853/1*zJkojKNpFD9HFGPJLCs15Q.jpeg"  />
