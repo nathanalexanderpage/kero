@@ -162,5 +162,12 @@ body{
   margin: 50px;
 }
 
+.tasktools{
+  margin-top: 10px;
+}
 
-
+#usertask{
+  width: 3vw;
+  height: 5vh;
+  border-radius: 50%;
+}
