@@ -96,12 +96,35 @@ class App extends Component {
       sprintList,
       tasksList
     ], (error, dataLists) => {
+      console.log('USER IS ROLE:');
+      console.log(this.state.user.role);
       console.log("ready to setState");
       console.log(dataLists);
-      this.setState({
-        sprints: dataLists[0],
-        tasks: dataLists[1]
-      });
+      if (this.state.user.role === 'admin') {
+        this.setState({
+          sprints: dataLists[0],
+          tasks: dataLists[1]
+        });
+      } else if (this.state.user.role === 'user') {
+        let token = localStorage.getItem('serverToken');
+        axios.get(`${SERVER_URL}/users/${this.state.user.id}/sprints`, {
+          headers: {
+            'Authorization' : `Bearer ${token}`
+          }
+        })
+        .then(foundSprints => {
+          console.log('Success getting REG USER Sprints');
+          console.log(foundSprints.data);
+          this.setState({
+            sprints: foundSprints.data,
+            tasks: dataLists[1]
+          });
+        })
+        .catch(err => {
+          console.log('error axios to server:');
+          console.log(err);
+        });
+      }
     });
   }
 
@@ -224,7 +247,10 @@ class App extends Component {
             } />
             <Route path="/profile" component={
               () => (
-                <Profile user={this.state.user} />
+                <Profile
+                  user={this.state.user}
+                  sprints={this.state.sprints}
+                />
               )
             } />
             <Route path="/adminprofile" component={
