@@ -11,16 +11,16 @@ class Task extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        modal: false,
-        id: this.props.id,
-        assignedTo: '',
-        title: '',
-        manHourBudget: 0,
-        status: '',
-        dateAssigned: '',
-        dateCompleted: '',
-        description: '',
-        sprint: this.props.sprintId
+      modal: false,
+      id: this.props.id,
+      assignedTo: '',
+      title: '',
+      manHourBudget: 0,
+      status: '',
+      dateAssigned: '',
+      dateCompleted: '',
+      description: '',
+      sprint: this.props.sprintId
     };
 
     this.toggle = this.toggle.bind(this);
@@ -32,18 +32,17 @@ class Task extends Component {
     }));
   }
 
+  drag = (e) => {
+    e.dataTransfer.setData('transfer', e.target.id);
+  }
 
-    drag = (e) => {
-      e.dataTransfer.setData('transfer', e.target.id);
-    }
+  noAllowDrop = (e) => {
+    e.stopPropagation();
+  }
 
-    noAllowDrop = (e) => {
-      e.stopPropagation();
-    }
-
-    changeState = (e) => {
-      console.log(e);
-    }
+  changeState = (e) => {
+    console.log(e);
+  }
 
   componentDidMount = () => {
     console.log(this.props.users);
@@ -96,6 +95,7 @@ class Task extends Component {
 
   }
 
+
   getPicture = (user) => {
     let result = this.props.users.map(Wanteduser =>{
         if(Wanteduser.id == user){
@@ -117,6 +117,44 @@ class Task extends Component {
   }
 
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let newState = {...this.state}
+    delete newState.modal
+    delete newState.t
+    console.log('NEW STATE');
+    if (newState.assignedTo === '') {
+      newState.assignedTo = null;
+    }
+    console.log(newState);
+    let token = localStorage.getItem('serverToken');
+    axios.put(`${SERVER_URL}/tasks/${newState.id}`, newState,
+      {
+        headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(response=> {
+      console.log('Success');
+      console.log(response);
+      this.setState({
+        // modal : {
+          assignedTo:'',
+          title:'',
+          manHourBudget: 0,
+          status:'',
+          dateAssigned:'',
+          dateCompleted:'',
+          description:''
+      })
+      this.props.rerender()
+    })
+    .catch(err => {
+      console.log('error axios to server:');
+      console.log(err);
+    })
+  }
+
   render() {
     let userSelects;
     if(!this.props.task){
@@ -129,6 +167,8 @@ class Task extends Component {
     }
     if (this.props.users[0]) {
       console.log('inside YES users');
+      console.log(this.props.users);
+      console.log(this.props.users[0]);
       let userSelects = this.props.users.map((user, i) => {
         return (
           <option
@@ -138,24 +178,21 @@ class Task extends Component {
           </option>
         )
       })
+      console.log(userSelects);
     } else {
       console.log('inside NO users');
-      let userSelects = () => {
-        return (<option>TBD</option>)
-      }
+      let userSelects = (<option>TBD</option>)
+      console.log(userSelects);
     }
-    return(
+    return (
       <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
-
          <Card>
            <CardTitle className="tasktools">
              <div>
-               <Link
-                 onClick={ () => this.handleDeleteTask()} >
+               <Link onClick={() => this.handleDeleteTask()} >
                  <FaTrash id="deleteicon"/>
                </Link>
-               <Link
-                 onClick={ () => this.toggle()} >
+               <Link onClick={() => this.toggle()} >
                  <FaWrench id="modifyicon"/>
                </Link>
              </div>
@@ -255,7 +292,7 @@ class Task extends Component {
               />
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" type="submit" onClick={this.toggle}>Create</Button>{' '}
+              <Button color="primary" type="submit" onClick={this.toggle}>Save Changes</Button>{' '}
               <Button color="secondary" onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Form>
