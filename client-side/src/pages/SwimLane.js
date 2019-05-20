@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Col, Container, Row } from 'reactstrap'
+import {Card, Col, Container, Row } from 'reactstrap'
 import Task from './Task'
 
 class SwimLane extends Component {
