@@ -96,7 +96,7 @@ body{
 }
 
 .board-columns {
-  height: 400px;
+  height: 70vh;
   background-color: white;
   margin-top: 40px;
   border-radius: 10px;
