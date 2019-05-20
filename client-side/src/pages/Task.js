@@ -96,6 +96,26 @@ class Task extends Component {
 
   }
 
+  getPicture = (user) => {
+    let result = this.props.users.map(Wanteduser =>{
+        if(Wanteduser.id == user){
+          return  Wanteduser.image
+        }
+     });
+    let finalResult = result.filter(options => options != undefined)
+      return finalResult[0]
+  }
+
+  getName = (user) => {
+    let result = this.props.users.map(Wanteduser =>{
+        if(Wanteduser.id == user){
+          return  Wanteduser.firstName
+        }
+     });
+    let finalResult = result.filter(options => options != undefined)
+      return finalResult[0]
+  }
+
 
   render() {
     let userSelects;
@@ -128,7 +148,7 @@ class Task extends Component {
       <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
 
          <Card>
-           <CardTitle>
+           <CardTitle className="tasktools">
              <div>
                <Link
                  onClick={ () => this.handleDeleteTask()} >
@@ -140,10 +160,18 @@ class Task extends Component {
                </Link>
              </div>
            </CardTitle>
-           <CardBody>             
+           <CardBody>
              <div>
-               {this.props.task.title}
-               {this.props.children}
+               <Row>
+                 <Col>
+                   <img  id="usertask" src={ this.getPicture(this.props.task.assignedTo)}  />
+                     {this.getName(this.props.task.assignedTo)}
+                     {this.props.children}
+                 </Col>
+                 <Col>
+                   {this.props.task.title}
+                 </Col>
+               </Row>
              </div>
            </CardBody>
          </Card>
