@@ -172,15 +172,22 @@ class AdminProfile extends Component {
 
   render() {
 
-    if(this.state.redirect === true){
-    return(
-      <Redirect to={{
-      pathname: '/board/'+ this.state.newboard
-       }} />
-     )
-   }
+    if (this.state.redirect === true) {
+      return (
+        <Redirect to={{
+        pathname: '/board/'+ this.state.newboard
+        }} />
+      )
+    }
 
-    if(this.props.user){
+    if (this.props.user) {
+      if (this.props.user.role === 'user') {
+        return (
+          <Redirect to={{
+          pathname: '/profile/'
+          }} />
+        )
+      }
       let sprintsList = this.props.sprints.map((sprint, i) => {
         return (
           <div key={`sprint-${sprint._id}`}>
