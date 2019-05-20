@@ -97,6 +97,7 @@ body{
 
 .board-columns {
   height: 70vh;
+  width: 15vw;
   background-color: white;
   margin-top: 40px;
   border-radius: 10px;
@@ -108,14 +109,13 @@ body{
 }
 
 .tasks{
-  border: 3px solid yellow;
+  border: 1px solid black;
   margin-top: 10px;
 }
 .subinfo{
   margin-left: 40px;
   text-align: initial;
 }
-
 
 #displayProjects{
   height: 500px;
@@ -148,19 +148,24 @@ body{
 }
 
 .coding-img {
-  width: 40vw;
-  height: 45vh;
-  position: absolute;
+  width: 45vw;
+  height: 40vh;
+  margin: 70px;
 }
 
 .home-info {
-  display: inline-block;
-  position: relative;
   text-align: center;
-  border: 1px solid black;
-  width: 40vw;
-  margin: 50px;
+  width: 50vw;
+  margin: 10px;
+  color: #555;
 }
 
+h1 {
+  color: #222;
+}
 
+.home-page {
+  display: inline-flex;
+  margin: 10px;
+}
 
