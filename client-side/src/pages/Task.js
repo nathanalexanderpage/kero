@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Task extends Component {
   constructor(props) {
@@ -16,6 +17,18 @@ class Task extends Component {
       }));
   }
 
+    drag = (e) => {
+      e.dataTransfer.setData('transfer', e.target.id);
+    }
+
+    noAllowDrop = (e) => {
+      e.stopPropagation();
+    }
+
+    changeState = (e) => {
+      console.log(e);
+    }
+
 
   render() {
 
@@ -28,8 +41,9 @@ class Task extends Component {
       );
     }
     return(
-      <div className="tasks">
+      <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
         {this.props.task.title}
+        {this.props.children}
         {/*/ <div>
         //   {8}
         // </div>
@@ -75,3 +89,9 @@ class Task extends Component {
 };
 
 export default Task;
+
+
+Task.propTypes = {
+  children: PropTypes.node,
+  id: PropTypes.string,
+}

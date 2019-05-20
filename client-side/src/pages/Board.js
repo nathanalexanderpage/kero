@@ -109,41 +109,6 @@ class Board extends Component {
           dateAssigned:'',
           dateCompleted:'',
           description:''
-        // },
-        // tasks: [
-        //   {
-        //     title: "Do stuff",
-        //     desc: "So much stuff to do, should really do",
-        //     manHourBudget: 20,
-        //     status: "to do",
-        //     dateAssigned: new Date(),
-        //     dateCompleted: null
-        //   },
-        //   {
-        //     title: "Do Things",
-        //     desc: "Make things that do things",
-        //     manHourBudget: 10,
-        //     status: "doing",
-        //     dateAssigned: new Date(),
-        //     dateCompleted: null
-        //   },
-        //   {
-        //     title: "Complete Thing",
-        //     desc: "take the partially done thing and complete it",
-        //     manHourBudget: 50,
-        //     status: "code review",
-        //     dateAssigned: new Date(),
-        //     dateCompleted: new Date()
-        //   },
-        //   {
-        //     title: "Finish",
-        //     desc: "Run down that damn finish line",
-        //     manHourBudget: 2,
-        //     status: "complete",
-        //     dateAssigned: new Date(),
-        //     dateCompleted: new Date()
-        //   },
-        // ]
       })
 
     })
@@ -168,7 +133,7 @@ class Board extends Component {
     let doing = []
     let codeReview = []
     let complete = []
-    
+
     // iterate through this.state.tasks and push tasks to their relevant array
 
 
@@ -202,16 +167,16 @@ class Board extends Component {
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
               <Col>
-                <Swimlane title="To-Do" tasks={toDo} />
+                <Swimlane id="dr1" title="To-Do" titleStatus="todo" tasks={toDo} />
               </Col>
               <Col>
-                <Swimlane title="Doing" tasks={doing} />
+                <Swimlane id="dr2" title="Doing" titleStatus="inprogress" tasks={doing} />
               </Col>
               <Col>
-                <Swimlane title="Code-Review" tasks={codeReview}/>
+                <Swimlane id="dr3" title="Code-Review"  titleStatus="codereview" tasks={codeReview}/>
               </Col>
               <Col>
-                <Swimlane title="Done" tasks={complete}/>
+                <Swimlane id="dr4" title="Done" titleStatus="done" tasks={complete}/>
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
