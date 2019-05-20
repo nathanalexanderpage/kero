@@ -42,15 +42,15 @@ class AdminProfile extends Component {
 
   }
   toggleCreate() {
-      this.setState(prevState => ({
-          modalCreate: !prevState.modalCreate
-      }));
+    this.setState(prevState => ({
+      modalCreate: !prevState.modalCreate
+    }));
   }
 
   toggleEdit() {
-      this.setState(prevState => ({
-          modalEdit: !prevState.modalEdit
-      }));
+    this.setState(prevState => ({
+      modalEdit: !prevState.modalEdit
+    }));
   }
 
   handleSubmit = (e) => {

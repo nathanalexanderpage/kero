@@ -168,16 +168,16 @@ class Board extends Component {
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
               <Col>
-                <Swimlane id="dr1" title="To-Do" titleStatus="todo" tasks={toDo} />
+                <Swimlane id="dr1" title="To-Do" tasks={toDo} users={this.state.userList} titleStatus="todo" />
               </Col>
               <Col>
-                <Swimlane id="dr2" title="Doing" titleStatus="inprogress" tasks={doing} />
+                <Swimlane id="dr2" title="Doing" tasks={doing} users={this.state.userList} />
               </Col>
               <Col>
-                <Swimlane id="dr3" title="Code-Review"  titleStatus="codereview" tasks={codeReview}/>
+                <Swimlane id="dr3" title="Code-Review" tasks={codeReview} users={this.state.userList} />
               </Col>
               <Col>
-                <Swimlane id="dr4" title="Done" titleStatus="done" tasks={complete}/>
+                <Swimlane id="dr4" title="Done" tasks={complete} users={this.state.userList} />
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>

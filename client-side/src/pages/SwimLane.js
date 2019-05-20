@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import {Card, Col, Container, Row } from 'reactstrap'
-import Task from './Task'
 import PropTypes from 'prop-types';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
+import {Card, Col, Container, Row, CardTitle, CardBody } from 'reactstrap'
+import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
+import {  Link } from 'react-router-dom';
+import Task from './Task';
 
 class SwimLane extends Component {
   // You will have props!
@@ -42,14 +44,14 @@ class SwimLane extends Component {
       let taskCards = this.props.tasks.map((task,index)=> {
         console.log(task);
         return (
-             <Task id={task._id} task={task}/>
+             <Task id={task._id} task={task} users={this.props.users} />
         )
       })
 
     return (
       <div id ={this.props.id}  onDrop={this.drop} onDragOver={this.allowDrop}>
-        <Container >
-          <Row >
+        <Container>
+          <Row>
             <Col>
               <div>{this.props.project}</div>
               <div>{this.props.sprint}</div>
@@ -60,7 +62,7 @@ class SwimLane extends Component {
                     <hr></hr>
                     {taskCards}
                     {this.props.children}
-                    </ div>
+                    </div>
                   </Col>
                 </Row>
               </Col>
@@ -70,7 +72,7 @@ class SwimLane extends Component {
       )
   }
   return (
-    <Container >
+    <Container>
       <Row >
         <Col>
         <div>{this.props.project}</div>
