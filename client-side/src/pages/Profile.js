@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Card, CardTitle, CardBody } from 'reactstrap';
 import '../App.css';
 import { FaCity , FaEnvelopeSquare, FaSuitcase} from "react-icons/fa";
+import { Route, Redirect, withRouter } from 'react-router';
 import {  Link } from 'react-router-dom';
 
 class Profile extends Component {
@@ -12,6 +13,13 @@ class Profile extends Component {
 
   render() {
     if(this.props.user){
+      if (this.props.user.role === 'admin') {
+        return (
+          <Redirect to={{
+          pathname: '/adminprofile/'
+          }} />
+        )
+      }
       let sprintsList = this.props.sprints.map((sprint, i) => {
         return (
           <div key={`sprint-${sprint._id}`}>
@@ -44,7 +52,7 @@ class Profile extends Component {
               </Col>
             </Row>
           </Col>
-          <Col md="6" >
+          <Col md="6">
             <Col><h1>Your Sprints</h1></Col>
             <Col id="displayProjects">{sprintsList}</Col>
           </Col>
