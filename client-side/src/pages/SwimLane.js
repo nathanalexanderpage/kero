@@ -17,6 +17,7 @@ class SwimLane extends Component {
       let newState = {status:this.props.titleStatus}
       let token = localStorage.getItem('serverToken');
       console.log(newState);
+      console.log("the data",data);
       axios.put(`${SERVER_URL}/tasks/${data}`, newState,
         {
           headers: {
@@ -25,7 +26,7 @@ class SwimLane extends Component {
        })
       .then(response=> {
         console.log("response from update status",response);
-        this.props.rerender()
+      
       })
       .catch(err => {
         console.log('error axios to server:');
