@@ -98,7 +98,8 @@ body{
   height: 70vh;
   width: 15vw;
   background-color: white;
-  margin-top: 40px;
+  margin: 40px 0 0 0 !important;
+  padding: 0;
   border-radius: 10px;
   overflow-y: scroll;
 }
@@ -174,6 +175,7 @@ body{
 .your-sprints {
   background-color: white;
   border-radius: 10px;
+}
 
 .tasktools{
   margin-top: 10px;
@@ -183,5 +185,12 @@ body{
   width: 3vw;
   height: 5vh;
   border-radius: 50%;
+}
 
+link {
+  color: white;
+}
+
+.skinny {
+  margin-right: 0;
 }

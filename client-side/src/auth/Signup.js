@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
 import { Button, Form, FormGroup, Label, Input, Fade, Col } from 'reactstrap';
@@ -63,7 +63,7 @@ class Signup extends Component {
     return(
       <div>
         <h2>Sign up as a new user!</h2>
-        <h6> If you already have an account, go log in!</h6>
+        <h6> If you already have an account, go <Link to="/login">log in.</Link></h6>
         <Form onSubmit={this.handleSubmit}>
             <Col xs="9"></Col>
               <FormGroup row>
@@ -140,7 +140,7 @@ class Signup extends Component {
                         onChange={this.handleImageChange}/>
               </FormGroup>
             <div>
-              <Button outline color="secondary" size="lg" onClick={this.handleSubmit}>Sign Up</Button>
+              <Button color="secondary" size="lg" onClick={this.handleSubmit}>Sign Up</Button>
               <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
         </Form>
