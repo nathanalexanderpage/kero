@@ -189,11 +189,11 @@ class Task extends Component {
          <Card>
            <CardTitle className="tasktools">
              <div>
-               <Link onClick={() => this.handleDeleteTask()} >
-                 <FaTrash id="deleteicon"/>
+               <Link draggable="false" onClick={() => this.handleDeleteTask()} >
+                 <FaTrash  id="deleteicon"/>
                </Link>
-               <Link onClick={() => this.toggle()} >
-                 <FaWrench id="modifyicon"/>
+               <Link draggable="false" onClick={() => this.toggle()} >
+                 <FaWrench  id="modifyicon"/>
                </Link>
              </div>
            </CardTitle>
@@ -201,7 +201,7 @@ class Task extends Component {
              <div>
                <Row>
                  <Col>
-                   <img  id="usertask" src={ this.getPicture(this.props.task.assignedTo)}  />
+                   <img  draggable="false" id="usertask" src={ this.getPicture(this.props.task.assignedTo)}  />
                      {this.getName(this.props.task.assignedTo)}
                      {this.props.children}
                  </Col>
