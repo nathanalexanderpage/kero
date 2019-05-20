@@ -158,6 +158,7 @@ class Board extends Component {
         </option>
       )
     })
+    console.log(userSelects);
 
 
     return (

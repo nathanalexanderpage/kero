@@ -20,7 +20,8 @@ class Task extends Component {
       dateAssigned: '',
       dateCompleted: '',
       description: '',
-      sprint: this.props.sprintId
+      sprint: this.props.sprintId,
+      userList: []
     };
 
     this.toggle = this.toggle.bind(this);
@@ -52,7 +53,8 @@ class Task extends Component {
       manHourBudget: this.props.task.manHourBudget,
       status: this.props.task.status,
       description: this.props.task.desc,
-      sprint: this.props.task.sprint
+      sprint: this.props.task.sprint,
+      userList: this.props.users
     })
     if (this.props.task.dateAssigned) {
       this.setState({
@@ -156,7 +158,6 @@ class Task extends Component {
   }
 
   render() {
-    let userSelects;
     if(!this.props.task){
       return (
         <div>
@@ -165,25 +166,33 @@ class Task extends Component {
         </div>
       );
     }
-    if (this.props.users[0]) {
-      console.log('inside YES users');
-      console.log(this.props.users);
-      console.log(this.props.users[0]);
-      let userSelects = this.props.users.map((user, i) => {
-        return (
-          <option
+
+    let list = () => {
+      let userList = [];
+      let throwaway = [];
+      let prep = [];
+      if (this.props.users[0]) {
+        userList.push(<option>TBD</option>);
+        throwaway = this.props.users.map((user, i) => {
+          return (
+            <option
             value={user.id}
-          >
+            >
             {`${user.firstName} ${user.lastName}`}
-          </option>
-        )
-      })
-      console.log(userSelects);
-    } else {
-      console.log('inside NO users');
-      let userSelects = (<option>TBD</option>)
-      console.log(userSelects);
+            </option>
+          )
+        });
+        while (throwaway.length !== 0) {
+          userList.push(throwaway.shift())
+        }
+      } else {
+        userList.push(<option>No users to choose from!</option>);
+      }
+      return userList;
     }
+    let newList = [...list()];
+    console.log(list());
+
     return (
       <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
          <Card>
@@ -227,7 +236,7 @@ class Task extends Component {
                 name="assignedTo"
                 onChange={this.handleAssignedToChange}
               >
-                {userSelects}
+                {newList}
               </Input>
               <Label>Title</Label>
               <Input
