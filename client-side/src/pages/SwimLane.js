@@ -21,8 +21,8 @@ class SwimLane extends Component {
       axios.put(`${SERVER_URL}/tasks/${data}`, newState,
         {
           headers: {
-           'Authorization' : `Bearer ${token}`
-         }
+          'Authorization' : `Bearer ${token}`
+        }
       })
       .then(response=> {
         console.log("response from update status",response);
@@ -45,7 +45,7 @@ class SwimLane extends Component {
       let taskCards = this.props.tasks.map((task,index)=> {
         console.log(task);
         return (
-             <Task id={task._id} task={task} users={this.props.users} rerender={this.props.rerender} />
+            <Task id={task._id} task={task} users={this.props.users} rerender={this.props.rerender} />
         )
       })
 
@@ -53,7 +53,7 @@ class SwimLane extends Component {
       <div id ={this.props.id}  onDrop={this.drop} onDragOver={this.allowDrop}>
         <Container>
           <Row>
-            <Col>
+            <Col className="skinny">
               <div>{this.props.project}</div>
               <div>{this.props.sprint}</div>
               <Row id="mainboard">

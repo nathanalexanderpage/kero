@@ -46,7 +46,7 @@ class Login extends Component {
     return(
       <div className='sign-in'>
         <h2>Log in to Kero</h2>
-        <Link to="/signup">or create an account</Link>
+        <Link to="/signup" className="link">or create an account</Link>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row>
           <Col sm="12" md={{ size: 6, offset: 3 }}>
@@ -70,7 +70,7 @@ class Login extends Component {
             </Col>
           </FormGroup>
             <div>
-              <Button color="link" size="lg" >Log In</Button>
+              <Button color="secondary" size="lg" >Log In</Button>
               <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
           </Form>
