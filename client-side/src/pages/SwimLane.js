@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Card, Col, Container, Row } from 'reactstrap'
-import Task from './Task'
+import {Card, Col, Container, Row, CardTitle, CardBody } from 'reactstrap'
+import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
+import {  Link } from 'react-router-dom';
+
 
 class SwimLane extends Component {
   // You will have props!
@@ -11,7 +13,9 @@ class SwimLane extends Component {
       let taskCards = this.props.tasks.map((task)=> {
         console.log(task);
         return (
-             <Task task={task}/>
+
+          <Task task={task}/>
+
         )
       })
 
