@@ -165,6 +165,12 @@ class Board extends Component {
         <Row>
           <Col>
             <div>{this.props.sprint}</div>
+            <h1>{this.props.title}</h1>
+            <Form inline onSubmit={(e) => e.preventDefault()}>
+              <Button color="secondary"
+                onClick={this.toggle}
+                id="new-task">New Task</Button>
+            </Form>
             <Row id="mainboard">
               <Col>
                 <Swimlane id="dr1" title="To-Do" tasks={toDo} users={this.state.userList} titleStatus="todo" rerender={this.props.rerender} />
@@ -179,11 +185,6 @@ class Board extends Component {
                 <Swimlane id="dr4" title="Done" tasks={complete} users={this.state.userList} titleStatus="done" rerender={this.props.rerender} />
               </Col>
             </Row>
-            <Form inline onSubmit={(e) => e.preventDefault()}>
-              <Button color="primary"
-                onClick={this.toggle}
-                id="new-task">➕ </Button>
-            </Form>
             <Modal
               isOpen={this.state.modal}
               toggle={this.toggle}
@@ -264,7 +265,7 @@ class Board extends Component {
                   />
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="primary" type="submit" onClick={this.toggle}>Create</Button>{' '}
+                  <Button color="secondary" type="submit" onClick={this.toggle}>Create</Button>{' '}
                   <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
               </Form>

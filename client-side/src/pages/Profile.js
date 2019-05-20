@@ -52,8 +52,12 @@ class Profile extends Component {
               </Col>
             </Row>
           </Col>
-          <Col md="6">
-            <Col><h1>Your Sprints</h1></Col>
+          <Col md="6" >
+            <Col>
+              <div className="your-sprints">
+                <h1>Your Sprints</h1>
+              </div>
+            </Col>
             <Col id="displayProjects">{sprintsList}</Col>
           </Col>
         </Row>

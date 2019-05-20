@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Label, Input, Fade } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class Login extends Component {
@@ -20,7 +20,6 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Why god why')
     // send data to server
     axios.post(`${SERVER_URL}/auth/login`, this.state)
     .then(response=> {
@@ -45,11 +44,12 @@ class Login extends Component {
       return (<Redirect to="/adminprofile" />);
     }
     return(
-      <div>
+      <div className='sign-in'>
         <h2>Log in to Kero</h2>
         <Link to="/signup">or create an account</Link>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup row>
+          <Col sm="12" md={{ size: 6, offset: 3 }}>
             <Label for="Email">Email</Label>
             <Input type="email"
                     name="email"
@@ -57,17 +57,20 @@ class Login extends Component {
                     placeholder="example@email.com"
                     value={this.state.email}
                     onChange={this.handleEmailChange} />
+          </Col>
           </FormGroup>
           <FormGroup row>
-                <Label for="Password">Password</Label>
-                <Input type="password"
-                        name="password"
-                        id="password"
-                        placeholder="shhhh"
-                        onChange={this.handlePasswordChange} />
+            <Col sm="12" md={{ size: 6, offset: 3 }}>
+              <Label for="Password">Password</Label>
+              <Input type="password"
+                      name="password"
+                      id="password"
+                      placeholder="shhhh"
+                      onChange={this.handlePasswordChange} />
+            </Col>
           </FormGroup>
             <div>
-              <Button outline color="secondary" size="lg" >Log In</Button>
+              <Button color="link" size="lg" >Log In</Button>
               <Fade in={this.state.fadeIn} tag="h5" className="mt-3"></Fade>
             </div>
           </Form>

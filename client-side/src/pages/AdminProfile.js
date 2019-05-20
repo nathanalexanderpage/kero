@@ -222,6 +222,7 @@ class AdminProfile extends Component {
               <Row id="userabout">
                  <Col>
                    <h5 id="username">{this.props.user.firstName + ' ' + this.props.user.lastName}</h5>
+                   <hr></hr>
                    <Col className="subinfo">
                      <h5><FaEnvelopeSquare/>: {this.props.user.email}</h5>
                      <h5><FaSuitcase/> : {this.props.user.role}</h5>
@@ -231,7 +232,11 @@ class AdminProfile extends Component {
               </Row>
             </Col>
             <Col md="6" >
-              <Col><h1>Your Sprints</h1></Col>
+            <Col>
+              <div className="your-sprints">
+                <h1>Your Sprints</h1>
+              </div>
+            </Col>
               <Col id="displayProjects">
                 {sprintsList}
               </Col>
@@ -245,7 +250,7 @@ class AdminProfile extends Component {
                 onSubmit={(e) => e.preventDefault()}
               >
                 <Button
-                  color="danger"
+                  color="secondary"
                   onClick={this.toggleCreate}
                 >
                   New Sprint
