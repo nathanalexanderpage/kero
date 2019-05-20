@@ -168,16 +168,16 @@ class Board extends Component {
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
               <Col>
-                <Swimlane id="dr1" title="To-Do" tasks={toDo} users={this.state.userList} titleStatus="todo" />
+                <Swimlane id="dr1" title="To-Do" tasks={toDo} users={this.state.userList} titleStatus="todo" rerender={this.props.rerender} />
               </Col>
               <Col>
-                <Swimlane id="dr2" title="Doing" tasks={doing} users={this.state.userList}  titleStatus="inprogress"/>
+                <Swimlane id="dr2" title="Doing" tasks={doing} users={this.state.userList} titleStatus="inprogress" rerender={this.props.rerender} />
               </Col>
               <Col>
-                <Swimlane id="dr3" title="Code-Review" tasks={codeReview} users={this.state.userList} titleStatus="codereview" />
+                <Swimlane id="dr3" title="Code-Review" tasks={codeReview} users={this.state.userList} titleStatus="codereview" rerender={this.props.rerender} />
               </Col>
               <Col>
-                <Swimlane id="dr4" title="Done" tasks={complete} users={this.state.userList} titleStatus="done"/>
+                <Swimlane id="dr4" title="Done" tasks={complete} users={this.state.userList} titleStatus="done" rerender={this.props.rerender} />
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>

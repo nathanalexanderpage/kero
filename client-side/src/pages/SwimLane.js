@@ -23,10 +23,10 @@ class SwimLane extends Component {
           headers: {
            'Authorization' : `Bearer ${token}`
          }
-       })
+      })
       .then(response=> {
         console.log("response from update status",response);
-      
+
       })
       .catch(err => {
         console.log('error axios to server:');
@@ -38,14 +38,13 @@ class SwimLane extends Component {
       e.preventDefault();
     }
 
-
   render() {
     // map through this.props.tasks, call your variable below
     if(this.props.tasks){
       let taskCards = this.props.tasks.map((task,index)=> {
         console.log(task);
         return (
-             <Task id={task._id} task={task} users={this.props.users} />
+             <Task id={task._id} task={task} users={this.props.users} rerender={this.props.rerender} />
         )
       })
 

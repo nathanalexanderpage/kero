@@ -12,6 +12,7 @@ class Task extends Component {
     super(props);
     this.state = {
         modal: false,
+        id: this.props.id,
         assignedTo: '',
         title: '',
         manHourBudget: 0,
@@ -75,9 +76,10 @@ class Task extends Component {
   handleDescriptionChange = (e) => { this.setState({ description: e.target.value }); }
 
 
-  handleDeleteTask = (task) =>{
+  handleDeleteTask = () => {
+    console.log(this.props.id);
     let token = localStorage.getItem('serverToken');
-    axios.delete(`${SERVER_URL}/tasks/${task._id}`,
+    axios.delete(`${SERVER_URL}/tasks/${this.props.id}`,
       {
         headers: {
          'Authorization' : `Bearer ${token}`
@@ -85,7 +87,7 @@ class Task extends Component {
      })
     .then(response=> {
      console.log("deleted", response);
-     this.props.rerender()
+     this.props.rerender();
     })
     .catch(err => {
       console.log('error axios to server:');
