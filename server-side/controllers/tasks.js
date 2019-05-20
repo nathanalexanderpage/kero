@@ -71,6 +71,8 @@ router.post('/', (req, res) => {
 //put tasks
 router.put('/:id', (req, res) => {
   //args : {where}, data , {options}
+  console.log("this is the body",req.body);
+  console.log("this is the id",req.params.id);
   db.Task.findOneAndUpdate(
     { _id: req.params.id},
     req.body,

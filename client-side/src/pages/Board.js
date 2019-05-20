@@ -171,13 +171,13 @@ class Board extends Component {
                 <Swimlane id="dr1" title="To-Do" tasks={toDo} users={this.state.userList} titleStatus="todo" />
               </Col>
               <Col>
-                <Swimlane id="dr2" title="Doing" tasks={doing} users={this.state.userList} />
+                <Swimlane id="dr2" title="Doing" tasks={doing} users={this.state.userList}  titleStatus="inprogress"/>
               </Col>
               <Col>
-                <Swimlane id="dr3" title="Code-Review" tasks={codeReview} users={this.state.userList} />
+                <Swimlane id="dr3" title="Code-Review" tasks={codeReview} users={this.state.userList} titleStatus="codereview" />
               </Col>
               <Col>
-                <Swimlane id="dr4" title="Done" tasks={complete} users={this.state.userList} />
+                <Swimlane id="dr4" title="Done" tasks={complete} users={this.state.userList} titleStatus="done"/>
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
