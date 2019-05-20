@@ -160,6 +160,7 @@ body{
   color: #222;
 }
 
+
 .home-page {
   display: inline-flex;
   margin: 10px;
@@ -173,4 +174,14 @@ body{
 .your-sprints {
   background-color: white;
   border-radius: 10px;
+
+.tasktools{
+  margin-top: 10px;
+}
+
+#usertask{
+  width: 3vw;
+  height: 5vh;
+  border-radius: 50%;
+
 }

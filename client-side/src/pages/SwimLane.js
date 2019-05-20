@@ -40,6 +40,7 @@ class SwimLane extends Component {
 
   render() {
     // map through this.props.tasks, call your variable below
+    console.log(this.props.users);
     if(this.props.tasks){
       let taskCards = this.props.tasks.map((task,index)=> {
         console.log(task);

@@ -111,7 +111,6 @@ class Board extends Component {
           description:''
       })
       this.props.rerender()
-
     })
     .catch(err => {
       console.log('error axios to server:');
