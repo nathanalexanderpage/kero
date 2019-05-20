@@ -272,6 +272,7 @@ class App extends Component {
                 <Board
                   user={this.state.user}
                   sprintId={match.params.id}
+                  rerender={this.loadUserData}
                   />
               )
             } />

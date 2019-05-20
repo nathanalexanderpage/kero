@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Row, Card, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
 import {  Link } from 'react-router-dom';
 import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+
 
 class Task extends Component {
   constructor(props) {
@@ -29,6 +31,19 @@ class Task extends Component {
     }));
   }
 
+
+    drag = (e) => {
+      e.dataTransfer.setData('transfer', e.target.id);
+    }
+
+    noAllowDrop = (e) => {
+      e.stopPropagation();
+    }
+
+    changeState = (e) => {
+      console.log(e);
+    }
+
   componentDidMount = () => {
     console.log(this.props.users);
     this.setState({
@@ -48,6 +63,7 @@ class Task extends Component {
       dateCompleted: this.props.task.dateCompleted.slice(0,10)
     }
   }
+
 
   handleAssignedToChange = (e) => { this.setState({ assignedTo: e.target.value }); }
   handleTitleChange = (e) => { this.setState({ title: e.target.value }); }
@@ -107,7 +123,7 @@ class Task extends Component {
       }
     }
     return(
-      <div className="tasks">
+      <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
         <div>
           <Link
             onClick={ () => this.handleDeleteTask()} >
@@ -120,6 +136,7 @@ class Task extends Component {
         </div>
         <div>
           {this.props.task.title}
+          {this.props.children}
         </div>
 
         <Modal
@@ -251,3 +268,9 @@ class Task extends Component {
 };
 
 export default Task;
+
+
+Task.propTypes = {
+  children: PropTypes.node,
+  id: PropTypes.string,
+}
