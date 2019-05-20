@@ -168,7 +168,7 @@ class Board extends Component {
     let doing = []
     let codeReview = []
     let complete = []
-    
+
     // iterate through this.state.tasks and push tasks to their relevant array
 
 
@@ -202,16 +202,16 @@ class Board extends Component {
             <div>{this.props.sprint}</div>
             <Row id="mainboard">
               <Col>
-                <Swimlane title="To-Do" tasks={toDo} />
+                <Swimlane title="To-Do" tasks={toDo} users={this.state.userList} />
               </Col>
               <Col>
-                <Swimlane title="Doing" tasks={doing} />
+                <Swimlane title="Doing" tasks={doing} users={this.state.userList} />
               </Col>
               <Col>
-                <Swimlane title="Code-Review" tasks={codeReview}/>
+                <Swimlane title="Code-Review" tasks={codeReview} users={this.state.userList} />
               </Col>
               <Col>
-                <Swimlane title="Done" tasks={complete}/>
+                <Swimlane title="Done" tasks={complete} users={this.state.userList} />
               </Col>
             </Row>
             <Form inline onSubmit={(e) => e.preventDefault()}>
