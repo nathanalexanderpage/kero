@@ -107,6 +107,10 @@ body{
   padding-top: 10px
 }
 
+.tasks{
+  border: 3px solid yellow;
+  margin-top: 10px;
+}
 .subinfo{
   margin-left: 40px;
   text-align: initial;
@@ -140,3 +144,21 @@ body{
   left: 0;
   margin-left: 15px;
 }
+
+.coding-img {
+  width: 40vw;
+  height: 45vh;
+  position: absolute;
+}
+
+.home-info {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  border: 1px solid black;
+  width: 40vw;
+  margin: 50px;
+}
+
+
+

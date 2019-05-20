@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody,
-  ModalFooter, Input, Label, Form, FormGroup, Card, CardTitle, CardBody } from 'reactstrap';
+import { Container, Row, Col, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Card, CardTitle, CardBody } from 'reactstrap';
 import '../App.css';
 import SERVER_URL from '../constants/server';
 import axios from 'axios';
@@ -8,23 +7,22 @@ import {  Link } from 'react-router-dom';
 import { Route, Redirect, withRouter } from 'react-router';
 import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
 
-
 class AdminProfile extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        title: '',
-        startDate: '',
-        finishDate: '',
-        titlE: '',
-        startDatE: '',
-        finishDatE: '',
-        modalCreate: false,
-        modalEdit: false,
-        redirect: false,
-        newboard: '',
-        editSprint:''
+      title: '',
+      startDate: '',
+      finishDate: '',
+      titlE: '',
+      startDatE: '',
+      finishDatE: '',
+      modalCreate: false,
+      modalEdit: false,
+      redirect: false,
+      newboard: '',
+      editSprint: ''
     };
 
     this.toggleCreate = this.toggleCreate.bind(this);
@@ -44,15 +42,15 @@ class AdminProfile extends Component {
 
   }
   toggleCreate() {
-      this.setState(prevState => ({
-          modalCreate: !prevState.modalCreate
-      }));
+    this.setState(prevState => ({
+      modalCreate: !prevState.modalCreate
+    }));
   }
 
   toggleEdit() {
-      this.setState(prevState => ({
-          modalEdit: !prevState.modalEdit
-      }));
+    this.setState(prevState => ({
+      modalEdit: !prevState.modalEdit
+    }));
   }
 
   handleSubmit = (e) => {
@@ -174,15 +172,22 @@ class AdminProfile extends Component {
 
   render() {
 
-    if(this.state.redirect === true){
-    return(
-      <Redirect to={{
-      pathname: '/board/'+ this.state.newboard
-       }} />
-     )
-   }
+    if (this.state.redirect === true) {
+      return (
+        <Redirect to={{
+        pathname: '/board/'+ this.state.newboard
+        }} />
+      )
+    }
 
-    if(this.props.user){
+    if (this.props.user) {
+      if (this.props.user.role === 'user') {
+        return (
+          <Redirect to={{
+          pathname: '/profile/'
+          }} />
+        )
+      }
       let sprintsList = this.props.sprints.map((sprint, i) => {
         return (
           <div key={`sprint-${sprint._id}`}>
