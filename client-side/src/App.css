@@ -137,10 +137,12 @@ body{
   position: absolute;
   right: 0;
   margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 #deleteicon{
   position: absolute;
   left: 0;
   margin-left: 15px;
+  margin-bottom: 10px;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Card, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
+import { Container, Row, Card, CardTitle, CardBody, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form  } from 'reactstrap';
 import {  Link } from 'react-router-dom';
 import { FaCity , FaEnvelopeSquare, FaSuitcase , FaTrash, FaWrench} from "react-icons/fa";
 import axios from 'axios';
@@ -126,20 +126,27 @@ class Task extends Component {
     }
     return(
       <div className="tasks" id={this.props.id} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDrop={this.changeState}>
-        <div>
-          <Link
-            onClick={ () => this.handleDeleteTask()} >
-            <FaTrash id="deleteicon"/>
-          </Link>
-          <Link
-          onClick={ () => this.toggle()} >
-            <FaWrench id="modifyicon"/>
-          </Link>
-        </div>
-        <div>
-          {this.props.task.title}
-          {this.props.children}
-        </div>
+
+         <Card>
+           <CardTitle>
+             <div>
+               <Link
+                 onClick={ () => this.handleDeleteTask()} >
+                 <FaTrash id="deleteicon"/>
+               </Link>
+               <Link
+                 onClick={ () => this.toggle()} >
+                 <FaWrench id="modifyicon"/>
+               </Link>
+             </div>
+           </CardTitle>
+           <CardBody>             
+             <div>
+               {this.props.task.title}
+               {this.props.children}
+             </div>
+           </CardBody>
+         </Card>
 
         <Modal
           isOpen={this.state.modal}
